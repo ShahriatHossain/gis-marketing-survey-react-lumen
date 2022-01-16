@@ -1,0 +1,81 @@
+question_types
+ id (PK)
+ name (text, multiple_choice_single, multiple_choice_multi)
+ description (Freetext, Multiple choice (single answer), Multiple choice (multi answer))
+
+php artisan make:migration create_question_types_table
+
+questions
+ id (PK)
+ question_type_id (FK)
+ title
+ description
+ required
+
+php artisan make:migration create_questions_table
+ 
+multiple_choices
+ id
+ question_id
+ label
+ value
+ selected (false/true)
+
+php artisan make:migration create_multiple_choices_table
+ 
+surveys
+ id
+ name
+ description
+ date_created
+ owner
+
+php artisan make:migration create_surveys_table
+
+questions_in_surveys
+ question_id
+ survey_id
+
+php artisan make:migration create_questions_in_surveys_table
+
+business_types
+ id
+ name (advertising, retail)
+ description (Advertising, Retail)
+
+php artisan make:migration create_business_types_table
+
+customers
+ id
+ name
+ contact_name
+ email
+ phone
+ job_title
+ city
+ street
+ postalcode
+ state
+ county
+ country
+ latitude
+ longitude
+ fax
+
+php artisan make:migration create_customers_table
+
+customer_survey_responses
+ id
+ customer_id
+ survey_id
+ date_completed
+ comments
+
+php artisan make:migration create_customer_survey_responses_table
+
+survey_answers
+ response_id
+ question_id
+ answer_text
+
+php artisan make:migration create_survey_answers_table
