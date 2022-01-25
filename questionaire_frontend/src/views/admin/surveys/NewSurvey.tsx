@@ -10,7 +10,7 @@ const NewSurvey: React.FC = () => {
 
     useEffect(() => {
         if (status === 'completed') {
-            history.push('/surveys');
+            history.push('/admin/surveys');
         }
     }, [status, history]);
 

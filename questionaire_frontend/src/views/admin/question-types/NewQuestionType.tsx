@@ -10,7 +10,7 @@ const NewQuestionType: React.FC = () => {
 
     useEffect(() => {
         if (status === 'completed') {
-            history.push('/question-types');
+            history.push('/admin/question-types');
         }
     }, [status, history]);
 

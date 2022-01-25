@@ -4,7 +4,7 @@ const NoSurveysFound: React.FC = () => {
     return (
         <div className="alert alert-light" role="alert">
             No surveys found! &nbsp; 
-            <Link className='alert-link' to='/new-survey'>
+            <Link className='alert-link' to='/admin/new-survey'>
                 Add a Survey
             </Link>.
         </div>

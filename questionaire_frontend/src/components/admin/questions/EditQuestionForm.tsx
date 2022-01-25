@@ -19,7 +19,7 @@ const EditQuestionForm: React.FC<{ existingData: any, isLoading: boolean, survey
         const enteredTitle = titleInputRef.current.value;
         const enteredSurvey = surveyInputRef.current.value;
         const enteredQuestionType = questionTypeInputRef.current.value;
-        const enteredRequired = requiredInputRef.current.value;
+        const enteredRequired = requiredInputRef.current.checked;
         const enteredDescription = descriptionInputRef.current.value;
 
         onEditQuestion({
@@ -83,7 +83,7 @@ const EditQuestionForm: React.FC<{ existingData: any, isLoading: boolean, survey
                     <label htmlFor="required" className="col-sm-2 col-form-label">Required?</label>
                     <div className="col-sm-10">
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" defaultValue={existingData.requied} id="required" ref={requiredInputRef} />
+                            <input className="form-check-input" type="checkbox" defaultChecked={existingData.required} id="required" ref={requiredInputRef} />
                         </div>
                     </div>
                 </div>

@@ -39,7 +39,7 @@ const SurveyItem: React.FC<{ survey: Survey, onDeleteSurvey: Function }> = ({ su
                 <td>{survey.created_at}</td>
                 <td>{survey.updated_at}</td>
                 <td>
-                    <NavLink className="btn btn-primary btn-sm" to={'/edit-survey/' + survey.id}>
+                    <NavLink className="btn btn-primary btn-sm" to={'/admin/edit-survey/' + survey.id}>
                     <i className="fas fa-pen"></i>
                     </NavLink>&nbsp;
                     <ModalButtonLink targetId={modalParam.modalId}><i className="far fa-trash-alt"></i></ModalButtonLink>

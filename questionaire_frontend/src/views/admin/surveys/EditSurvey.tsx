@@ -23,7 +23,7 @@ const EditSurvey: React.FC = () => {
 
     useEffect(() => {
         if (statusForEdit === 'completed') {
-            history.push('/surveys');
+            history.push('/admin/surveys');
         }
     }, [statusForEdit, history]);
 

@@ -17,10 +17,10 @@ export const SideNavMenuContainer: React.FC = () => {
                 </a>
                 <div className="collapse" id="collapseSuvey" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/surveys'>
+                        <NavLink className="nav-link" to='/admin/surveys'>
                             All Surveys
                         </NavLink>
-                        <NavLink className="nav-link" to='/new-survey'>
+                        <NavLink className="nav-link" to='/admin/new-survey'>
                             Add a Survey
                         </NavLink>
                     </nav>
@@ -34,11 +34,28 @@ export const SideNavMenuContainer: React.FC = () => {
                 </a>
                 <div className="collapse" id="collapseQuestion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/questions'>
+                        <NavLink className="nav-link" to='/admin/questions'>
                             All Questions
                         </NavLink>
-                        <NavLink className="nav-link" to='/new-question'>
+                        <NavLink className="nav-link" to='/admin/new-question'>
                             Add a Question
+                        </NavLink>
+                    </nav>
+                </div>
+
+                {/* Customer */}
+                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCustomer" aria-expanded="false" aria-controls="collapseCustomer">
+                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
+                    Customer
+                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                </a>
+                <div className="collapse" id="collapseCustomer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav className="sb-sidenav-menu-nested nav">
+                        <NavLink className="nav-link" to='/admin/customers'>
+                            All Customers
+                        </NavLink>
+                        <NavLink className="nav-link" to='/admin/new-customer'>
+                            Add a Customer
                         </NavLink>
                     </nav>
                 </div>
@@ -51,10 +68,10 @@ export const SideNavMenuContainer: React.FC = () => {
                 </a>
                 <div className="collapse" id="collapseBusinessType" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/business-types'>
+                        <NavLink className="nav-link" to='/admin/business-types'>
                             All Business Types
                         </NavLink>
-                        <NavLink className="nav-link" to='/new-business-type'>
+                        <NavLink className="nav-link" to='/admin/new-business-type'>
                             Add a Business Type
                         </NavLink>
                     </nav>
@@ -68,10 +85,10 @@ export const SideNavMenuContainer: React.FC = () => {
                 </a>
                 <div className="collapse" id="collapseQuestionType" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/question-types'>
+                        <NavLink className="nav-link" to='/admin/question-types'>
                             All Question Types
                         </NavLink>
-                        <NavLink className="nav-link" to='/new-question-type'>
+                        <NavLink className="nav-link" to='/admin/new-question-type'>
                             Add a Question Type
                         </NavLink>
                     </nav>

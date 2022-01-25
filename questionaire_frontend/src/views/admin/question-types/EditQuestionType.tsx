@@ -23,7 +23,7 @@ const EditQuestionType: React.FC = () => {
 
     useEffect(() => {
         if (statusForEdit === 'completed') {
-            history.push('/question-types');
+            history.push('/admin/question-types');
         }
     }, [statusForEdit, history]);
 

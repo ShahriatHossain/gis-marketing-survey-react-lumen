@@ -23,7 +23,7 @@ const EditBusinessType: React.FC = () => {
 
     useEffect(() => {
         if (statusForEdit === 'completed') {
-            history.push('/business-types');
+            history.push('/admin/business-types');
         }
     }, [statusForEdit, history]);
 

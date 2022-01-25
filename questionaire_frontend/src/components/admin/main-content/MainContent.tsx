@@ -2,6 +2,9 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import AllBusinessTypes from '../../../views/admin/business-types/AllBusinessTypes';
 import EditBusinessType from '../../../views/admin/business-types/EditBusinessType';
 import NewBusinessType from '../../../views/admin/business-types/NewBusinessType';
+import AllCustomers from '../../../views/admin/customers/AllCustomers';
+import EditCustomer from '../../../views/admin/customers/EditCustomer';
+import NewCustomer from '../../../views/admin/customers/NewCustomer';
 import AllQuestionTypes from '../../../views/admin/question-types/AllQuestionTypes';
 import EditQuestionType from '../../../views/admin/question-types/EditQuestionType';
 import NewQuestionType from '../../../views/admin/question-types/NewQuestionType';
@@ -26,51 +29,62 @@ export const MainContent: React.FC = () => {
                         <div className="card-body">
                             <Switch>
                                 <Route path='/' exact>
-                                    <Redirect to='/surveys' />
+                                    <Redirect to='/admin/surveys' />
                                 </Route>
 
-                                 {/* Survey */}
-                                <Route path='/surveys' exact>
+                                {/* Survey */}
+                                <Route path='/admin/surveys' exact>
                                     <AllSurveys />
                                 </Route>
-                                <Route path='/new-survey' exact>
+                                <Route path='/admin/new-survey' exact>
                                     <NewSurvey />
                                 </Route>
-                                <Route path='/edit-survey/:surveyId' exact>
+                                <Route path='/admin/edit-survey/:surveyId' exact>
                                     <EditSurvey />
                                 </Route>
 
                                 {/* Business Type */}
-                                <Route path='/business-types' exact>
+                                <Route path='/admin/business-types' exact>
                                     <AllBusinessTypes />
                                 </Route>
-                                <Route path='/new-business-type' exact>
+                                <Route path='/admin/new-business-type' exact>
                                     <NewBusinessType />
                                 </Route>
-                                <Route path='/edit-business-type/:businessTypeId' exact>
+                                <Route path='/admin/edit-business-type/:businessTypeId' exact>
                                     <EditBusinessType />
                                 </Route>
 
                                 {/* Question Type */}
-                                <Route path='/question-types' exact>
+                                <Route path='/admin/question-types' exact>
                                     <AllQuestionTypes />
                                 </Route>
-                                <Route path='/new-question-type' exact>
+                                <Route path='/admin/new-question-type' exact>
                                     <NewQuestionType />
                                 </Route>
-                                <Route path='/edit-question-type/:questionTypeId' exact>
+                                <Route path='/admin/edit-question-type/:questionTypeId' exact>
                                     <EditQuestionType />
                                 </Route>
 
                                 {/* Question */}
-                                <Route path='/questions' exact>
+                                <Route path='/admin/questions' exact>
                                     <AllQuestions />
                                 </Route>
-                                <Route path='/new-question' exact>
+                                <Route path='/admin/new-question' exact>
                                     <NewQuestion />
                                 </Route>
-                                <Route path='/edit-question/:surveyId/:questionId' exact>
+                                <Route path='/admin/edit-question/:surveyId/:questionId' exact>
                                     <EditQuestion />
+                                </Route>
+
+                                {/* Customer */}
+                                <Route path='/admin/customers' exact>
+                                    <AllCustomers />
+                                </Route>
+                                <Route path='/admin/new-customer' exact>
+                                    <NewCustomer />
+                                </Route>
+                                <Route path='/admin/edit-customer/:customerId' exact>
+                                    <EditCustomer />
                                 </Route>
 
                                 {/* <Route path='*'>

@@ -36,7 +36,7 @@ const EditQuestion: React.FC = () => {
 
     useEffect(() => {
         if (statusForEdit === 'completed') {
-            history.push('/questions');
+            history.push('/admin/questions');
         }
     }, [statusForEdit, history]);
 

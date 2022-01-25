@@ -19,7 +19,7 @@ const NewQuestionForm: React.FC<{ isLoading: boolean, surveys: Survey[], questio
         const enteredTitle = titleInputRef.current.value;
         const enteredSurvey = surveyInputRef.current.value;
         const enteredQuestionType = questionTypeInputRef.current.value;
-        const enteredRequired = requiredInputRef.current.value;
+        const enteredRequired = requiredInputRef.current.checked;
         const enteredDescription = descriptionInputRef.current.value;
 
         onAddQuestion({

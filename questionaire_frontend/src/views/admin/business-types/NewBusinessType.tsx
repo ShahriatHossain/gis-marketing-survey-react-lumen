@@ -10,7 +10,7 @@ const NewBusinessType: React.FC = () => {
 
     useEffect(() => {
         if (status === 'completed') {
-            history.push('/business-types');
+            history.push('/admin/business-types');
         }
     }, [status, history]);
 

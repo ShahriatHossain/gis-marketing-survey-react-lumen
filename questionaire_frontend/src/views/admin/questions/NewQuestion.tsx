@@ -21,7 +21,7 @@ const NewQuestion: React.FC = () => {
 
     useEffect(() => {
         if (status === 'completed') {
-            history.push('/questions');
+            history.push('/admin/questions');
         }
 
         sendRequestForSurveys();

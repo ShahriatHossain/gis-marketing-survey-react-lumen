@@ -39,7 +39,7 @@ const BusinessTypeItem: React.FC<{ businessType: BusinessType, onDeleteBusinessT
                 <td>{businessType.created_at}</td>
                 <td>{businessType.updated_at}</td>
                 <td>
-                    <NavLink className="btn btn-primary btn-sm" to={'/edit-business-type/' + businessType.id}>
+                    <NavLink className="btn btn-primary btn-sm" to={'/admin/edit-business-type/' + businessType.id}>
                     <i className="fas fa-pen"></i>
                     </NavLink>&nbsp;
                     <ModalButtonLink targetId={modalParam.modalId}><i className="far fa-trash-alt"></i></ModalButtonLink>
