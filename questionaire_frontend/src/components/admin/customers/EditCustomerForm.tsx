@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
+import { BusinessType } from "../../../utils/models/BusinessType";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
-const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, onEditCustomer: Function }> = ({ existingData, isLoading, onEditCustomer }) => {
+const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, businessTypes: BusinessType[], onEditCustomer: Function }> = ({ existingData, isLoading, businessTypes, onEditCustomer }) => {
     const [isEntering, setIsEntering] = useState(false);
 
     const nameInputRef = useRef<any>();
@@ -95,14 +96,16 @@ const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, onEdit
                         </div>
                         <div className="row mb-3">
                             <div className="col-sm-12">
-                                <label htmlFor="email" className="form-label">Email</label>
-                                <input type="text" className="form-control" defaultValue={existingData.email} id="email" ref={emailInputRef} />
+                                <label htmlFor="job_title" className="form-label">Job Title</label>
+                                <input type="text" className="form-control" defaultValue={existingData.job_title} id="job_title" ref={jobTitleInputRef} />
                             </div>
                         </div>
                         <div className="row mb-3">
                             <div className="col-sm-12">
-                                <label htmlFor="job_title" className="form-label">Job Title</label>
-                                <input type="text" className="form-control" defaultValue={existingData.job_title} id="job_title" ref={jobTitleInputRef} />
+                                <label htmlFor="business_type" className="form-label">Business Type</label>
+                                <select className="form-select" id="business_type" ref={businessTypeInputRef} aria-label="Select Business Type">
+                                    {businessTypes && businessTypes.map(bt => <option key={bt.id} value={bt.name}>{bt.description}</option>)}
+                                </select>
                             </div>
                         </div>
                         <div className="row mb-3">
@@ -125,14 +128,14 @@ const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, onEdit
                         </div>
                         <div className="row mb-3">
                             <div className="col-sm-12">
-                                <label htmlFor="fax" className="form-label">Fax</label>
-                                <input type="text" className="form-control" defaultValue={existingData.fax} id="fax" ref={faxInputRef} />
+                                <label htmlFor="phone" className="form-label">Phone</label>
+                                <input type="text" className="form-control" defaultValue={existingData.phone} id="phone" ref={phoneInputRef} />
                             </div>
                         </div>
                         <div className="row mb-3">
                             <div className="col-sm-12">
-                                <label htmlFor="business_type" className="form-label">Business Type</label>
-                                <input type="text" className="form-control" defaultValue={existingData.business_type} id="business_type" ref={businessTypeInputRef} />
+                                <label htmlFor="fax" className="form-label">Fax</label>
+                                <input type="text" className="form-control" defaultValue={existingData.fax} id="fax" ref={faxInputRef} />
                             </div>
                         </div>
                     </div>
@@ -145,8 +148,8 @@ const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, onEdit
                         </div>
                         <div className="row mb-3">
                             <div className="col-sm-12">
-                                <label htmlFor="phone" className="form-label">Phone</label>
-                                <input type="text" className="form-control" defaultValue={existingData.phone} id="phone" ref={phoneInputRef} />
+                                <label htmlFor="email" className="form-label">Email</label>
+                                <input type="text" className="form-control" defaultValue={existingData.email} id="email" ref={emailInputRef} />
                             </div>
                         </div>
                         <div className="row mb-3">

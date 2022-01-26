@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
+import { BusinessType } from "../../../utils/models/BusinessType";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
-const NewCustomerForm: React.FC<{ isLoading: boolean, onAddCustomer: Function }> = ({ isLoading, onAddCustomer }) => {
+const NewCustomerForm: React.FC<{ isLoading: boolean, businessTypes: BusinessType[], onAddCustomer: Function }> = ({ isLoading, businessTypes, onAddCustomer }) => {
     const [isEntering, setIsEntering] = useState(false);
 
     const nameInputRef = useRef<any>();
@@ -94,14 +95,16 @@ const NewCustomerForm: React.FC<{ isLoading: boolean, onAddCustomer: Function }>
                         </div>
                         <div className="row mb-3">
                             <div className="col-sm-12">
-                                <label htmlFor="email" className="form-label">Email</label>
-                                <input type="text" className="form-control" id="email" ref={emailInputRef} />
+                                <label htmlFor="job_title" className="form-label">Job Title</label>
+                                <input type="text" className="form-control" id="job_title" ref={jobTitleInputRef} />
                             </div>
                         </div>
                         <div className="row mb-3">
                             <div className="col-sm-12">
-                                <label htmlFor="job_title" className="form-label">Job Title</label>
-                                <input type="text" className="form-control" id="job_title" ref={jobTitleInputRef} />
+                                <label htmlFor="business_type" className="form-label">Business Type</label>
+                                <select className="form-select" id="business_type" ref={businessTypeInputRef} aria-label="Select Business Type">
+                                    {businessTypes && businessTypes.map(bt => <option key={bt.id} value={bt.name}>{bt.description}</option>)}
+                                </select>
                             </div>
                         </div>
                         <div className="row mb-3">
@@ -124,14 +127,14 @@ const NewCustomerForm: React.FC<{ isLoading: boolean, onAddCustomer: Function }>
                         </div>
                         <div className="row mb-3">
                             <div className="col-sm-12">
-                                <label htmlFor="fax" className="form-label">Fax</label>
-                                <input type="text" className="form-control" id="fax" ref={faxInputRef} />
+                                <label htmlFor="phone" className="form-label">Phone</label>
+                                <input type="text" className="form-control" id="phone" ref={phoneInputRef} />
                             </div>
                         </div>
                         <div className="row mb-3">
                             <div className="col-sm-12">
-                                <label htmlFor="business_type" className="form-label">Business Type</label>
-                                <input type="text" className="form-control" id="business_type" ref={businessTypeInputRef} />
+                                <label htmlFor="fax" className="form-label">Fax</label>
+                                <input type="text" className="form-control" id="fax" ref={faxInputRef} />
                             </div>
                         </div>
                     </div>
@@ -144,8 +147,8 @@ const NewCustomerForm: React.FC<{ isLoading: boolean, onAddCustomer: Function }>
                         </div>
                         <div className="row mb-3">
                             <div className="col-sm-12">
-                                <label htmlFor="phone" className="form-label">Phone</label>
-                                <input type="text" className="form-control" id="phone" ref={phoneInputRef} />
+                                <label htmlFor="email" className="form-label">Email</label>
+                                <input type="text" className="form-control" id="email" ref={emailInputRef} />
                             </div>
                         </div>
                         <div className="row mb-3">

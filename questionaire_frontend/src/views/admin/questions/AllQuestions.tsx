@@ -3,7 +3,6 @@ import NoQuestionsFound from "../../../components/admin/questions/NoQuestionsFou
 import QuestionList from "../../../components/admin/questions/QuestionList";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import useHttpWithParam from "../../../hooks/use-httpWithParam";
-import { getAllQuestions } from "../../../lib/question-api";
 import { getAllQuestionTypes } from "../../../lib/question-type-api";
 import { getAllSurveys } from "../../../lib/survey-api";
 import { BASE_URL } from "../../../utils/constants/common";

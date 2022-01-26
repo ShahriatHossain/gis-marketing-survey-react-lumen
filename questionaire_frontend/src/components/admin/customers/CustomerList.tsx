@@ -15,7 +15,7 @@ const CustomerList: React.FC<{ customers: Customer[], onRefreshRecord: Function 
         <React.Fragment>
             <div className="row">
                 <div className="col">
-                    <NavLink className="btn btn-primary btn-sm float-end mb-2" role="button" to={"/new-customer"}><i className="fas fa-plus"></i></NavLink>
+                    <NavLink className="btn btn-primary btn-sm float-end mb-2" role="button" to={"/admin/new-customer"}><i className="fas fa-plus"></i></NavLink>
                 </div>
             </div>
             <div className="table-responsive">
