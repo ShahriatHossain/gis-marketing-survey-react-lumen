@@ -13,15 +13,17 @@ const MultipleChoiceList: React.FC<{ multichoices: MultipleChoice[], onRefreshRe
         <React.Fragment>
             <div className="row">
                 <div className="col">
-                    <NavLink className="btn btn-primary btn-sm float-end mb-2" role="button" to={"/new-multichoice"}><i className="fas fa-plus"></i></NavLink>
+                    <NavLink className="btn btn-primary btn-sm float-end mb-2" role="button" to={"/admin/new-multichoice"}><i className="fas fa-plus"></i></NavLink>
                 </div>
             </div>
             <div className="table-responsive">
                 <table className="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Description</th>
+                            <th scope="col">Label</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Question Title</th>
+                            <th scope="col">Selected</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Updated At</th>
                             <th scope="col">Action</th>

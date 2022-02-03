@@ -35,6 +35,8 @@ const QuestionItem: React.FC<{ question: Question, onDeleteQuestion: Function }>
         <React.Fragment>
             <tr key={question.id}>
                 <td>{question.title}</td>
+                <td>{question.survey_name}</td>
+                <td>{question.question_type_description}</td>
                 <td>{question.description}</td>
                 <td>{question.created_at}</td>
                 <td>{question.updated_at}</td>

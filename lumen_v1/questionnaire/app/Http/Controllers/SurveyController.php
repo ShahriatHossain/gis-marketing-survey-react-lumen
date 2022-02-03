@@ -67,8 +67,12 @@ class SurveyController extends Controller
     // FIND Questions
     public function showAllQuestions()
     {
-        $questions = Question::all();
-        return response()->json($questions, 200);
+        $results = app('db')->select("
+        SELECT questions.*, surveys.name as survey_name, question_types.description as question_type_description
+        FROM questions
+        INNER JOIN surveys ON surveys.id = questions.survey_id
+        INNER JOIN question_types ON questions.question_type = question_types.name");
+        return response()->json($results, 200);
     }
 
     public function showAllQuestionsFromSurvey($survey_id)

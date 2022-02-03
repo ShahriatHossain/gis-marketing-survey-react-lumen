@@ -5,6 +5,9 @@ import NewBusinessType from '../../../views/admin/business-types/NewBusinessType
 import AllCustomers from '../../../views/admin/customers/AllCustomers';
 import EditCustomer from '../../../views/admin/customers/EditCustomer';
 import NewCustomer from '../../../views/admin/customers/NewCustomer';
+import AllMultipleChoices from '../../../views/admin/multiple-choices/AllMultipleChoices';
+import EditMultipleChoice from '../../../views/admin/multiple-choices/EditMultipleChoice';
+import NewMultipleChoice from '../../../views/admin/multiple-choices/NewMultipleChoice';
 import AllQuestionTypes from '../../../views/admin/question-types/AllQuestionTypes';
 import EditQuestionType from '../../../views/admin/question-types/EditQuestionType';
 import NewQuestionType from '../../../views/admin/question-types/NewQuestionType';
@@ -74,6 +77,17 @@ export const MainContent: React.FC = () => {
                                 </Route>
                                 <Route path='/admin/edit-question/:surveyId/:questionId' exact>
                                     <EditQuestion />
+                                </Route>
+
+                                {/* Multiple Choice */}
+                                <Route path='/admin/multichoices' exact>
+                                    <AllMultipleChoices />
+                                </Route>
+                                <Route path='/admin/new-multichoice' exact>
+                                    <NewMultipleChoice />
+                                </Route>
+                                <Route path='/admin/edit-multichoice/:multiChoiceId' exact>
+                                    <EditMultipleChoice />
                                 </Route>
 
                                 {/* Customer */}

@@ -59,4 +59,12 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->get('/questions', ['uses' => 'SurveyController@showAllQuestions']);
     $router->get('/surveys/{survey_id}/questions', ['uses' => 'SurveyController@showAllQuestionsFromSurvey']);
     $router->get('/surveys/{survey_id}/questions/{question_id}', ['uses' => 'SurveyController@showOneQuestion']);
+
+    // Find Multiple Choices
+    $router->get('/multichoices', ['uses' => 'MultipleChoiceController@index']);
+    $router->get('/multichoices/{id}', ['uses' => 'MultipleChoiceController@show']);
+    // Multiple Choice CRUD
+    $router->post('/multichoices', ['uses' => 'MultipleChoiceController@create']);
+    $router->put('/multichoices/{id}', ['uses' => 'MultipleChoiceController@update']);
+    $router->delete('/multichoices/{id}', ['uses' => 'MultipleChoiceController@delete']);
 });

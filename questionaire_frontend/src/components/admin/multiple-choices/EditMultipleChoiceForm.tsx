@@ -1,22 +1,28 @@
 import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
+import { MultipleChoice } from "../../../utils/models/MultipleChoice";
+import { Question } from "../../../utils/models/Question";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
-const EditMultipleChoiceForm: React.FC<{ existingData: any, isLoading: boolean, onEditMultipleChoice: Function }> = ({ existingData, isLoading, onEditMultipleChoice }) => {
+const EditMultipleChoiceForm: React.FC<{ existingData: MultipleChoice, isLoading: boolean, questions: Question[], onEditMultipleChoice: Function }> = ({ existingData, isLoading, questions, onEditMultipleChoice }) => {
     const [isEntering, setIsEntering] = useState(false);
 
-    const nameInputRef = useRef<any>();
-    const descriptionInputRef = useRef<any>();
+    const labelInputRef = useRef<any>();
+    const valueInputRef = useRef<any>();
+    const selectedInputRef = useRef<any>();
+    const questionInputRef = useRef<any>();
 
     const submitFormHandler = (event: any) => {
         event.preventDefault();
 
-        const enteredName = nameInputRef.current.value;
-        const enteredDescription = descriptionInputRef.current.value;
+        const enteredLabel = labelInputRef.current.value;
+        const enteredValue = valueInputRef.current.value;
+        const enteredSelected = selectedInputRef.current.checked;
+        const enteredQuestion = questionInputRef.current.value;
 
         // optional: Could validate here
 
-        onEditMultipleChoice({ id: existingData.id, name: enteredName, description: enteredDescription });
+        onEditMultipleChoice({ id: existingData.id, label: enteredLabel, value: enteredValue, selected: enteredSelected, question_id: enteredQuestion });
     }
 
     const finishEnteringHandler = () => {
@@ -45,22 +51,38 @@ const EditMultipleChoiceForm: React.FC<{ existingData: any, isLoading: boolean, 
                 )}
 
                 <div className="row mb-3">
-                    <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
+                    <label htmlFor="label" className="col-sm-2 col-form-label">Label</label>
                     <div className="col-sm-10">
-                        <input type="text" defaultValue={existingData.name} className="form-control" id="name" ref={nameInputRef} />
+                        <input type="text" className="form-control" id="label" defaultValue={existingData.label} ref={labelInputRef} />
                     </div>
                 </div>
                 <div className="row mb-3">
-                    <label htmlFor="description" className="col-sm-2 col-form-label">Description</label>
+                    <label htmlFor="value" className="col-sm-2 col-form-label">Value</label>
                     <div className="col-sm-10">
-                        <textarea className="form-control" id="description" defaultValue={existingData.description} ref={descriptionInputRef}></textarea>
+                        <input type="text" className="form-control" id="value" defaultValue={existingData.value} ref={valueInputRef} />
+                    </div>
+                </div>
+                <div className="row mb-3">
+                    <label htmlFor="question_id" className="col-sm-2 col-form-label">Question</label>
+                    <div className="col-sm-10">
+                        <select className="form-select" id="question_id" ref={questionInputRef} aria-label="Select Question">
+                            {questions && questions.map(question => <option key={question.id} value={question.id}>{question.title}</option>)}
+                        </select>
+                    </div>
+                </div>
+                <div className="row mb-3">
+                    <label htmlFor="selected" className="col-sm-2 col-form-label">Selected?</label>
+                    <div className="col-sm-10">
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="selected" defaultChecked={existingData.selected} ref={selectedInputRef} />
+                        </div>
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Edit MultipleChoice</button>
+                        <button onClick={finishEnteringHandler} className="btn btn-primary">Add Multiple Choice</button>
                         <NavLink className="btn btn-secondary ms-2" to={"/multichoices"}>Cancel</NavLink>
                     </div>
                 </div>

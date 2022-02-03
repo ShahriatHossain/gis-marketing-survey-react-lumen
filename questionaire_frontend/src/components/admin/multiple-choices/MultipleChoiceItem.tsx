@@ -34,8 +34,10 @@ const MultipleChoiceItem: React.FC<{ multichoice: MultipleChoice, onDeleteMultip
     return (
         <React.Fragment>
             <tr key={multichoice.id}>
-                <td>{multichoice.name}</td>
-                <td>{multichoice.description}</td>
+                <td>{multichoice.label}</td>
+                <td>{multichoice.value}</td>
+                <td>{multichoice.question_title}</td>
+                <td>{multichoice.selected ? 'Yes' : 'No'}</td>
                 <td>{multichoice.created_at}</td>
                 <td>{multichoice.updated_at}</td>
                 <td>

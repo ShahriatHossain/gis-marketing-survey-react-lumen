@@ -43,6 +43,23 @@ export const SideNavMenuContainer: React.FC = () => {
                     </nav>
                 </div>
 
+                {/* Multiple Choice */}
+                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMultipleChoice" aria-expanded="false" aria-controls="collapseMultipleChoice">
+                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
+                    Multiple Choice
+                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                </a>
+                <div className="collapse" id="collapseMultipleChoice" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav className="sb-sidenav-menu-nested nav">
+                        <NavLink className="nav-link" to='/admin/multichoices'>
+                            All Multiple Choices
+                        </NavLink>
+                        <NavLink className="nav-link" to='/admin/new-multichoice'>
+                            Add a Multiple Choice
+                        </NavLink>
+                    </nav>
+                </div>
+
                 {/* Customer */}
                 <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCustomer" aria-expanded="false" aria-controls="collapseCustomer">
                     <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>

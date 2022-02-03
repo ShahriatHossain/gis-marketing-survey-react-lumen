@@ -20,7 +20,10 @@ class MultipleChoiceController extends Controller
     // FIND
     public function index()
     {
-        return response()->json(MultipleChoice::all());
+        $results = app('db')->select("
+        SELECT mc.*, questions.title as question_title FROM multiple_choices as mc 
+        INNER JOIN questions ON questions.id = mc.question_id");
+        return response()->json($results, 200);
     }
 
     public function show($id)

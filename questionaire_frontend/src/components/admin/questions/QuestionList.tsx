@@ -26,7 +26,9 @@ const QuestionList: React.FC<{ questions: Question[], surveys: Survey[], questio
                 <table className="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Survey</th>
+                            <th scope="col">Question Type</th>
                             <th scope="col">Description</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Updated At</th>
