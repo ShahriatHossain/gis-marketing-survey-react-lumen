@@ -53,19 +53,20 @@ const EditMultipleChoiceForm: React.FC<{ existingData: MultipleChoice, isLoading
                 <div className="row mb-3">
                     <label htmlFor="label" className="col-sm-2 col-form-label">Label</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="label" defaultValue={existingData.label} ref={labelInputRef} />
+                        <input type="text" className="form-control" id="label" defaultValue={existingData.label} ref={labelInputRef} required />
                     </div>
                 </div>
                 <div className="row mb-3">
                     <label htmlFor="value" className="col-sm-2 col-form-label">Value</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="value" defaultValue={existingData.value} ref={valueInputRef} />
+                        <input type="text" className="form-control" id="value" defaultValue={existingData.value} ref={valueInputRef} required />
                     </div>
                 </div>
                 <div className="row mb-3">
                     <label htmlFor="question_id" className="col-sm-2 col-form-label">Question</label>
                     <div className="col-sm-10">
-                        <select className="form-select" id="question_id" ref={questionInputRef} aria-label="Select Question">
+                        <select className="form-select" id="question_id" ref={questionInputRef} aria-label="Select Question" required>
+                            <option value="">Choose...</option>
                             {questions && questions.map(question => <option key={question.id} value={question.id}>{question.title}</option>)}
                         </select>
                     </div>
@@ -83,7 +84,7 @@ const EditMultipleChoiceForm: React.FC<{ existingData: MultipleChoice, isLoading
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
                         <button onClick={finishEnteringHandler} className="btn btn-primary">Add Multiple Choice</button>
-                        <NavLink className="btn btn-secondary ms-2" to={"/multichoices"}>Cancel</NavLink>
+                        <NavLink className="btn btn-secondary ms-2" to={"/admin/multichoices"}>Cancel</NavLink>
                     </div>
                 </div>
 

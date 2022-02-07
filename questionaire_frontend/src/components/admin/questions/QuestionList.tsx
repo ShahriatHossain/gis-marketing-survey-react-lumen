@@ -19,7 +19,7 @@ const QuestionList: React.FC<{ questions: Question[], surveys: Survey[], questio
                     <QuestionFilterUI surveys={surveys} questionTypes={questionTypes} onFilterQuestions={onFilterQuestions}></QuestionFilterUI>
                 </div>
                 <div className="col">
-                    <NavLink className="btn btn-primary btn-sm float-end" role="button" to={"/new-question"}><i className="fas fa-plus"></i></NavLink>
+                    <NavLink className="btn btn-primary btn-sm float-end" role="button" to={"/admin/new-question"}><i className="fas fa-plus"></i></NavLink>
                 </div>
             </div>
             <div className="table-responsive">

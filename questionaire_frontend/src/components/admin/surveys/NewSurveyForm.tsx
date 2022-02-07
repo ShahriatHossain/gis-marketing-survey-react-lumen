@@ -1,12 +1,22 @@
 import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
+import { isEmpty } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = ({ isLoading, onAddSurvey }) => {
     const [isEntering, setIsEntering] = useState(false);
+    const [formInputsValidity, setFormInputsValidity] = useState({
+        name: true
+    });
 
     const nameInputRef = useRef<any>();
     const descriptionInputRef = useRef<any>();
+
+    const nameChangeHandler = (event: any) => {
+        setFormInputsValidity({
+            name: !isEmpty(event.target.value)
+        });
+    }
 
     const submitFormHandler = (event: any) => {
         event.preventDefault();
@@ -15,9 +25,22 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
         const enteredDescription = descriptionInputRef.current.value;
 
         // optional: Could validate here
+        const enteredNameIsValid = !isEmpty(enteredName);
+
+        setFormInputsValidity({
+            name: enteredNameIsValid
+        });
+
+        const formIsValid = enteredNameIsValid;
+
+        if (!formIsValid) {
+            return;
+        }
 
         onAddSurvey({ name: enteredName, description: enteredDescription });
-    }
+    };
+
+    const nameControlClasses = `form-control ${formInputsValidity.name ? '' : 'is-invalid'}`;
 
     const finishEnteringHandler = () => {
         setIsEntering(false);
@@ -37,7 +60,8 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
             />
             <form
                 onFocus={formFocusedHandler}
-                onSubmit={submitFormHandler}>
+                onSubmit={submitFormHandler}
+                autoComplete="off">
                 {isLoading && (
                     <React.Fragment>
                         <LoadingSpinner />
@@ -47,7 +71,10 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
                 <div className="row mb-3">
                     <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="name" ref={nameInputRef} />
+                        <input type="text" className={nameControlClasses} id="name" ref={nameInputRef} onChange={nameChangeHandler} />
+                        {!formInputsValidity.name && <div className="invalid-feedback">
+                            Please provide a valid name.
+                        </div>}
                     </div>
                 </div>
                 <div className="row mb-3">
@@ -61,7 +88,7 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
                         <button onClick={finishEnteringHandler} className="btn btn-primary">Add Survey</button>
-                        <NavLink className="btn btn-secondary ms-2" to={"/surveys"}>Cancel</NavLink>
+                        <NavLink className="btn btn-secondary ms-2" to={"/admin/surveys"}>Cancel</NavLink>
                     </div>
                 </div>
 

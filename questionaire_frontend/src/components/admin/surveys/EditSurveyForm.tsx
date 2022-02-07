@@ -47,7 +47,7 @@ const EditSurveyForm: React.FC<{ existingData: any, isLoading: boolean, onEditSu
                 <div className="row mb-3">
                     <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
                     <div className="col-sm-10">
-                        <input type="text" defaultValue={existingData.name} className="form-control" id="name" ref={nameInputRef} />
+                        <input type="text" defaultValue={existingData.name} className="form-control" id="name" ref={nameInputRef} required />
                     </div>
                 </div>
                 <div className="row mb-3">
@@ -61,7 +61,7 @@ const EditSurveyForm: React.FC<{ existingData: any, isLoading: boolean, onEditSu
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
                         <button onClick={finishEnteringHandler} className="btn btn-primary">Edit Survey</button>
-                        <NavLink className="btn btn-secondary ms-2" to={"/surveys"}>Cancel</NavLink>
+                        <NavLink className="btn btn-secondary ms-2" to={"/admin/surveys"}>Cancel</NavLink>
                     </div>
                 </div>
 

@@ -60,7 +60,7 @@ const EditQuestionTypeForm: React.FC<{ existingData: any, isLoading: boolean, on
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
                         <button onClick={finishEnteringHandler} className="btn btn-primary">Edit Question Type</button>
-                        <NavLink className="btn btn-secondary ms-2" to={"/question-types"}>Cancel</NavLink>
+                        <NavLink className="btn btn-secondary ms-2" to={"/admin/question-types"}>Cancel</NavLink>
                     </div>
                 </div>
 

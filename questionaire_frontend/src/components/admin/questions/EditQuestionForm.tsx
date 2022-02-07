@@ -60,13 +60,14 @@ const EditQuestionForm: React.FC<{ existingData: any, isLoading: boolean, survey
                 <div className="row mb-3">
                     <label htmlFor="title" className="col-sm-2 col-form-label">Title</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" defaultValue={existingData.title} id="title" ref={titleInputRef} />
+                        <input type="text" className="form-control" defaultValue={existingData.title} id="title" ref={titleInputRef} required />
                     </div>
                 </div>
                 <div className="row mb-3">
                     <label htmlFor="survey" className="col-sm-2 col-form-label">Survey</label>
                     <div className="col-sm-10">
-                        <select className="form-select" id="survey" ref={surveyInputRef} aria-label="Select Survey">
+                        <select className="form-select" id="survey" ref={surveyInputRef} aria-label="Select Survey" required>
+                            <option value="">Choose...</option>
                             {surveys && surveys.map(survey => <option key={survey.id} value={survey.id}>{survey.name}</option>)}
                         </select>
                     </div>
@@ -74,7 +75,8 @@ const EditQuestionForm: React.FC<{ existingData: any, isLoading: boolean, survey
                 <div className="row mb-3">
                     <label htmlFor="questionType" className="col-sm-2 col-form-label">Question Type</label>
                     <div className="col-sm-10">
-                        <select className="form-select" id="questionType" ref={questionTypeInputRef} aria-label="Select Question Type">
+                        <select className="form-select" id="questionType" ref={questionTypeInputRef} aria-label="Select Question Type" required>
+                            <option value="">Choose...</option>
                             {questionTypes && questionTypes.map(qt => <option key={qt.id} value={qt.name}>{qt.description}</option>)}
                         </select>
                     </div>
@@ -98,7 +100,7 @@ const EditQuestionForm: React.FC<{ existingData: any, isLoading: boolean, survey
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
                         <button onClick={finishEnteringHandler} className="btn btn-primary">Edit Question</button>
-                        <NavLink className="btn btn-secondary ms-2" to={"/questions"}>Cancel</NavLink>
+                        <NavLink className="btn btn-secondary ms-2" to={"/admin/questions"}>Cancel</NavLink>
                     </div>
                 </div>
             </form>

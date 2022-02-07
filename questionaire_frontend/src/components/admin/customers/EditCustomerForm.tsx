@@ -91,7 +91,7 @@ const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, busine
                         <div className="row mb-3">
                             <div className="col-sm-12">
                                 <label htmlFor="name" className="form-label">Name</label>
-                                <input type="text" className="form-control" defaultValue={existingData.name} id="name" ref={nameInputRef} />
+                                <input type="text" className="form-control" defaultValue={existingData.name} id="name" ref={nameInputRef} required />
                             </div>
                         </div>
                         <div className="row mb-3">
@@ -103,7 +103,8 @@ const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, busine
                         <div className="row mb-3">
                             <div className="col-sm-12">
                                 <label htmlFor="business_type" className="form-label">Business Type</label>
-                                <select className="form-select" id="business_type" ref={businessTypeInputRef} aria-label="Select Business Type">
+                                <select className="form-select" id="business_type" ref={businessTypeInputRef} aria-label="Select Business Type" required>
+                                    <option value="">Choose...</option>
                                     {businessTypes && businessTypes.map(bt => <option key={bt.id} value={bt.name}>{bt.description}</option>)}
                                 </select>
                             </div>
@@ -149,7 +150,7 @@ const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, busine
                         <div className="row mb-3">
                             <div className="col-sm-12">
                                 <label htmlFor="email" className="form-label">Email</label>
-                                <input type="text" className="form-control" defaultValue={existingData.email} id="email" ref={emailInputRef} />
+                                <input type="text" className="form-control" defaultValue={existingData.email} id="email" ref={emailInputRef} required />
                             </div>
                         </div>
                         <div className="row mb-3">
@@ -189,7 +190,7 @@ const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, busine
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
                         <button onClick={finishEnteringHandler} className="btn btn-primary">Edit Customer</button>
-                        <NavLink className="btn btn-secondary ms-2" to={"/customers"}>Cancel</NavLink>
+                        <NavLink className="btn btn-secondary ms-2" to={"/admin/customers"}>Cancel</NavLink>
                     </div>
                 </div>
 

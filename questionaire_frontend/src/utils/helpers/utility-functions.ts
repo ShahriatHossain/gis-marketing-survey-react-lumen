@@ -11,3 +11,5 @@ export const hideBootstrapModal = (modalId: string) => {
     $("[class*='modal-backdrop fade show']").remove();
 
 }
+
+export const isEmpty = (value: any) => value.trim() === '';
