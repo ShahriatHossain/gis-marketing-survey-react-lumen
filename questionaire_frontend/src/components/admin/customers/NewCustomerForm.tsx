@@ -1,10 +1,16 @@
 import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
+import { isEmpty, validateEmail } from "../../../utils/helpers/utility-functions";
 import { BusinessType } from "../../../utils/models/BusinessType";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const NewCustomerForm: React.FC<{ isLoading: boolean, businessTypes: BusinessType[], onAddCustomer: Function }> = ({ isLoading, businessTypes, onAddCustomer }) => {
     const [isEntering, setIsEntering] = useState(false);
+    const [formInputsValidity, setFormInputsValidity] = useState({
+        name: true,
+        email: true,
+        businessType: true
+    });
 
     const nameInputRef = useRef<any>();
     const contactNameInputRef = useRef<any>();
@@ -21,6 +27,33 @@ const NewCustomerForm: React.FC<{ isLoading: boolean, businessTypes: BusinessTyp
     const longitudeInputRef = useRef<any>();
     const faxInputRef = useRef<any>();
     const businessTypeInputRef = useRef<any>();
+
+    const nameChangeHandler = (event: any) => {
+        setFormInputsValidity(prevState => {
+            return {
+                ...prevState,
+                name: !isEmpty(event.target.value)
+            }
+        });
+    }
+
+    const emailChangeHandler = (event: any) => {
+        setFormInputsValidity(prevState => {
+            return {
+                ...prevState,
+                email: !isEmpty(event.target.value)
+            }
+        });
+    }
+
+    const businessTypeChangeHandler = (event: any) => {
+        setFormInputsValidity(prevState => {
+            return {
+                ...prevState,
+                businessType: !isEmpty(event.target.value)
+            }
+        });
+    }
 
     const submitFormHandler = (event: any) => {
         event.preventDefault();
@@ -41,6 +74,23 @@ const NewCustomerForm: React.FC<{ isLoading: boolean, businessTypes: BusinessTyp
         const enteredFax = faxInputRef.current.value;
         const enteredBusinessType = businessTypeInputRef.current.value;
 
+        // optional: Could validate here
+        const enteredNameIsValid = !isEmpty(enteredName);
+        const enteredEmailIsValid = !isEmpty(enteredEmail) && validateEmail(enteredEmail);
+        const enteredBusinessTypeIsValid = !isEmpty(enteredBusinessType);
+
+        setFormInputsValidity({
+            name: enteredNameIsValid,
+            email: enteredEmailIsValid,
+            businessType: enteredBusinessTypeIsValid
+        });
+
+        const formIsValid = enteredNameIsValid && enteredEmailIsValid && enteredBusinessTypeIsValid;
+
+        if (!formIsValid) {
+            return;
+        }
+
         onAddCustomer({
             name: enteredName,
             contact_name: enteredContactName,
@@ -53,8 +103,8 @@ const NewCustomerForm: React.FC<{ isLoading: boolean, businessTypes: BusinessTyp
             state: enteredState,
             county: enteredCounty,
             country: enteredCountry,
-            latitude: enteredLatitude,
-            longitude: enteredLongitude,
+            latitude: +enteredLatitude,
+            longitude: +enteredLongitude,
             fax: enteredFax,
             business_type: enteredBusinessType
         });
@@ -67,6 +117,10 @@ const NewCustomerForm: React.FC<{ isLoading: boolean, businessTypes: BusinessTyp
     const formFocusedHandler = () => {
         setIsEntering(true);
     };
+
+    const nameControlClasses = `form-control ${formInputsValidity.name ? '' : 'is-invalid'}`;
+    const emailControlClasses = `form-control ${formInputsValidity.email ? '' : 'is-invalid'}`;
+    const businessTypeControlClasses = `form-select ${formInputsValidity.businessType ? '' : 'is-invalid'}`;
 
     return (
         <React.Fragment>
@@ -90,7 +144,10 @@ const NewCustomerForm: React.FC<{ isLoading: boolean, businessTypes: BusinessTyp
                         <div className="row mb-3">
                             <div className="col-sm-12">
                                 <label htmlFor="name" className="form-label">Name</label>
-                                <input type="text" className="form-control" id="name" ref={nameInputRef} required />
+                                <input type="text" className={nameControlClasses} id="name" ref={nameInputRef} onChange={nameChangeHandler} />
+                                {!formInputsValidity.name && <div className="invalid-feedback">
+                                    Please provide a valid name.
+                                </div>}
                             </div>
                         </div>
                         <div className="row mb-3">
@@ -102,10 +159,13 @@ const NewCustomerForm: React.FC<{ isLoading: boolean, businessTypes: BusinessTyp
                         <div className="row mb-3">
                             <div className="col-sm-12">
                                 <label htmlFor="business_type" className="form-label">Business Type</label>
-                                <select className="form-select" id="business_type" ref={businessTypeInputRef} aria-label="Select Business Type" required>
+                                <select className={businessTypeControlClasses} id="business_type" ref={businessTypeInputRef} aria-label="Select Business Type" onChange={businessTypeChangeHandler}>
                                     <option value="">Choose...</option>
                                     {businessTypes && businessTypes.map(bt => <option key={bt.id} value={bt.name}>{bt.description}</option>)}
                                 </select>
+                                {!formInputsValidity.businessType && <div className="invalid-feedback">
+                                    Please choose business type.
+                                </div>}
                             </div>
                         </div>
                         <div className="row mb-3">
@@ -149,7 +209,10 @@ const NewCustomerForm: React.FC<{ isLoading: boolean, businessTypes: BusinessTyp
                         <div className="row mb-3">
                             <div className="col-sm-12">
                                 <label htmlFor="email" className="form-label" >Email</label>
-                                <input type="text" className="form-control" id="email" ref={emailInputRef} required />
+                                <input type="text" className={emailControlClasses} id="email" ref={emailInputRef} onChange={emailChangeHandler} />
+                                {!formInputsValidity.email && <div className="invalid-feedback">
+                                    Please provide valid email.
+                                </div>}
                             </div>
                         </div>
                         <div className="row mb-3">

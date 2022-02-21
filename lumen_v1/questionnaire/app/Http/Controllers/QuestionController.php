@@ -20,10 +20,12 @@ class QuestionController extends Controller
     // FIND
     public function index()
     {
-        $results = app('db')->select("SELECT questions.*, surveys.name as survey_name, question_types.name as question_type_name, question_types.description as question_type_description
+        $results = app('db')->select("
+        SELECT questions.*, surveys.name as survey_name, question_types.description as question_type_description
         FROM questions
         INNER JOIN surveys ON surveys.id = questions.survey_id
-        INNER JOIN question_types ON questions.question_type = question_types.name");
+        INNER JOIN question_types ON questions.question_type = question_types.name
+        ");
         return response()->json($results);
     }
 

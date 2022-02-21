@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import NoQuestionsFound from "../../../components/admin/questions/NoQuestionsFound";
+import QuestionFilterUI from "../../../components/admin/questions/QuestionFilterUI";
 import QuestionList from "../../../components/admin/questions/QuestionList";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import useHttpWithParam from "../../../hooks/use-httpWithParam";
@@ -10,7 +12,10 @@ import { Question } from "../../../utils/models/Question";
 
 const AllQuestions: React.FC = () => {
     const [questions, setQuestions] = useState<Question[]>([]);
+    const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [selectedFilterSurvey, setSelectedFilterSurvey] = useState('');
+    const [selectedFilterQuestionType, setSelectedFilterQuestionType] = useState('');
     const [error, setError] = useState(null);
 
     const { sendRequest: sendRequestForSurveys, status: statusForSurveys, data: loadedSurveys } = useHttpWithParam(
@@ -35,6 +40,14 @@ const AllQuestions: React.FC = () => {
 
     }, [sendRequestForSurveys, sendRequestForQuestionTypes]);
 
+    const selectFilterSurveyHandler = (surveyId: string) => {
+        setSelectedFilterSurvey(surveyId);
+    }
+
+    const selectFilterQuestionTypeHandler = (questionTypeId: string) => {
+        setSelectedFilterQuestionType(questionTypeId);
+    }
+
     const refreshRecordHandler = (questionId: any) => {
         setIsLoading(true);
         setQuestions(prevQuestions => prevQuestions.filter(q => q.id != questionId));
@@ -43,24 +56,25 @@ const AllQuestions: React.FC = () => {
 
     const filterQuestionsHandler = (surveyId: number, questionTypeName: string) => {
         setIsLoading(true);
-        setQuestions(prevQuestions => {
-            if (surveyId && questionTypeName) {
-                return prevQuestions.filter(q => q.survey_id == surveyId && q.question_type == questionTypeName)
-            }
-
-            if (surveyId) {
-                return prevQuestions.filter(q => q.survey_id == surveyId)
-            }
-
-            if (questionTypeName) {
-                return prevQuestions.filter(q => q.question_type == questionTypeName)
-            }
-
-            return prevQuestions;
-        });
-
+        setFilteredQuestions(getFilteredQuestions(surveyId, questionTypeName));
         delayLoading();
 
+    }
+
+    const getFilteredQuestions = (surveyId: number, questionTypeName: string) => {
+        if (surveyId && questionTypeName) {
+            return questions.filter(q => q.survey_id == surveyId && q.question_type == questionTypeName)
+        }
+
+        if (surveyId) {
+            return questions.filter(q => q.survey_id == surveyId)
+        }
+
+        if (questionTypeName) {
+            return questions.filter(q => q.question_type == questionTypeName)
+        }
+
+        return questions;
     }
 
     const delayLoading = () => {
@@ -97,6 +111,7 @@ const AllQuestions: React.FC = () => {
         }
 
         setQuestions(transformedQuestions);
+        setFilteredQuestions(transformedQuestions);
         setIsLoading(false);
     }
 
@@ -117,7 +132,28 @@ const AllQuestions: React.FC = () => {
     }
 
 
-    return <QuestionList questions={questions} surveys={loadedSurveys} questionTypes={loadedQuestionTypes} onRefreshRecord={refreshRecordHandler} onFilterQuestions={filterQuestionsHandler} />;
+    return (
+        <>
+            <div className="row mb-2">
+                <div className="col">
+                    <QuestionFilterUI
+                        surveys={loadedSurveys}
+                        questionTypes={loadedQuestionTypes}
+                        selecFilterSurvey={selectedFilterSurvey}
+                        selectFilterQuestionType={selectedFilterQuestionType}
+                        onFilterQuestions={filterQuestionsHandler}
+                        onSelectFilterSurvey={selectFilterSurveyHandler}
+                        onSelectFilterQuestionType={selectFilterQuestionTypeHandler}></QuestionFilterUI>
+                </div>
+                <div className="col">
+                    <NavLink className="btn btn-primary btn-sm float-end" role="button" to={"/admin/new-question"}><i className="fas fa-plus"></i></NavLink>
+                </div>
+            </div>
+            {filteredQuestions && filteredQuestions.length > 0 ?
+                <QuestionList questions={filteredQuestions} onRefreshRecord={refreshRecordHandler} />
+                : "No record found!"}
+        </>
+    )
 }
 
 export default AllQuestions;

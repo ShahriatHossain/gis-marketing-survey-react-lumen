@@ -25,7 +25,7 @@ export async function getAllQuestions() {
 }
 
 export async function getSingleQuestion(questionData: any) {
-    const response = await fetch(`${BASE_URL}/surveys/${questionData.surveyId}/questions/${questionData.questionId}`);
+    const response = await fetch(`${BASE_URL}/questions/${questionData.questionId}`);
     const data = await response.json();
 
     if (!response.ok) {
@@ -41,7 +41,7 @@ export async function getSingleQuestion(questionData: any) {
 }
 
 export async function addQuestion(questionData: Question) {
-    const response = await fetch(`${BASE_URL}/surveys/${questionData.survey_id}/questions`, {
+    const response = await fetch(`${BASE_URL}/questions`, {
         method: 'POST',
         body: JSON.stringify(questionData),
         headers: {
@@ -58,7 +58,7 @@ export async function addQuestion(questionData: Question) {
 }
 
 export async function editQuestion(questionData: Question) {
-    const response = await fetch(`${BASE_URL}/surveys/${questionData.survey_id}/questions/${questionData.id}`, {
+    const response = await fetch(`${BASE_URL}/questions/${questionData.id}`, {
         method: 'PUT',
         body: JSON.stringify(questionData),
         headers: {
@@ -75,7 +75,7 @@ export async function editQuestion(questionData: Question) {
 }
 
 export async function deleteQuestion(questionData: Question) {
-    const response = await fetch(`${BASE_URL}/surveys/${questionData.survey_id}/questions/${questionData.id}`, {
+    const response = await fetch(`${BASE_URL}/questions/${questionData.id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

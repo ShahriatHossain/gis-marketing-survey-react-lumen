@@ -1,13 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = ({ isLoading, onAddSurvey }) => {
     const [isEntering, setIsEntering] = useState(false);
+    const [didMount, setDidMount] = useState(false);
     const [formInputsValidity, setFormInputsValidity] = useState({
         name: true
     });
+
+    useEffect(() => {
+        setDidMount(true);
+        return () => setDidMount(false);
+    }, []);
 
     const nameInputRef = useRef<any>();
     const descriptionInputRef = useRef<any>();
@@ -49,6 +55,10 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
     const formFocusedHandler = () => {
         setIsEntering(true);
     };
+
+    if (!didMount) {
+        return null;
+    }
 
     return (
         <React.Fragment>

@@ -1,12 +1,22 @@
 import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
+import { isEmpty } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const EditSurveyForm: React.FC<{ existingData: any, isLoading: boolean, onEditSurvey: Function }> = ({ existingData, isLoading, onEditSurvey }) => {
     const [isEntering, setIsEntering] = useState(false);
+    const [formInputsValidity, setFormInputsValidity] = useState({
+        name: true
+    });
 
     const nameInputRef = useRef<any>();
     const descriptionInputRef = useRef<any>();
+
+    const nameChangeHandler = (event: any) => {
+        setFormInputsValidity({
+            name: !isEmpty(event.target.value)
+        });
+    }
 
     const submitFormHandler = (event: any) => {
         event.preventDefault();
@@ -15,6 +25,17 @@ const EditSurveyForm: React.FC<{ existingData: any, isLoading: boolean, onEditSu
         const enteredDescription = descriptionInputRef.current.value;
 
         // optional: Could validate here
+        const enteredNameIsValid = !isEmpty(enteredName);
+
+        setFormInputsValidity({
+            name: enteredNameIsValid
+        });
+
+        const formIsValid = enteredNameIsValid;
+
+        if (!formIsValid) {
+            return;
+        }
 
         onEditSurvey({ id: existingData.id, name: enteredName, description: enteredDescription });
     }
@@ -26,6 +47,8 @@ const EditSurveyForm: React.FC<{ existingData: any, isLoading: boolean, onEditSu
     const formFocusedHandler = () => {
         setIsEntering(true);
     };
+
+    const nameControlClasses = `form-control ${formInputsValidity.name ? '' : 'is-invalid'}`;
 
     return (
         <React.Fragment>
@@ -47,7 +70,10 @@ const EditSurveyForm: React.FC<{ existingData: any, isLoading: boolean, onEditSu
                 <div className="row mb-3">
                     <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
                     <div className="col-sm-10">
-                        <input type="text" defaultValue={existingData.name} className="form-control" id="name" ref={nameInputRef} required />
+                        <input type="text" defaultValue={existingData.name} className={nameControlClasses} id="name" ref={nameInputRef} onChange={nameChangeHandler} />
+                        {!formInputsValidity.name && <div className="invalid-feedback">
+                            Please provide a valid name.
+                        </div>}
                     </div>
                 </div>
                 <div className="row mb-3">

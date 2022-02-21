@@ -51,15 +51,14 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->put('/surveys/{id}', ['uses' => 'SurveyController@update']);
     $router->delete('/surveys/{id}', ['uses' => 'SurveyController@delete']);
 
-    // Question CRUD
-    $router->post('/surveys/{survey_id}/questions', ['uses' => 'SurveyController@createQuestion']);
-    $router->put('/surveys/{survey_id}/questions/{question_id}', ['uses' => 'SurveyController@updateQuestion']);
-    $router->delete('/surveys/{survey_id}/questions/{question_id}', ['uses' => 'SurveyController@deleteQuestion']);
     // Find Questions
-    $router->get('/questions', ['uses' => 'SurveyController@showAllQuestions']);
-    $router->get('/surveys/{survey_id}/questions', ['uses' => 'SurveyController@showAllQuestionsFromSurvey']);
-    $router->get('/surveys/{survey_id}/questions/{question_id}', ['uses' => 'SurveyController@showOneQuestion']);
-
+    $router->get('/questions', ['uses' => 'QuestionController@index']);
+    $router->get('/questions/{id}', ['uses' => 'QuestionController@show']);
+    // Question CRUD
+    $router->post('/questions', ['uses' => 'QuestionController@create']);
+    $router->put('/questions/{id}', ['uses' => 'QuestionController@update']);
+    $router->delete('/questions/{id}', ['uses' => 'QuestionController@delete']);
+    
     // Find Multiple Choices
     $router->get('/multichoices', ['uses' => 'MultipleChoiceController@index']);
     $router->get('/multichoices/{id}', ['uses' => 'MultipleChoiceController@show']);

@@ -37,11 +37,12 @@ const QuestionItem: React.FC<{ question: Question, onDeleteQuestion: Function }>
                 <td>{question.title}</td>
                 <td>{question.survey_name}</td>
                 <td>{question.question_type_description}</td>
+                <td>{question.required ? 'Yes' : 'No'}</td>
                 <td>{question.description}</td>
                 <td>{question.created_at}</td>
                 <td>{question.updated_at}</td>
                 <td>
-                    <NavLink className="btn btn-primary btn-sm" to={`/admin/edit-question/${question.survey_id}/${question.id}`}>
+                    <NavLink className="btn btn-primary btn-sm" to={`/admin/edit-question/${question.id}`}>
                         <i className="fas fa-pen"></i>
                     </NavLink>&nbsp;
                     <ModalButtonLink targetId={modalParam.modalId}><i className="far fa-trash-alt"></i></ModalButtonLink>

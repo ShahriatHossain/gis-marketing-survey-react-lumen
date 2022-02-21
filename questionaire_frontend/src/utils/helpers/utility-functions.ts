@@ -13,3 +13,8 @@ export const hideBootstrapModal = (modalId: string) => {
 }
 
 export const isEmpty = (value: any) => value.trim() === '';
+
+export const validateEmail = (email: string) => {
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return email.match(mailformat) ? true : false;
+}

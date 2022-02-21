@@ -75,7 +75,7 @@ export const MainContent: React.FC = () => {
                                 <Route path='/admin/new-question' exact>
                                     <NewQuestion />
                                 </Route>
-                                <Route path='/admin/edit-question/:surveyId/:questionId' exact>
+                                <Route path='/admin/edit-question/:questionId' exact>
                                     <EditQuestion />
                                 </Route>
 
