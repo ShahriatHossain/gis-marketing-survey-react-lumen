@@ -17,17 +17,14 @@ import NewQuestion from '../../../views/admin/questions/NewQuestion';
 import AllSurveys from '../../../views/admin/surveys/AllSurveys';
 import EditSurvey from '../../../views/admin/surveys/EditSurvey';
 import NewSurvey from '../../../views/admin/surveys/NewSurvey';
+import Breadcrumbs from '../../UI/Breadcrumbs';
 
 export const MainContent: React.FC = () => {
     return (
         <div id="layoutSidenav_content">
             <main>
                 <div className="container-fluid px-4">
-                    <h1 className="mt-4">Sidenav Light</h1>
-                    <ol className="breadcrumb mb-4">
-                        <li className="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li className="breadcrumb-item active">Sidenav Light</li>
-                    </ol>
+                    <Breadcrumbs />
                     <div className="card mb-4">
                         <div className="card-body">
                             <Switch>

@@ -1,12 +1,25 @@
 import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
+import { isEmpty } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const EditBusinessTypeForm: React.FC<{ existingData: any, isLoading: boolean, onEditBusinessType: Function }> = ({ existingData, isLoading, onEditBusinessType }) => {
     const [isEntering, setIsEntering] = useState(false);
+    const [formInputsValidity, setFormInputsValidity] = useState({
+        name: true
+    });
 
     const nameInputRef = useRef<any>();
     const descriptionInputRef = useRef<any>();
+
+    const nameChangeHandler = (event: any) => {
+        setFormInputsValidity(prevState => {
+            return {
+                ...prevState,
+                name: !isEmpty(event.target.value)
+            }
+        });
+    }
 
     const submitFormHandler = (event: any) => {
         event.preventDefault();
@@ -15,6 +28,17 @@ const EditBusinessTypeForm: React.FC<{ existingData: any, isLoading: boolean, on
         const enteredDescription = descriptionInputRef.current.value;
 
         // optional: Could validate here
+        const enteredNameIsValid = !isEmpty(enteredName);
+
+        setFormInputsValidity({
+            name: enteredNameIsValid
+        });
+
+        const formIsValid = enteredNameIsValid;
+
+        if (!formIsValid) {
+            return;
+        }
 
         onEditBusinessType({ id: existingData.id, name: enteredName, description: enteredDescription });
     }
@@ -26,6 +50,8 @@ const EditBusinessTypeForm: React.FC<{ existingData: any, isLoading: boolean, on
     const formFocusedHandler = () => {
         setIsEntering(true);
     };
+
+    const nameControlClasses = `form-control ${formInputsValidity.name ? '' : 'is-invalid'}`;
 
     return (
         <React.Fragment>
@@ -47,7 +73,10 @@ const EditBusinessTypeForm: React.FC<{ existingData: any, isLoading: boolean, on
                 <div className="row mb-3">
                     <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
                     <div className="col-sm-10">
-                        <input type="text" defaultValue={existingData.name} className="form-control" id="name" ref={nameInputRef} required />
+                        <input type="text" className={nameControlClasses} defaultValue={existingData.name} id="name" ref={nameInputRef} onChange={nameChangeHandler} />
+                        {!formInputsValidity.name && <div className="invalid-feedback">
+                            Please provide a valid name.
+                        </div>}
                     </div>
                 </div>
                 <div className="row mb-3">
