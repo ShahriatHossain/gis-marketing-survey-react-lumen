@@ -1,6 +1,6 @@
 export const ContentWrapper: React.FC = ({ children }) => {
     return (
-        <div id="layoutSidenav">
+        <div id="layoutLanding">
             {children}
         </div>
     )

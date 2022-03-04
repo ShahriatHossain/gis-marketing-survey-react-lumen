@@ -11307,16 +11307,17 @@ body {
   height: 100%;
 }
 
-#layoutAuthentication {
+#layoutLanding {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin-top: 35px;
 }
-#layoutAuthentication #layoutAuthentication_content {
+#layoutLanding #layoutLanding_content {
   min-width: 0;
   flex-grow: 1;
 }
-#layoutAuthentication #layoutAuthentication_footer {
+#layoutLanding #layoutLanding_footer {
   min-width: 0;
 }
 

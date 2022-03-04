@@ -36,9 +36,11 @@ export const MainContent: React.FC = () => {
                                 <Route path='/admin/surveys' exact>
                                     <AllSurveys />
                                 </Route>
+
                                 <Route path='/admin/new-survey' exact>
                                     <NewSurvey />
                                 </Route>
+
                                 <Route path='/admin/edit-survey/:surveyId' exact>
                                     <EditSurvey />
                                 </Route>
