@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const SignUp: React.FC = () => {
     return (
         <div className="row justify-content-center">
@@ -44,7 +46,7 @@ const SignUp: React.FC = () => {
                         </form>
                     </div>
                     <div className="card-footer text-center py-3">
-                        <div className="small"><a href="login.html">Have an account? Go to login</a></div>
+                        <div className="small"><NavLink to="/signin">Have an account? Go to login</NavLink></div>
                     </div>
                 </div>
             </div>

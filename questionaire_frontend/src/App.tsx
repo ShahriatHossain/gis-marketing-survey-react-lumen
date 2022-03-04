@@ -4,6 +4,7 @@ import { ContentWrapper } from "./components/admin/content-wrapper/ContentWrappe
 import { MainContent } from "./components/admin/main-content/MainContent";
 import { SideNav } from "./components/admin/navigation/side-nav/SideNav";
 import { TopNav } from "./components/admin/navigation/top-nav/TopNav";
+import ForgotPasswordPage from "./views/landing/forgot-password/ForgotPasswordPage";
 import SigninPage from "./views/landing/signin/SigninPage";
 import SignupPage from "./views/landing/signup/SignupPage";
 
@@ -14,6 +15,7 @@ function App() {
       <TopNav></TopNav>
       <Route exact path='/signin' component={SigninPage} />
       <Route exact path='/signup' component={SignupPage} />
+      <Route exact path='/forgot-password' component={ForgotPasswordPage} />
       <Route
         path={'/admin/(.+)'}
         render={() => (
