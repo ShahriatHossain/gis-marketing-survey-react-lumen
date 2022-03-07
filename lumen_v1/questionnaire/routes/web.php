@@ -58,7 +58,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->post('/questions', ['uses' => 'QuestionController@create']);
     $router->put('/questions/{id}', ['uses' => 'QuestionController@update']);
     $router->delete('/questions/{id}', ['uses' => 'QuestionController@delete']);
-    
+
     // Find Multiple Choices
     $router->get('/multichoices', ['uses' => 'MultipleChoiceController@index']);
     $router->get('/multichoices/{id}', ['uses' => 'MultipleChoiceController@show']);
@@ -66,4 +66,17 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->post('/multichoices', ['uses' => 'MultipleChoiceController@create']);
     $router->put('/multichoices/{id}', ['uses' => 'MultipleChoiceController@update']);
     $router->delete('/multichoices/{id}', ['uses' => 'MultipleChoiceController@delete']);
+
+    // Matches "/api/register
+    $router->post('register', 'AuthController@register');
+    // Matches "/api/login
+    $router->post('login', 'AuthController@login');
+
+    // Matches "/api/profile
+    $router->get('profile', 'UserController@profile');
+    // Matches "/api/users/1 
+    //get one user by id
+    $router->get('users/{id}', 'UserController@singleUser');
+    // Matches "/api/users
+    $router->get('users', 'UserController@allUsers');
 });

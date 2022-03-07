@@ -95,9 +95,19 @@ $app->middleware([
 |
 */
 
-$app->register(App\Providers\AppServiceProvider::class);
+//$app->register(App\Providers\AppServiceProvider::class);
+//$app->register(App\Providers\AuthServiceProvider::class);
+//$app->register(App\Providers\EventServiceProvider::class);
+
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
+
 $app->register(App\Providers\AuthServiceProvider::class);
-$app->register(App\Providers\EventServiceProvider::class);
+
+// Add this line in the same file:
+
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
