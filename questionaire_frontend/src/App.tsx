@@ -4,18 +4,20 @@ import { ContentWrapper } from "./components/admin/content-wrapper/ContentWrappe
 import { MainContent } from "./components/admin/main-content/MainContent";
 import { SideNav } from "./components/admin/navigation/side-nav/SideNav";
 import { TopNav } from "./components/admin/navigation/top-nav/TopNav";
-import ForgotPasswordPage from "./views/landing/forgot-password/ForgotPasswordPage";
-import SigninPage from "./views/landing/signin/SigninPage";
-import SignupPage from "./views/landing/signup/SignupPage";
+import ForgotPassword from "./views/landing/forgot-password/ForgotPassword";
+import HomePage from "./views/landing/home/HomePage";
+import Signin from "./views/landing/signin/Signin";
+import Signup from "./views/landing/signup/Signup";
 
 function App() {
   const isAdmin: boolean = true;
   return (
     <BrowserRouter>
       <TopNav></TopNav>
-      <Route exact path='/signin' component={SigninPage} />
-      <Route exact path='/signup' component={SignupPage} />
-      <Route exact path='/forgot-password' component={ForgotPasswordPage} />
+      <Route exact path='/' component={HomePage} />
+      <Route exact path='/signin' component={Signin} />
+      <Route exact path='/signup' component={Signup} />
+      <Route exact path='/forgot-password' component={ForgotPassword} />
       <Route
         path={'/admin/(.+)'}
         render={() => (

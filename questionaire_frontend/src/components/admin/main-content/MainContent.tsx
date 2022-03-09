@@ -28,10 +28,6 @@ export const MainContent: React.FC = () => {
                     <div className="card mb-4">
                         <div className="card-body">
                             <Switch>
-                                <Route path='/' exact>
-                                    <Redirect to='/admin/surveys' />
-                                </Route>
-
                                 {/* Survey */}
                                 <Route path='/admin/surveys' exact>
                                     <AllSurveys />
