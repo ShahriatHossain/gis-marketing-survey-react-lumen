@@ -3,7 +3,7 @@ import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty, validateEmail } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
-const SigninForm: React.FC<{ isLoading: boolean, onAddCustomer: Function }> = ({ isLoading, onAddCustomer }) => {
+const SigninForm: React.FC<{ isLoading: boolean, onLoginUser: Function }> = ({ isLoading, onLoginUser }) => {
     const [isEntering, setIsEntering] = useState(false);
     const [formInputsValidity, setFormInputsValidity] = useState({
         email: true,
@@ -52,12 +52,10 @@ const SigninForm: React.FC<{ isLoading: boolean, onAddCustomer: Function }> = ({
             return;
         }
 
-        // onAddCustomer({
-        //     name: enteredName,
-        //     contact_name: enteredContactName,
-        //     email: enteredEmail,
-        //     password: enteredPassword
-        // });
+        onLoginUser({
+            email: enteredEmail,
+            password: enteredPassword
+        });
     }
 
     const finishEnteringHandler = () => {

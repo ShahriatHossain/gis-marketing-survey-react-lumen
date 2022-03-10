@@ -8,7 +8,7 @@ import useHttpWithParam from "../../../hooks/use-httpWithParam";
 import { addCustomer } from "../../../lib/customer-api";
 
 const Signup: React.FC = () => {
-    const { sendRequest, status } = useHttpWithParam(addCustomer);
+    const { sendRequest, status, data: loadTokenInfo, error } = useHttpWithParam(addCustomer);
     const history = useHistory();
 
     useEffect(() => {
@@ -20,6 +20,11 @@ const Signup: React.FC = () => {
     const addCustomerHandler = (customerData: any) => {
         sendRequest(customerData);
     };
+
+    if (status === 'completed' && loadTokenInfo) {
+        console.log(loadTokenInfo);
+    }
+
     return (
         <ContentWrapper>
             <ContentContainer>

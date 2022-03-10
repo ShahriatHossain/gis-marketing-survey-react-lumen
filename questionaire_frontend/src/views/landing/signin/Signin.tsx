@@ -4,12 +4,14 @@ import SigninForm from "../../../components/landing/signin/SigninForm";
 import Footer from "../../../components/landing/footer/Footer";
 import useHttpWithParam from "../../../hooks/use-httpWithParam";
 import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
-import { addCustomer } from "../../../lib/customer-api";
+import { useContext, useEffect } from "react";
+import { loginUser } from "../../../lib/auth-api";
+import AuthContext from "../../../store/auth-context";
 
 const Signin: React.FC = () => {
-    const { sendRequest, status } = useHttpWithParam(addCustomer);
+    const { sendRequest, status, data: loadTokenInfo, error } = useHttpWithParam(loginUser);
     const history = useHistory();
+    const authCtx = useContext(AuthContext);
 
     useEffect(() => {
         if (status === 'completed') {
@@ -17,14 +19,18 @@ const Signin: React.FC = () => {
         }
     }, [status, history]);
 
-    const addCustomerHandler = (customerData: any) => {
-        sendRequest(customerData);
+    const loginHandler = (authData: any) => {
+        sendRequest(authData);
     };
-    
+
+    if (status === 'completed' && loadTokenInfo) {
+        authCtx.login(loadTokenInfo)
+    }
+
     return (
         <ContentWrapper>
             <ContentContainer>
-                <SigninForm isLoading={status === 'pending'} onAddCustomer={addCustomerHandler} />
+                <SigninForm isLoading={status === 'pending'} onLoginUser={loginHandler} />
             </ContentContainer>
             <Footer />
         </ContentWrapper>
