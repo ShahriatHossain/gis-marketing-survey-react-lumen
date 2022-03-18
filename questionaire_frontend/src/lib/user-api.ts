@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants/common";
 import { User } from "../utils/models/User";
+import { getAuthorizedHeader, getBearerToken } from "../utils/helpers/utility-functions";
 
 export async function getAllUsers() {
-    const response = await fetch(`${BASE_URL}/users`);
+    const response = await fetch(`${BASE_URL}/users`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -25,7 +26,7 @@ export async function getAllUsers() {
 }
 
 export async function getSingleUser(userId: string) {
-    const response = await fetch(`${BASE_URL}/users/${userId}`);
+    const response = await fetch(`${BASE_URL}/users/${userId}`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -41,7 +42,7 @@ export async function getSingleUser(userId: string) {
 }
 
 export async function getUserProfile() {
-    const response = await fetch(`${BASE_URL}/profile`);
+    const response = await fetch(`${BASE_URL}/profile`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -61,6 +62,7 @@ export async function addUser(userData: User) {
         body: JSON.stringify(userData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -78,6 +80,7 @@ export async function editUser(userData: User) {
         body: JSON.stringify(userData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -94,6 +97,7 @@ export async function deleteUser(userId: string) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();

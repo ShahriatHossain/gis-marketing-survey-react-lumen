@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants/common";
 import { Survey } from "../utils/models/Survey";
+import { getAuthorizedHeader, getBearerToken } from "../utils/helpers/utility-functions";
 
 export async function getAllSurveys() {
-    const response = await fetch(`${BASE_URL}/surveys`);
+    const response = await fetch(`${BASE_URL}/surveys`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -25,7 +25,7 @@ export async function getAllSurveys() {
 }
 
 export async function getSingleSurvey(surveyId: string) {
-    const response = await fetch(`${BASE_URL}/surveys/${surveyId}`);
+    const response = await fetch(`${BASE_URL}/surveys/${surveyId}`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -46,6 +46,7 @@ export async function addSurvey(surveyData: Survey) {
         body: JSON.stringify(surveyData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -63,6 +64,7 @@ export async function editSurvey(surveyData: Survey) {
         body: JSON.stringify(surveyData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -79,6 +81,7 @@ export async function deleteSurvey(surveyId: string) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();

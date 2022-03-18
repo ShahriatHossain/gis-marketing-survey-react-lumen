@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants/common";
+import { getAuthorizedHeader, getBearerToken } from "../utils/helpers/utility-functions";
 import { BusinessType } from "../utils/models/BusinessType";
 
 export async function getAllBusinessTypes() {
-    const response = await fetch(`${BASE_URL}/business-types`);
+    const response = await fetch(`${BASE_URL}/business-types`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -25,14 +26,14 @@ export async function getAllBusinessTypes() {
 }
 
 export async function getSingleBusinessType(businessTypeId: string) {
-    const response = await fetch(`${BASE_URL}/business-types/${businessTypeId}`);
+    const response = await fetch(`${BASE_URL}/business-types/${businessTypeId}`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
         throw new Error(data.message || 'Could not fetch business type.');
     }
 
-    const loadedBusinessType = <BusinessType> {
+    const loadedBusinessType = <BusinessType>{
         id: businessTypeId,
         ...data,
     };
@@ -46,6 +47,7 @@ export async function addBusinessType(businessTypeData: BusinessType) {
         body: JSON.stringify(businessTypeData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -63,6 +65,7 @@ export async function editBusinessType(businessTypeData: BusinessType) {
         body: JSON.stringify(businessTypeData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -79,6 +82,7 @@ export async function deleteBusinessType(businessTypeId: string) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();

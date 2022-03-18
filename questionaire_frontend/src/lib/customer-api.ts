@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants/common";
 import { Customer } from "../utils/models/Customer";
+import { getAuthorizedHeader, getBearerToken } from "../utils/helpers/utility-functions";
 
 export async function getAllCustomers() {
-    const response = await fetch(`${BASE_URL}/customers`);
+    const response = await fetch(`${BASE_URL}/customers`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -25,7 +26,7 @@ export async function getAllCustomers() {
 }
 
 export async function getSingleCustomer(customerId: string) {
-    const response = await fetch(`${BASE_URL}/customers/${customerId}`);
+    const response = await fetch(`${BASE_URL}/customers/${customerId}`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -46,6 +47,7 @@ export async function addCustomer(customerData: Customer) {
         body: JSON.stringify(customerData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -63,6 +65,7 @@ export async function editCustomer(customerData: Customer) {
         body: JSON.stringify(customerData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -79,6 +82,7 @@ export async function deleteCustomer(customerId: string) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();

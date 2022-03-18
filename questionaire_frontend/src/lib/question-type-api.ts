@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants/common";
 import { QuestionType } from "../utils/models/QuestionType";
+import { getAuthorizedHeader, getBearerToken } from "../utils/helpers/utility-functions";
 
 export async function getAllQuestionTypes() {
-    const response = await fetch(`${BASE_URL}/question-types`);
+    const response = await fetch(`${BASE_URL}/question-types`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -25,7 +25,7 @@ export async function getAllQuestionTypes() {
 }
 
 export async function getSingleQuestionType(questionTypeId: string) {
-    const response = await fetch(`${BASE_URL}/question-types/${questionTypeId}`);
+    const response = await fetch(`${BASE_URL}/question-types/${questionTypeId}`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -46,6 +46,7 @@ export async function addQuestionType(questionTypeData: QuestionType) {
         body: JSON.stringify(questionTypeData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -63,6 +64,7 @@ export async function editQuestionType(questionTypeData: QuestionType) {
         body: JSON.stringify(questionTypeData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -79,6 +81,7 @@ export async function deleteQuestionType(questionTypeId: string) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();

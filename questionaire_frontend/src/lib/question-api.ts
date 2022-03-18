@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants/common";
 import { Question } from "../utils/models/Question";
+import { getAuthorizedHeader, getBearerToken } from "../utils/helpers/utility-functions";
 
 export async function getAllQuestions() {
-    const response = await fetch(`${BASE_URL}/questions`);
+    const response = await fetch(`${BASE_URL}/questions`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -25,7 +25,7 @@ export async function getAllQuestions() {
 }
 
 export async function getSingleQuestion(questionData: any) {
-    const response = await fetch(`${BASE_URL}/questions/${questionData.questionId}`);
+    const response = await fetch(`${BASE_URL}/questions/${questionData.questionId}`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -46,6 +46,7 @@ export async function addQuestion(questionData: Question) {
         body: JSON.stringify(questionData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -63,6 +64,7 @@ export async function editQuestion(questionData: Question) {
         body: JSON.stringify(questionData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -79,6 +81,7 @@ export async function deleteQuestion(questionData: Question) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();

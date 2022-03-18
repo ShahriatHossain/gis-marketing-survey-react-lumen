@@ -14,18 +14,17 @@ const Signin: React.FC = () => {
     const authCtx = useContext(AuthContext);
 
     useEffect(() => {
-        if (status === 'completed') {
-            history.push('/admin');
+        if (status === 'completed' && loadTokenInfo) {
+            
+            authCtx.login(loadTokenInfo);
+
+            history.push('/admin/surveys');
         }
     }, [status, history]);
 
     const loginHandler = (authData: any) => {
         sendRequest(authData);
     };
-
-    if (status === 'completed' && loadTokenInfo) {
-        authCtx.login(loadTokenInfo)
-    }
 
     return (
         <ContentWrapper>

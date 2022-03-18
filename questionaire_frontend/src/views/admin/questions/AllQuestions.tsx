@@ -8,6 +8,7 @@ import useHttpWithParam from "../../../hooks/use-httpWithParam";
 import { getAllQuestionTypes } from "../../../lib/question-type-api";
 import { getAllSurveys } from "../../../lib/survey-api";
 import { BASE_URL } from "../../../utils/constants/common";
+import { getAuthorizedHeader } from "../../../utils/helpers/utility-functions";
 import { Question } from "../../../utils/models/Question";
 
 const AllQuestions: React.FC = () => {
@@ -90,7 +91,7 @@ const AllQuestions: React.FC = () => {
         const transformedQuestions = [];
 
         try {
-            const response = await fetch(`${BASE_URL}/questions`);
+            const response = await fetch(`${BASE_URL}/questions`, getAuthorizedHeader());
             const data = await response.json();
 
             if (!response.ok) {

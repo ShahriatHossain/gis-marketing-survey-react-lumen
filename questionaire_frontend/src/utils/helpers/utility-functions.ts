@@ -18,3 +18,15 @@ export const validateEmail = (email: string) => {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return email.match(mailformat) ? true : false;
 }
+
+export const getAuthorizedHeader = () => {
+    return {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+    };
+}
+
+export const getBearerToken = () => {
+    return `Bearer ${localStorage.getItem('token')}`;
+}

@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants/common";
 import { MultipleChoice } from "../utils/models/MultipleChoice";
+import { getAuthorizedHeader, getBearerToken } from "../utils/helpers/utility-functions";
 
 export async function getAllMultipleChoices() {
-    const response = await fetch(`${BASE_URL}/multichoices`);
+    const response = await fetch(`${BASE_URL}/multichoices`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -25,7 +26,7 @@ export async function getAllMultipleChoices() {
 }
 
 export async function getSingleMultipleChoice(multichoiceId: string) {
-    const response = await fetch(`${BASE_URL}/multichoices/${multichoiceId}`);
+    const response = await fetch(`${BASE_URL}/multichoices/${multichoiceId}`, getAuthorizedHeader());
     const data = await response.json();
 
     if (!response.ok) {
@@ -46,6 +47,7 @@ export async function addMultipleChoice(multichoiceData: MultipleChoice) {
         body: JSON.stringify(multichoiceData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -63,6 +65,7 @@ export async function editMultipleChoice(multichoiceData: MultipleChoice) {
         body: JSON.stringify(multichoiceData),
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();
@@ -79,6 +82,7 @@ export async function deleteMultipleChoice(multichoiceId: string) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': getBearerToken()
         },
     });
     const data = await response.json();

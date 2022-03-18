@@ -18,6 +18,7 @@ import AllSurveys from '../../../views/admin/surveys/AllSurveys';
 import EditSurvey from '../../../views/admin/surveys/EditSurvey';
 import NewSurvey from '../../../views/admin/surveys/NewSurvey';
 import Breadcrumbs from '../../UI/Breadcrumbs';
+import PrivateRoute from '../../UI/PrivateRoute';
 
 export const MainContent: React.FC = () => {
     return (
@@ -29,72 +30,34 @@ export const MainContent: React.FC = () => {
                         <div className="card-body">
                             <Switch>
                                 {/* Survey */}
-                                <Route path='/admin/surveys' exact>
-                                    <AllSurveys />
-                                </Route>
-
-                                <Route path='/admin/new-survey' exact>
-                                    <NewSurvey />
-                                </Route>
-
-                                <Route path='/admin/edit-survey/:surveyId' exact>
-                                    <EditSurvey />
-                                </Route>
+                                <PrivateRoute exact path='/admin/surveys' component={AllSurveys} />
+                                <PrivateRoute exact path='/admin/new-survey' component={NewSurvey} />
+                                <PrivateRoute exact path='/admin/edit-survey/:surveyId' component={EditSurvey} />
 
                                 {/* Business Type */}
-                                <Route path='/admin/business-types' exact>
-                                    <AllBusinessTypes />
-                                </Route>
-                                <Route path='/admin/new-business-type' exact>
-                                    <NewBusinessType />
-                                </Route>
-                                <Route path='/admin/edit-business-type/:businessTypeId' exact>
-                                    <EditBusinessType />
-                                </Route>
+                                <PrivateRoute exact path='/admin/business-types' component={AllBusinessTypes} />
+                                <PrivateRoute exact path='/admin/new-business-type' component={NewBusinessType} />
+                                <PrivateRoute exact path='/admin/edit-business-type/:businessTypeId' component={EditBusinessType} />
 
                                 {/* Question Type */}
-                                <Route path='/admin/question-types' exact>
-                                    <AllQuestionTypes />
-                                </Route>
-                                <Route path='/admin/new-question-type' exact>
-                                    <NewQuestionType />
-                                </Route>
-                                <Route path='/admin/edit-question-type/:questionTypeId' exact>
-                                    <EditQuestionType />
-                                </Route>
+                                <PrivateRoute exact path='/admin/question-types' component={AllQuestionTypes} />
+                                <PrivateRoute exact path='/admin/new-question-type' component={NewQuestionType} />
+                                <PrivateRoute exact path='/admin/edit-question-type/:questionTypeId' component={EditQuestionType} />
 
                                 {/* Question */}
-                                <Route path='/admin/questions' exact>
-                                    <AllQuestions />
-                                </Route>
-                                <Route path='/admin/new-question' exact>
-                                    <NewQuestion />
-                                </Route>
-                                <Route path='/admin/edit-question/:questionId' exact>
-                                    <EditQuestion />
-                                </Route>
+                                <PrivateRoute exact path='/admin/questions' component={AllQuestions} />
+                                <PrivateRoute exact path='/admin/new-question' component={NewQuestion} />
+                                <PrivateRoute exact path='/admin/edit-question/:questionId' component={EditQuestion} />
 
                                 {/* Multiple Choice */}
-                                <Route path='/admin/multichoices' exact>
-                                    <AllMultipleChoices />
-                                </Route>
-                                <Route path='/admin/new-multichoice' exact>
-                                    <NewMultipleChoice />
-                                </Route>
-                                <Route path='/admin/edit-multichoice/:multiChoiceId' exact>
-                                    <EditMultipleChoice />
-                                </Route>
+                                <PrivateRoute exact path='/admin/multichoices' component={AllMultipleChoices} />
+                                <PrivateRoute exact path='/admin/new-multichoice' component={NewMultipleChoice} />
+                                <PrivateRoute exact path='/admin/edit-multichoice/:multiChoiceId' component={EditMultipleChoice} />
 
                                 {/* Customer */}
-                                <Route path='/admin/customers' exact>
-                                    <AllCustomers />
-                                </Route>
-                                <Route path='/admin/new-customer' exact>
-                                    <NewCustomer />
-                                </Route>
-                                <Route path='/admin/edit-customer/:customerId' exact>
-                                    <EditCustomer />
-                                </Route>
+                                <PrivateRoute exact path='/admin/customers' component={AllCustomers} />
+                                <PrivateRoute exact path='/admin/new-customer' component={NewCustomer} />
+                                <PrivateRoute exact path='/admin/edit-customer/:customerId' component={EditCustomer} />
 
                                 {/* <Route path='*'>
                                     <NotFound />
