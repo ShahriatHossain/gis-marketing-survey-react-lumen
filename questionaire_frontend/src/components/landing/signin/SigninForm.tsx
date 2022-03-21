@@ -70,12 +70,6 @@ const SigninForm: React.FC<{ isLoading: boolean, onLoginUser: Function }> = ({ i
     const passwordControlClasses = `form-select ${formInputsValidity.password ? '' : 'is-invalid'}`;
     return (
         <Fragment>
-            <Prompt
-                when={isEntering}
-                message={(location) =>
-                    'Are you sure you want to leave? All your entered data will be lost!'
-                }
-            />
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
@@ -102,10 +96,6 @@ const SigninForm: React.FC<{ isLoading: boolean, onLoginUser: Function }> = ({ i
                                     {!formInputsValidity.password && <div className="invalid-feedback">
                                         Please provide a valid password.
                                     </div>}
-                                </div>
-                                <div className="form-check mb-3">
-                                    <input className="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                                    <label className="form-check-label" htmlFor="inputRememberPassword">Remember Password</label>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                     <NavLink className="small" to="/forgot-password">Forgot Password?</NavLink>
