@@ -17,6 +17,9 @@ import NewQuestion from '../../../views/admin/questions/NewQuestion';
 import AllSurveys from '../../../views/admin/surveys/AllSurveys';
 import EditSurvey from '../../../views/admin/surveys/EditSurvey';
 import NewSurvey from '../../../views/admin/surveys/NewSurvey';
+import AllUsers from '../../../views/admin/users/AllUsers';
+import EditUser from '../../../views/admin/users/EditUser';
+import NewUser from '../../../views/admin/users/NewUser';
 import Breadcrumbs from '../../UI/Breadcrumbs';
 import PrivateRoute from '../../UI/PrivateRoute';
 
@@ -53,6 +56,11 @@ export const MainContent: React.FC = () => {
                                 <PrivateRoute exact path='/admin/multichoices' component={AllMultipleChoices} />
                                 <PrivateRoute exact path='/admin/new-multichoice' component={NewMultipleChoice} />
                                 <PrivateRoute exact path='/admin/edit-multichoice/:multiChoiceId' component={EditMultipleChoice} />
+
+                                {/* User */}
+                                <PrivateRoute exact path='/admin/users' component={AllUsers} />
+                                <PrivateRoute exact path='/admin/new-user' component={NewUser} />
+                                <PrivateRoute exact path='/admin/edit-user/:userId' component={EditUser} />
 
                                 {/* Customer */}
                                 <PrivateRoute exact path='/admin/customers' component={AllCustomers} />

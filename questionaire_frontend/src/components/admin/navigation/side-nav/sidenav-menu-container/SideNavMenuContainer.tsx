@@ -9,6 +9,40 @@ export const SideNavMenuContainer: React.FC = () => {
                     Dashboard
                 </a>
 
+                {/* User */}
+                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false" aria-controls="collapseUser">
+                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
+                    User
+                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                </a>
+                <div className="collapse" id="collapseUser" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav className="sb-sidenav-menu-nested nav">
+                        <NavLink className="nav-link" to='/admin/users'>
+                            All Users
+                        </NavLink>
+                        <NavLink className="nav-link" to='/admin/new-user'>
+                            Add a User
+                        </NavLink>
+                    </nav>
+                </div>
+
+                {/* Customer */}
+                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCustomer" aria-expanded="false" aria-controls="collapseCustomer">
+                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
+                    Customer
+                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                </a>
+                <div className="collapse" id="collapseCustomer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav className="sb-sidenav-menu-nested nav">
+                        <NavLink className="nav-link" to='/admin/customers'>
+                            All Customers
+                        </NavLink>
+                        <NavLink className="nav-link" to='/admin/new-customer'>
+                            Add a Customer
+                        </NavLink>
+                    </nav>
+                </div>
+
                 {/* Survey */}
                 <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSuvey" aria-expanded="false" aria-controls="collapseSuvey">
                     <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
@@ -56,23 +90,6 @@ export const SideNavMenuContainer: React.FC = () => {
                         </NavLink>
                         <NavLink className="nav-link" to='/admin/new-multichoice'>
                             Add a Multiple Choice
-                        </NavLink>
-                    </nav>
-                </div>
-
-                {/* Customer */}
-                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCustomer" aria-expanded="false" aria-controls="collapseCustomer">
-                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
-                    Customer
-                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </a>
-                <div className="collapse" id="collapseCustomer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/admin/customers'>
-                            All Customers
-                        </NavLink>
-                        <NavLink className="nav-link" to='/admin/new-customer'>
-                            Add a Customer
                         </NavLink>
                     </nav>
                 </div>
