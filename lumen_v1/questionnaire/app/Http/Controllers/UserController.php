@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use  App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -27,30 +28,55 @@ class UserController extends Controller
         return response()->json(['user' => Auth::user()], 200);
     }
 
-    /**
-     * Get all User.
-     *
-     * @return Response
-     */
-    public function allUsers()
+    // FIND
+    public function index()
     {
-        return response()->json(['users' =>  User::all()], 200);
+        return response()->json(User::all());
     }
 
-    /**
-     * Get one user.
-     *
-     * @return Response
-     */
-    public function singleUser($id)
+    public function show($id)
     {
+        return response()->json(User::find($id));
+    }
+
+    // CRUD
+    public function create(Request $request)
+    {
+        //validate incoming request 
+        $this->validate($request, [
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+        ]);
+
         try {
-            $user = User::findOrFail($id);
 
-            return response()->json(['user' => $user], 200);
+            $user = new User;
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $plainPassword = $request->input('password');
+            $user->password = app('hash')->make($plainPassword);
+
+            $user->save();
+
+            //return successful response
+            return response()->json(['user' => $user, 'message' => 'CREATED'], 201);
         } catch (\Exception $e) {
-
-            return response()->json(['message' => 'user not found!'], 404);
+            //return error message
+            return response()->json(['message' => 'User Registration Failed!'], 409);
         }
+    }
+
+    public function update($id, Request $request)
+    {
+        $entity = User::findOrFail($id);
+        $entity->update($request->all());
+        return response()->json($entity, 200);
+    }
+
+    public function delete($id)
+    {
+        User::findOrFail($id)->delete();
+        return response('Deleted Successfully', 200);
     }
 }

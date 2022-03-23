@@ -79,4 +79,12 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->get('users/{id}', 'UserController@singleUser');
     // Matches "/api/users
     $router->get('users', 'UserController@allUsers');
+
+    // Find Users
+    $router->get('/users', ['uses' => 'UserController@index']);
+    $router->get('/users/{id}', ['uses' => 'UserController@show']);
+    // User CRUD
+    $router->post('/users', ['uses' => 'UserController@create']);
+    $router->put('/users/{id}', ['uses' => 'UserController@update']);
+    $router->delete('/users/{id}', ['uses' => 'UserController@delete']);
 });
