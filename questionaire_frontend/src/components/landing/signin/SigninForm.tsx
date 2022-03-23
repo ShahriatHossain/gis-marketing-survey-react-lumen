@@ -2,6 +2,7 @@ import { Fragment, useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty, validateEmail } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const SigninForm: React.FC<{ isLoading: boolean, error: string; onLoginUser: Function }> = ({ isLoading, error, onLoginUser }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -73,11 +74,7 @@ const SigninForm: React.FC<{ isLoading: boolean, error: string; onLoginUser: Fun
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
-                {isLoading && (
-                    <Fragment>
-                        <LoadingSpinner />
-                    </Fragment>
-                )}
+                
                 <div className="row justify-content-center">
                     <div className="col-lg-5">
                         <div className="card shadow-lg border-0 rounded-lg mt-5">
@@ -100,7 +97,9 @@ const SigninForm: React.FC<{ isLoading: boolean, error: string; onLoginUser: Fun
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                     <NavLink className="small" to="/forgot-password">Forgot Password?</NavLink>
-                                    <button onClick={finishEnteringHandler} className="btn btn-primary">Login</button>
+                                    <SubmitButton isLoading={isLoading}
+                                        clickHandler={finishEnteringHandler}
+                                        classes="btn btn-primary">Login</SubmitButton>
                                 </div>
                             </div>
                             <div className="card-footer text-center py-3">

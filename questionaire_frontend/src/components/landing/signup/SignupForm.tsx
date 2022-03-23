@@ -2,6 +2,7 @@ import { Fragment, useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty, validateEmail } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const SignupForm: React.FC<{ isLoading: boolean, error: string, onAddCustomer: Function }>
     = ({ isLoading, error, onAddCustomer }) => {
@@ -114,11 +115,7 @@ const SignupForm: React.FC<{ isLoading: boolean, error: string, onAddCustomer: F
                 <form
                     onFocus={formFocusedHandler}
                     onSubmit={submitFormHandler}>
-                    {isLoading && (
-                        <Fragment>
-                            <LoadingSpinner />
-                        </Fragment>
-                    )}
+                    
                     <div className="row justify-content-center">
                         <div className="col-lg-7">
                             <div className="card shadow-lg border-0 rounded-lg mt-5">
@@ -164,7 +161,11 @@ const SignupForm: React.FC<{ isLoading: boolean, error: string, onAddCustomer: F
                                         </div>
                                     </div>
                                     <div className="mt-4 mb-0">
-                                        <div className="d-grid"><button onClick={finishEnteringHandler} className="btn btn-primary btn-block">Create Account</button></div>
+                                        <div className="d-grid">
+                                            <SubmitButton isLoading={isLoading}
+                                                clickHandler={finishEnteringHandler}
+                                                classes="btn btn-primary btn-block">Create Account</SubmitButton>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="card-footer text-center py-3">

@@ -20,7 +20,7 @@ export async function registerUser(userData: Registration) {
     }
 
     if (!response.ok) {
-        throw new Error(message.join(',') || 'Could not create user.');
+        throw new Error(message.join(' ') || 'Could not create user.');
     }
 
     return null;

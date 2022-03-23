@@ -3,6 +3,7 @@ import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty, validateEmail } from "../../../utils/helpers/utility-functions";
 import { BusinessType } from "../../../utils/models/BusinessType";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const NewUserForm: React.FC<{ isLoading: boolean, businessTypes: BusinessType[], onAddUser: Function }> = ({ isLoading, businessTypes, onAddUser }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -97,12 +98,7 @@ const NewUserForm: React.FC<{ isLoading: boolean, businessTypes: BusinessType[],
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
-                {isLoading && (
-                    <React.Fragment>
-                        <LoadingSpinner />
-                    </React.Fragment>
-                )}
-
+                
                 <div className="row">
                     <div className="col">
                         <div className="row mb-3">
@@ -132,14 +128,16 @@ const NewUserForm: React.FC<{ isLoading: boolean, businessTypes: BusinessType[],
                                 </div>}
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Add User</button>
+                        <SubmitButton isLoading={isLoading}
+                            clickHandler={finishEnteringHandler}
+                            classes="btn btn-primary">Add User</SubmitButton>
                         <NavLink className="btn btn-secondary ms-2" to={"/admin/users"}>Cancel</NavLink>
                     </div>
                 </div>
