@@ -5,30 +5,26 @@ import { ContentWrapper } from "../../../components/landing/content-wrapper/Cont
 import Footer from "../../../components/landing/footer/Footer";
 import SignupForm from "../../../components/landing/signup/SignupForm";
 import useHttpWithParam from "../../../hooks/use-httpWithParam";
-import { addCustomer } from "../../../lib/customer-api";
+import { registerUser } from "../../../lib/auth-api";
 
 const Signup: React.FC = () => {
-    const { sendRequest, status, data: loadTokenInfo, error } = useHttpWithParam(addCustomer);
+    const { sendRequest, status, response, error } = useHttpWithParam(registerUser);
     const history = useHistory();
 
     useEffect(() => {
-        if (status === 'completed') {
+        if (status === 'completed' && !error) {
             history.push('/signin');
         }
     }, [status, history]);
 
-    const addCustomerHandler = (customerData: any) => {
-        sendRequest(customerData);
+    const registerUserHandler = (userData: any) => {
+        sendRequest(userData);
     };
-
-    if (status === 'completed' && loadTokenInfo) {
-        console.log(loadTokenInfo);
-    }
 
     return (
         <ContentWrapper>
             <ContentContainer>
-                <SignupForm isLoading={status === 'pending'} onAddCustomer={addCustomerHandler} />
+                <SignupForm isLoading={status === 'pending'} error={error} onAddCustomer={registerUserHandler} />
             </ContentContainer>
             <Footer />
         </ContentWrapper>

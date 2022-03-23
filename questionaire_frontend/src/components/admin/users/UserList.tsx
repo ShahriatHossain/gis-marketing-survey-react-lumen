@@ -24,7 +24,6 @@ const UserList: React.FC<{ users: User[], onRefreshRecord: Function }> = ({ user
                         <tr>
                             <th className={"valign-top"} scope="col">Name</th>
                             <th className="valign-top" scope="col">Email</th>
-                            <th className="valign-top" scope="col">Password</th>
                             <th className="valign-top" scope="col">Created At</th>
                             <th className="valign-top" scope="col">Updated At</th>
                             <th className="valign-top" scope="col">Action</th>

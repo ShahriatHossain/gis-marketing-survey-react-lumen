@@ -3,7 +3,7 @@ import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty, validateEmail } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
-const SigninForm: React.FC<{ isLoading: boolean, onLoginUser: Function }> = ({ isLoading, onLoginUser }) => {
+const SigninForm: React.FC<{ isLoading: boolean, error: string; onLoginUser: Function }> = ({ isLoading, error, onLoginUser }) => {
     const [isEntering, setIsEntering] = useState(false);
     const [formInputsValidity, setFormInputsValidity] = useState({
         email: true,
@@ -83,6 +83,7 @@ const SigninForm: React.FC<{ isLoading: boolean, onLoginUser: Function }> = ({ i
                         <div className="card shadow-lg border-0 rounded-lg mt-5">
                             <div className="card-header"><h3 className="text-center font-weight-light my-4">Login</h3></div>
                             <div className="card-body">
+                                {error && <p className="text-danger text-center">{error}</p>}
                                 <div className="form-floating mb-3">
                                     <input className={emailControlClasses} id="inputEmail" type="email" ref={emailInputRef} onChange={emailChangeHandler} />
                                     <label htmlFor="inputEmail">Email address</label>

@@ -14,8 +14,8 @@ const Signin: React.FC = () => {
     const authCtx = useContext(AuthContext);
 
     useEffect(() => {
-        if (status === 'completed' && loadTokenInfo) {
-            
+        if (status === 'completed' && loadTokenInfo && !error) {
+
             authCtx.login(loadTokenInfo);
 
             history.push('/admin/surveys');
@@ -29,7 +29,7 @@ const Signin: React.FC = () => {
     return (
         <ContentWrapper>
             <ContentContainer>
-                <SigninForm isLoading={status === 'pending'} onLoginUser={loginHandler} />
+                <SigninForm isLoading={status === 'pending'} error={error} onLoginUser={loginHandler} />
             </ContentContainer>
             <Footer />
         </ContentWrapper>
