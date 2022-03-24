@@ -3,6 +3,7 @@ import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty, validateEmail } from "../../../utils/helpers/utility-functions";
 import { BusinessType } from "../../../utils/models/BusinessType";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, businessTypes: BusinessType[], onEditCustomer: Function }> = ({ existingData, isLoading, businessTypes, onEditCustomer }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -139,11 +140,6 @@ const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, busine
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
-                {isLoading && (
-                    <React.Fragment>
-                        <LoadingSpinner />
-                    </React.Fragment>
-                )}
 
                 <div className="row">
                     <div className="col">
@@ -257,7 +253,9 @@ const EditCustomerForm: React.FC<{ existingData: any, isLoading: boolean, busine
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Edit Customer</button>
+                        <SubmitButton isLoading={isLoading}
+                            clickHandler={finishEnteringHandler}
+                            classes="btn btn-primary">Edit Customer</SubmitButton>
                         <NavLink className="btn btn-secondary ms-2" to={"/admin/customers"}>Cancel</NavLink>
                     </div>
                 </div>

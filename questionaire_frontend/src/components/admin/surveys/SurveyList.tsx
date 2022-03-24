@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Survey } from "../../../utils/models/Survey";
+import Pagination from "../../UI/Pagination";
 import SurveyItem from "./SurveyItem";
 
 const SurveyList: React.FC<{ surveys: Survey[], onRefreshRecord: Function }> = ({ surveys, onRefreshRecord }) => {
@@ -36,6 +37,7 @@ const SurveyList: React.FC<{ surveys: Survey[], onRefreshRecord: Function }> = (
                     </tbody>
 
                 </table>
+                <Pagination />
             </div>
         </React.Fragment>
     )

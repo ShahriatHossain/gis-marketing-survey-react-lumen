@@ -4,6 +4,7 @@ import { isEmpty } from "../../../utils/helpers/utility-functions";
 import { MultipleChoice } from "../../../utils/models/MultipleChoice";
 import { Question } from "../../../utils/models/Question";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const EditMultipleChoiceForm: React.FC<{ existingData: MultipleChoice, isLoading: boolean, questions: Question[], onEditMultipleChoice: Function }> = ({ existingData, isLoading, questions, onEditMultipleChoice }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -105,11 +106,6 @@ const EditMultipleChoiceForm: React.FC<{ existingData: MultipleChoice, isLoading
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
-                {isLoading && (
-                    <React.Fragment>
-                        <LoadingSpinner />
-                    </React.Fragment>
-                )}
 
                 <div className="row mb-3">
                     <label htmlFor="label" className="col-sm-2 col-form-label">Label</label>
@@ -153,7 +149,9 @@ const EditMultipleChoiceForm: React.FC<{ existingData: MultipleChoice, isLoading
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Edit Multiple Choice</button>
+                        <SubmitButton isLoading={isLoading}
+                            clickHandler={finishEnteringHandler}
+                            classes="btn btn-primary">Edit Multiple Choice</SubmitButton>
                         <NavLink className="btn btn-secondary ms-2" to={"/admin/multichoices"}>Cancel</NavLink>
                     </div>
                 </div>

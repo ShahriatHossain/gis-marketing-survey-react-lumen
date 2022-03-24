@@ -3,6 +3,7 @@ import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty } from "../../../utils/helpers/utility-functions";
 import { Question } from "../../../utils/models/Question";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const NewMultipleChoiceForm: React.FC<{ isLoading: boolean, questions: Question[], onAddMultipleChoice: Function }> = ({ isLoading, questions, onAddMultipleChoice }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -106,11 +107,6 @@ const NewMultipleChoiceForm: React.FC<{ isLoading: boolean, questions: Question[
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
-                {isLoading && (
-                    <React.Fragment>
-                        <LoadingSpinner />
-                    </React.Fragment>
-                )}
 
                 <div className="row mb-3">
                     <label htmlFor="label" className="col-sm-2 col-form-label">Label</label>
@@ -154,7 +150,9 @@ const NewMultipleChoiceForm: React.FC<{ isLoading: boolean, questions: Question[
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Add Multiple Choice</button>
+                        <SubmitButton isLoading={isLoading}
+                            clickHandler={finishEnteringHandler}
+                            classes="btn btn-primary">Add Multiple Choice</SubmitButton>
                         <NavLink className="btn btn-secondary ms-2" to={"/admin/multichoices"}>Cancel</NavLink>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import { isEmpty } from "../../../utils/helpers/utility-functions";
 import { QuestionType } from "../../../utils/models/QuestionType";
 import { Survey } from "../../../utils/models/Survey";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const NewQuestionForm: React.FC<{ isLoading: boolean, surveys: Survey[], questionTypes: QuestionType[], onAddQuestion: Function }> = ({ isLoading, surveys, questionTypes, onAddQuestion }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -102,7 +103,7 @@ const NewQuestionForm: React.FC<{ isLoading: boolean, surveys: Survey[], questio
     if (!didMount) {
         return null;
     }
-    
+
     return (
         <React.Fragment>
             <Prompt
@@ -114,11 +115,6 @@ const NewQuestionForm: React.FC<{ isLoading: boolean, surveys: Survey[], questio
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
-                {isLoading && (
-                    <React.Fragment>
-                        <LoadingSpinner />
-                    </React.Fragment>
-                )}
 
                 <div className="row mb-3">
                     <label htmlFor="title" className="col-sm-2 col-form-label">Title</label>
@@ -171,7 +167,9 @@ const NewQuestionForm: React.FC<{ isLoading: boolean, surveys: Survey[], questio
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Add Question</button>
+                        <SubmitButton isLoading={isLoading}
+                            clickHandler={finishEnteringHandler}
+                            classes="btn btn-primary">Add Question</SubmitButton>
                         <NavLink className="btn btn-secondary ms-2" to={"/admin/questions"}>Cancel</NavLink>
                     </div>
                 </div>

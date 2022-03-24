@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const NewQuestionTypeForm: React.FC<{ isLoading: boolean, onAddQuestionType: Function }> = ({ isLoading, onAddQuestionType }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -64,12 +65,7 @@ const NewQuestionTypeForm: React.FC<{ isLoading: boolean, onAddQuestionType: Fun
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
-                {isLoading && (
-                    <React.Fragment>
-                        <LoadingSpinner />
-                    </React.Fragment>
-                )}
-
+                    
                 <div className="row mb-3">
                     <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
                     <div className="col-sm-10">
@@ -89,7 +85,9 @@ const NewQuestionTypeForm: React.FC<{ isLoading: boolean, onAddQuestionType: Fun
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Add Question Type</button>
+                        <SubmitButton isLoading={isLoading}
+                            clickHandler={finishEnteringHandler}
+                            classes="btn btn-primary">Add Question Type</SubmitButton>
                         <NavLink className="btn btn-secondary ms-2" to={"/admin/question-types"}>Cancel</NavLink>
                     </div>
                 </div>

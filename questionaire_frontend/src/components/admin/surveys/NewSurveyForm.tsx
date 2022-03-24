@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = ({ isLoading, onAddSurvey }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -72,11 +73,6 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}
                 autoComplete="off">
-                {isLoading && (
-                    <React.Fragment>
-                        <LoadingSpinner />
-                    </React.Fragment>
-                )}
 
                 <div className="row mb-3">
                     <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
@@ -97,7 +93,9 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Add Survey</button>
+                        <SubmitButton isLoading={isLoading}
+                            clickHandler={finishEnteringHandler}
+                            classes="btn btn-primary">Add Survey</SubmitButton>
                         <NavLink className="btn btn-secondary ms-2" to={"/admin/surveys"}>Cancel</NavLink>
                     </div>
                 </div>

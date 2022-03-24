@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const NewBusinessTypeForm: React.FC<{ isLoading: boolean, onAddBusinessType: Function }> = ({ isLoading, onAddBusinessType }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -64,11 +65,6 @@ const NewBusinessTypeForm: React.FC<{ isLoading: boolean, onAddBusinessType: Fun
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
-                {isLoading && (
-                    <React.Fragment>
-                        <LoadingSpinner />
-                    </React.Fragment>
-                )}
 
                 <div className="row mb-3">
                     <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
@@ -89,7 +85,9 @@ const NewBusinessTypeForm: React.FC<{ isLoading: boolean, onAddBusinessType: Fun
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Add Business Type</button>
+                        <SubmitButton isLoading={isLoading}
+                            clickHandler={finishEnteringHandler}
+                            classes="btn btn-primary">Add Business Type</SubmitButton>
                         <NavLink className="btn btn-secondary ms-2" to={"/admin/business-types"}>Cancel</NavLink>
                     </div>
                 </div>

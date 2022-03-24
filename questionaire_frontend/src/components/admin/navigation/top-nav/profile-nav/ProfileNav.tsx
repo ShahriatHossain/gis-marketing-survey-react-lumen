@@ -17,12 +17,15 @@ export const ProfileNav: React.FC = () => {
                 <ul className={open ? 'dropdown-menu dropdown-menu-end show' : 'dropdown-menu dropdown-menu-end'} aria-labelledby="navbarDropdown">
                     {authCtx.isLoggedIn ?
                         <>
-                            <li><a className="dropdown-item" href="#!">Settings</a></li>
-                            <li><a className="dropdown-item" href="#!">Activity Log</a></li>
+                            <li><NavLink className="dropdown-item" to={"/settings"}>Settings</NavLink></li>
                             <li><hr className="dropdown-divider" /></li>
                             <li><a className="dropdown-item" href="#!" onClick={() => authCtx.logout()}>Logout</a></li>
                         </>
-                        : <li><NavLink className="dropdown-item" to={"/signin"}>Login</NavLink></li>
+                        :
+                        <>
+                            <li><NavLink className="dropdown-item" to={"/signin"}>Login</NavLink></li>
+                            <li><NavLink className="dropdown-item" to={"/signup"}>Signup</NavLink></li>
+                        </>
                     }
 
                 </ul>

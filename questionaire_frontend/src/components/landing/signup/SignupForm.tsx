@@ -106,12 +106,7 @@ const SignupForm: React.FC<{ isLoading: boolean, error: string, onAddCustomer: F
 
         return (
             <Fragment>
-                <Prompt
-                    when={isEntering}
-                    message={(location) =>
-                        'Are you sure you want to leave? All your entered data will be lost!'
-                    }
-                />
+                
                 <form
                     onFocus={formFocusedHandler}
                     onSubmit={submitFormHandler}>

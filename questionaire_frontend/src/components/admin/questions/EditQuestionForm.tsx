@@ -4,6 +4,7 @@ import { isEmpty } from "../../../utils/helpers/utility-functions";
 import { QuestionType } from "../../../utils/models/QuestionType";
 import { Survey } from "../../../utils/models/Survey";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const EditQuestionForm: React.FC<{ existingData: any, isLoading: boolean, surveys: Survey[], questionTypes: QuestionType[], onEditQuestion: Function }> = ({ existingData, isLoading, surveys, questionTypes, onEditQuestion }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -115,11 +116,6 @@ const EditQuestionForm: React.FC<{ existingData: any, isLoading: boolean, survey
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
-                {isLoading && (
-                    <React.Fragment>
-                        <LoadingSpinner />
-                    </React.Fragment>
-                )}
 
                 <div className="row mb-3">
                     <label htmlFor="title" className="col-sm-2 col-form-label">Title</label>
@@ -172,7 +168,9 @@ const EditQuestionForm: React.FC<{ existingData: any, isLoading: boolean, survey
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Edit Question</button>
+                        <SubmitButton isLoading={isLoading}
+                            clickHandler={finishEnteringHandler}
+                            classes="btn btn-primary">Edit Question</SubmitButton>
                         <NavLink className="btn btn-secondary ms-2" to={"/admin/questions"}>Cancel</NavLink>
                     </div>
                 </div>

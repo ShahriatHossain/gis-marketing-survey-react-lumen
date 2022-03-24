@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import SubmitButton from "../../UI/SubmitButton";
 
 const EditQuestionTypeForm: React.FC<{ existingData: any, isLoading: boolean, onEditQuestionType: Function }> = ({ existingData, isLoading, onEditQuestionType }) => {
     const [isEntering, setIsEntering] = useState(false);
@@ -64,11 +65,6 @@ const EditQuestionTypeForm: React.FC<{ existingData: any, isLoading: boolean, on
             <form
                 onFocus={formFocusedHandler}
                 onSubmit={submitFormHandler}>
-                {isLoading && (
-                    <React.Fragment>
-                        <LoadingSpinner />
-                    </React.Fragment>
-                )}
 
                 <div className="row mb-3">
                     <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
@@ -88,7 +84,9 @@ const EditQuestionTypeForm: React.FC<{ existingData: any, isLoading: boolean, on
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
-                        <button onClick={finishEnteringHandler} className="btn btn-primary">Edit Question Type</button>
+                        <SubmitButton isLoading={isLoading}
+                            clickHandler={finishEnteringHandler}
+                            classes="btn btn-primary">Edit Question Type</SubmitButton>
                         <NavLink className="btn btn-secondary ms-2" to={"/admin/question-types"}>Cancel</NavLink>
                     </div>
                 </div>
