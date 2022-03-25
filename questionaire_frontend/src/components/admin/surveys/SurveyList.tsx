@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { PageSize } from "../../../utils/constants/common";
 import { Survey } from "../../../utils/models/Survey";
 import Pagination from "../../UI/Pagination";
 import SurveyItem from "./SurveyItem";
 
 const SurveyList: React.FC<{ surveys: Survey[], onRefreshRecord: Function }> = ({ surveys, onRefreshRecord }) => {
+    const [currentPage, setCurrentPage] = useState(1);
 
     const deleteSurveyHandler = (surveyId: number) => {
         onRefreshRecord();
     }
+
+    const paginatedData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * PageSize;
+        const lastPageIndex = firstPageIndex + PageSize;
+        return surveys.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage]);
 
     return (
         <React.Fragment>
@@ -29,7 +37,7 @@ const SurveyList: React.FC<{ surveys: Survey[], onRefreshRecord: Function }> = (
                         </tr>
                     </thead>
                     <tbody>
-                        {surveys.map(survey => {
+                        {paginatedData.map(survey => {
                             return (
                                 <SurveyItem onDeleteSurvey={deleteSurveyHandler} key={survey.id} survey={survey} />
                             )
@@ -37,7 +45,11 @@ const SurveyList: React.FC<{ surveys: Survey[], onRefreshRecord: Function }> = (
                     </tbody>
 
                 </table>
-                <Pagination />
+                <Pagination
+                    currentPage={currentPage}
+                    totalCount={surveys.length}
+                    pageSize={PageSize}
+                    onPageChange={(page: number) => setCurrentPage(page)} />
             </div>
         </React.Fragment>
     )

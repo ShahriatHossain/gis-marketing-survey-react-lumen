@@ -1,19 +1,70 @@
-const Pagination: React.FC = () => {
+import { DOTS, usePagination } from "../../hooks/use-pagination";
+
+interface PageInfo {
+    onPageChange: any,
+    totalCount: number,
+    siblingCount?: number,
+    currentPage: number,
+    pageSize: number
+}
+
+const Pagination: React.FC<PageInfo> = (props) => {
+
+    const {
+        onPageChange,
+        totalCount,
+        siblingCount = 1,
+        currentPage,
+        pageSize,
+    } = props;
+
+    const paginationRange = usePagination(
+        totalCount,
+        pageSize,
+        siblingCount,
+        currentPage,
+    );
+
+    if (currentPage === 0 || paginationRange!.length < 2) {
+        return null;
+    }
+
+    const onNext = () => {
+        onPageChange(currentPage + 1);
+    };
+
+    const onPrevious = () => {
+        onPageChange(currentPage - 1);
+    };
+
+    let lastPage = paginationRange![paginationRange!.length - 1];
+
     return (
         <nav aria-label="Page navigation example">
             <ul className="pagination">
-                <li className="page-item disabled">
-                    <a className="page-link" href="#" aria-label="Previous">
+                <li className={currentPage === 1 ? 'page-item disabled' : 'page-item'}>
+                    <a className="page-link" href="#" aria-label="Previous" onClick={onPrevious}>
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li className="page-item"><a className="page-link" href="#">1</a></li>
-                <li className="page-item active" aria-current="page">
-                    <a className="page-link" href="#">2</a>
-                </li>
-                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                <li className="page-item">
-                    <a className="page-link" href="#" aria-label="Next">
+
+                {paginationRange!.map(pageNumber => {
+
+                    if (pageNumber === DOTS) {
+                        return <li className="page-item dots">&#8230;</li>;
+                    }
+
+                    return (
+                        <li className={pageNumber === currentPage ? 'page-item active' : 'page-item'}>
+                            <a className="page-link" href="#" onClick={() =>
+                                onPageChange(pageNumber)}>{pageNumber}
+                            </a>
+                        </li>
+                    );
+                })}
+                
+                <li className={currentPage === lastPage ? 'page-item disabled' : 'page-item'}>
+                    <a className="page-link" href="#" aria-label="Next" onClick={onNext}>
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
