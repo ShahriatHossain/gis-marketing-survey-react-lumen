@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { usePaginatedData } from "../../../hooks/use-paginatedData";
+import { PageSize } from "../../../utils/constants/common";
 import { Customer } from "../../../utils/models/Customer";
+import Pagination from "../../UI/Pagination";
 import CustomerItem from "./CustomerItem";
 
 import './Customers.css';
 
 const CustomerList: React.FC<{ customers: Customer[], onRefreshRecord: Function }> = ({ customers, onRefreshRecord }) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const paginatedData = usePaginatedData(currentPage, customers);
 
     const deleteCustomerHandler = (customerId: number) => {
         onRefreshRecord();
@@ -43,7 +48,7 @@ const CustomerList: React.FC<{ customers: Customer[], onRefreshRecord: Function 
                         </tr>
                     </thead>
                     <tbody>
-                        {customers.map(customer => {
+                        {paginatedData.map(customer => {
                             return (
                                 <CustomerItem onDeleteCustomer={deleteCustomerHandler} key={customer.id} customer={customer} />
                             )
@@ -52,6 +57,12 @@ const CustomerList: React.FC<{ customers: Customer[], onRefreshRecord: Function 
 
                 </table>
             </div>
+            <br />
+            <Pagination
+                    currentPage={currentPage}
+                    totalCount={customers.length}
+                    pageSize={PageSize}
+                    onPageChange={(page: number) => setCurrentPage(page)} />
         </React.Fragment>
     )
 }

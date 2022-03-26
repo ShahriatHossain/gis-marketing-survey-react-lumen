@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { usePaginatedData } from "../../../hooks/use-paginatedData";
+import { PageSize } from "../../../utils/constants/common";
 import { QuestionType } from "../../../utils/models/QuestionType";
+import Pagination from "../../UI/Pagination";
 import QuestionTypeItem from "./QuestionTypeItem";
 
 const QuestionTypeList: React.FC<{ questionTypes: QuestionType[], onRefreshRecord: Function }> = ({ questionTypes, onRefreshRecord }) => {
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const paginatedData = usePaginatedData(currentPage, questionTypes);
+    
     const deleteQuestionTypeHandler = (questionTypeId: number) => {
         onRefreshRecord();
     }
@@ -28,7 +33,7 @@ const QuestionTypeList: React.FC<{ questionTypes: QuestionType[], onRefreshRecor
                         </tr>
                     </thead>
                     <tbody>
-                        {questionTypes.map(questionType => {
+                        {paginatedData.map(questionType => {
                             return (
                                 <QuestionTypeItem onDeleteQuestionType={deleteQuestionTypeHandler} key={questionType.id} questionType={questionType} />
                             )
@@ -36,6 +41,11 @@ const QuestionTypeList: React.FC<{ questionTypes: QuestionType[], onRefreshRecor
                     </tbody>
 
                 </table>
+                <Pagination
+                    currentPage={currentPage}
+                    totalCount={questionTypes.length}
+                    pageSize={PageSize}
+                    onPageChange={(page: number) => setCurrentPage(page)} />
             </div>
         </React.Fragment>
     )

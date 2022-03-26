@@ -8,7 +8,6 @@ import Signin from "./views/landing/signin/Signin";
 import Signup from "./views/landing/signup/Signup";
 
 function App() {
-  const isAdmin: boolean = true;
   return (
     <BrowserRouter>
       <TopNav></TopNav>

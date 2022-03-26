@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { usePaginatedData } from "../../../hooks/use-paginatedData";
+import { PageSize } from "../../../utils/constants/common";
 import { MultipleChoice } from "../../../utils/models/MultipleChoice";
+import Pagination from "../../UI/Pagination";
 import MultipleChoiceItem from "./MultipleChoiceItem";
 
 const MultipleChoiceList: React.FC<{ multichoices: MultipleChoice[], onRefreshRecord: Function }> = ({ multichoices, onRefreshRecord }) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const paginatedData = usePaginatedData(currentPage, multichoices);
 
     const deleteMultipleChoiceHandler = (multichoiceId: number) => {
         onRefreshRecord();
@@ -30,7 +35,7 @@ const MultipleChoiceList: React.FC<{ multichoices: MultipleChoice[], onRefreshRe
                         </tr>
                     </thead>
                     <tbody>
-                        {multichoices.map(multichoice => {
+                        {paginatedData.map(multichoice => {
                             return (
                                 <MultipleChoiceItem onDeleteMultipleChoice={deleteMultipleChoiceHandler} key={multichoice.id} multichoice={multichoice} />
                             )
@@ -38,6 +43,11 @@ const MultipleChoiceList: React.FC<{ multichoices: MultipleChoice[], onRefreshRe
                     </tbody>
 
                 </table>
+                <Pagination
+                    currentPage={currentPage}
+                    totalCount={multichoices.length}
+                    pageSize={PageSize}
+                    onPageChange={(page: number) => setCurrentPage(page)} />
             </div>
         </React.Fragment>
     )

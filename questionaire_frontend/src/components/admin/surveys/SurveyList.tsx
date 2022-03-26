@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { usePaginatedData } from "../../../hooks/use-paginatedData";
 import { PageSize } from "../../../utils/constants/common";
 import { Survey } from "../../../utils/models/Survey";
 import Pagination from "../../UI/Pagination";
@@ -7,17 +8,12 @@ import SurveyItem from "./SurveyItem";
 
 const SurveyList: React.FC<{ surveys: Survey[], onRefreshRecord: Function }> = ({ surveys, onRefreshRecord }) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const paginatedData = usePaginatedData(currentPage, surveys);
 
     const deleteSurveyHandler = (surveyId: number) => {
         onRefreshRecord();
     }
-
-    const paginatedData = useMemo(() => {
-        const firstPageIndex = (currentPage - 1) * PageSize;
-        const lastPageIndex = firstPageIndex + PageSize;
-        return surveys.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage]);
-
+    
     return (
         <React.Fragment>
             <div className="row">

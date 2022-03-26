@@ -30,3 +30,7 @@ export const getAuthorizedHeader = () => {
 export const getBearerToken = () => {
     return `Bearer ${localStorage.getItem('token')}`;
 }
+
+export const getUserProfile = (profile: any) => {
+    return profile || null;
+}

@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { usePaginatedData } from "../../../hooks/use-paginatedData";
+import { PageSize } from "../../../utils/constants/common";
 import { Question } from "../../../utils/models/Question";
 import { QuestionType } from "../../../utils/models/QuestionType";
 import { Survey } from "../../../utils/models/Survey";
+import Pagination from "../../UI/Pagination";
 import QuestionFilterUI from "./QuestionFilterUI";
 import QuestionItem from "./QuestionItem";
 
 const QuestionList: React.FC<{ questions: Question[], onRefreshRecord: Function }> = ({ questions, onRefreshRecord }) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const paginatedData = usePaginatedData(currentPage, questions);
 
     const deleteQuestionHandler = (questionId: number) => {
         onRefreshRecord(questionId);
@@ -29,7 +34,7 @@ const QuestionList: React.FC<{ questions: Question[], onRefreshRecord: Function 
                         </tr>
                     </thead>
                     <tbody>
-                        {questions.map(question => {
+                        {paginatedData.map(question => {
                             return (
                                 <QuestionItem onDeleteQuestion={deleteQuestionHandler} key={question.id} question={question} />
                             )
@@ -37,6 +42,11 @@ const QuestionList: React.FC<{ questions: Question[], onRefreshRecord: Function 
                     </tbody>
 
                 </table>
+                <Pagination
+                    currentPage={currentPage}
+                    totalCount={questions.length}
+                    pageSize={PageSize}
+                    onPageChange={(page: number) => setCurrentPage(page)} />
             </div>
         </React.Fragment>
     )

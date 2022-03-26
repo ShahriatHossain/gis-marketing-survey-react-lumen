@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { TokenInfo } from '../utils/models/TokenInfo';
+import { User } from "../utils/models/User";
 
 let logoutTimer: any;
 
 const AuthContext = React.createContext({
   token: '',
   isLoggedIn: false,
+  profile: undefined,
   login: (token: TokenInfo) => { },
   logout: () => { },
+  setProfile: (profile: User) => { }
 });
 
 const calculateRemainingTime = (expirationTime: any) => {
@@ -46,6 +49,7 @@ export const AuthContextProvider = (props: any) => {
   }
 
   const [token, setToken] = useState(initialToken);
+  const [profile, setProfile] = useState<any | undefined>();
 
   const userIsLoggedIn = !!token;
 
@@ -74,6 +78,10 @@ export const AuthContextProvider = (props: any) => {
     logoutTimer = setTimeout(logoutHandler, remainingTime);
   };
 
+  const setProfileHandler = (profile: any) => {
+    setProfile(profile);
+  };
+
   useEffect(() => {
     if (tokenData) {
       console.log(tokenData.duration);
@@ -84,8 +92,10 @@ export const AuthContextProvider = (props: any) => {
   const contextValue = {
     token: token as string,
     isLoggedIn: userIsLoggedIn,
+    profile: profile as any,
     login: loginHandler,
     logout: logoutHandler,
+    setProfile: setProfileHandler,
   };
 
   return (

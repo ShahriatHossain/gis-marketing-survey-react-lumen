@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { usePaginatedData } from "../../../hooks/use-paginatedData";
+import { PageSize } from "../../../utils/constants/common";
 import { BusinessType } from "../../../utils/models/BusinessType";
+import Pagination from "../../UI/Pagination";
 import BusinessTypeItem from "./BusinessTypeItem";
 
 const BusinessTypeList: React.FC<{ businessTypes: BusinessType[], onRefreshRecord: Function }> = ({ businessTypes, onRefreshRecord }) => {
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const paginatedData = usePaginatedData(currentPage, businessTypes);
+    
     const deleteBusinessTypeHandler = (businessTypeId: number) => {
         onRefreshRecord();
     }
@@ -28,7 +33,7 @@ const BusinessTypeList: React.FC<{ businessTypes: BusinessType[], onRefreshRecor
                         </tr>
                     </thead>
                     <tbody>
-                        {businessTypes.map(businessType => {
+                        {paginatedData.map(businessType => {
                             return (
                                 <BusinessTypeItem onDeleteBusinessType={deleteBusinessTypeHandler} key={businessType.id} businessType={businessType} />
                             )
@@ -36,6 +41,11 @@ const BusinessTypeList: React.FC<{ businessTypes: BusinessType[], onRefreshRecor
                     </tbody>
 
                 </table>
+                <Pagination
+                    currentPage={currentPage}
+                    totalCount={businessTypes.length}
+                    pageSize={PageSize}
+                    onPageChange={(page: number) => setCurrentPage(page)} />
             </div>
         </React.Fragment>
     )

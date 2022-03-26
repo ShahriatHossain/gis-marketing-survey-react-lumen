@@ -48,14 +48,14 @@ const Pagination: React.FC<PageInfo> = (props) => {
                     </a>
                 </li>
 
-                {paginationRange!.map(pageNumber => {
+                {paginationRange!.map((pageNumber, idx) => {
 
                     if (pageNumber === DOTS) {
-                        return <li className="page-item dots">&#8230;</li>;
+                        return <li key={idx} className="page-item dots">&#8230;</li>;
                     }
 
                     return (
-                        <li className={pageNumber === currentPage ? 'page-item active' : 'page-item'}>
+                        <li key={idx} className={pageNumber === currentPage ? 'page-item active' : 'page-item'}>
                             <a className="page-link" href="#" onClick={() =>
                                 onPageChange(pageNumber)}>{pageNumber}
                             </a>
