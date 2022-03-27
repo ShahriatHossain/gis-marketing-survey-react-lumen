@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../../../../store/auth-context";
+import { getUserProfile } from "../../../../../utils/helpers/utility-functions";
 
 export const ProfileNav: React.FC = () => {
     const [open, setOpen] = useState(false);
     const authCtx = useContext(AuthContext);
+    const currentUser = getUserProfile(authCtx.profile);
 
     return (
         <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -17,7 +19,7 @@ export const ProfileNav: React.FC = () => {
                 <ul className={open ? 'dropdown-menu dropdown-menu-end show' : 'dropdown-menu dropdown-menu-end'} aria-labelledby="navbarDropdown">
                     {authCtx.isLoggedIn ?
                         <>
-                            <li><NavLink className="dropdown-item" to={"/settings"}>Settings</NavLink></li>
+                            {currentUser && <li><NavLink className="dropdown-item" to={`/admin/edit-user/${currentUser.id}`}>Settings</NavLink></li>}
                             <li><hr className="dropdown-divider" /></li>
                             <li><a className="dropdown-item" href="#!" onClick={() => authCtx.logout()}>Logout</a></li>
                         </>
