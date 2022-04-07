@@ -17,7 +17,22 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api/v1'], function () use ($router) {
+//TODO: will enabled verified middleware later for email verification
+//$router->group(['middleware' => ['auth', 'verified']], function () use ($router) {
+
+// Register, Login
+$router->post('register', 'AuthController@register');
+$router->post('login', 'AuthController@login');
+
+// Reset password
+$router->post('/password/reset-request', 'RequestPasswordController@sendResetLinkEmail');
+$router->post('/password/reset', ['as' => 'password.reset', 'uses' => 'ResetPasswordController@reset']);
+$router->post('/email/verify', ['as' => 'email.verify', 'uses' => 'AuthController@emailVerify']);
+
+$router->group(['middleware' => ['auth']], function () use ($router) {
+    $router->post('/email/request-verification', ['as' => 'email.request.verification', 'uses' => 'AuthController@emailRequestVerification']);
+    $router->post('/logout', 'AuthController@logout');
+    $router->post('/refresh', 'AuthController@refresh');
 
     // Find Business Types
     $router->get('/business-types', ['uses' => 'BusinessTypeController@index']);
@@ -67,11 +82,6 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->put('/multichoices/{id}', ['uses' => 'MultipleChoiceController@update']);
     $router->delete('/multichoices/{id}', ['uses' => 'MultipleChoiceController@delete']);
 
-    // Matches "/api/register
-    $router->post('register', 'AuthController@register');
-    // Matches "/api/login
-    $router->post('login', 'AuthController@login');
-
     // Matches "/api/profile
     $router->get('profile', 'UserController@profile');
     // Matches "/api/users/1 
@@ -88,3 +98,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->put('/users/{id}', ['uses' => 'UserController@update']);
     $router->delete('/users/{id}', ['uses' => 'UserController@delete']);
 });
+
+// $router->group(['prefix' => 'api/v1'], function () use ($router) {
+
+
+// });

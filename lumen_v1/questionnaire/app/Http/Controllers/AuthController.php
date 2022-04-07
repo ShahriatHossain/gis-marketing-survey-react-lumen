@@ -20,7 +20,7 @@ class AuthController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
+            'password' => 'required| min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/|confirmed',
         ]);
 
         try {
@@ -62,5 +62,67 @@ class AuthController extends Controller
         }
 
         return $this->respondWithToken($token);
+    }
+
+    /**
+     * Log the user out (Invalidate the token). Requires a login to use as the
+     * JWT in the Authorization header is what is invalidated
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth()->logout();
+        return response()->json(['message' => 'User successfully signed out']);
+    }
+
+    /**
+     * Refresh the current token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->respondWithToken(Auth::refresh());
+    }
+
+    /**
+     * Request an email verification email to be sent.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function emailRequestVerification(Request $request)
+    {
+        if ($request->user()->hasVerifiedEmail()) {
+            return response()->json('Email address is already verified.');
+        }
+
+        $request->user()->sendEmailVerificationNotification();
+
+        return response()->json('Email request verification sent to ' . Auth::user()->email);
+    }
+    /**
+     * Verify an email using email and token from email.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function emailVerify(Request $request)
+    {
+        $this->validate($request, [
+            'token' => 'required|string',
+        ]);
+        \Tymon\JWTAuth\Facades\JWTAuth::getToken();
+        \Tymon\JWTAuth\Facades\JWTAuth::parseToken()->authenticate();
+        if (!$request->user()) {
+            return response()->json('Invalid token', 401);
+        }
+
+        if ($request->user()->hasVerifiedEmail()) {
+            return response()->json('Email address ' . $request->user()->getEmailForVerification() . ' is already verified.');
+        }
+        $request->user()->markEmailAsVerified();
+        return response()->json('Email address ' . $request->user()->email . ' successfully verified.');
     }
 }

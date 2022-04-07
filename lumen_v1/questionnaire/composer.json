@@ -6,7 +6,12 @@
     "type": "project",
     "require": {
         "php": "^7.3|^8.0",
+        "guzzlehttp/guzzle": "^7.4",
+        "illuminate/mail": "^8.0",
+        "illuminate/notifications": "^8.0",
         "laravel/lumen-framework": "^8.3.1",
+        "laravel/ui": "^3.4",
+        "ramsey/uuid": "^4.3",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
@@ -29,7 +34,8 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "platform-check": false
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
