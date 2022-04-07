@@ -1,132 +1,58 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { BusinessTypeLinks, CustomerLinks, MultipleChoiceLinks, QuestionLinks, QuestionTypeLinks, SurveyLinks, UserLinks } from "../../../../../utils/constants/SideNavLinks";
+import { SideNavItemId } from "../../../../../utils/enums";
+import SideNavItem from "../side-nav-item/SideNavItem";
 
 export const SideNavMenuContainer: React.FC = () => {
+    const [isCollapsed, setIsCollapsed] = useState(true);
+    const [collapsedId, setCollapsedId] = useState('');
+
+    const navItemClickHandler = (id: string, openFlag: boolean) => {
+        setIsCollapsed(openFlag);
+        setCollapsedId(id);
+    };
     return (
         <div className="sb-sidenav-menu">
             <div className="nav">
-                <a className="nav-link" href="index.html">
+                <NavLink className="nav-link" to="/">
                     <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                     Dashboard
-                </a>
+                </NavLink>
 
                 {/* User */}
-                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false" aria-controls="collapseUser">
-                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
-                    User
-                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </a>
-                <div className="collapse" id="collapseUser" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/admin/users'>
-                            All Users
-                        </NavLink>
-                        <NavLink className="nav-link" to='/admin/new-user'>
-                            Add a User
-                        </NavLink>
-                    </nav>
-                </div>
+                <SideNavItem id={SideNavItemId.CollapseUser} name="User" links={UserLinks}
+                    isCollapsed={collapsedId == SideNavItemId.CollapseUser ? isCollapsed : true} onItemClick={navItemClickHandler}></SideNavItem>
 
                 {/* Customer */}
-                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCustomer" aria-expanded="false" aria-controls="collapseCustomer">
-                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
-                    Customer
-                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </a>
-                <div className="collapse" id="collapseCustomer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/admin/customers'>
-                            All Customers
-                        </NavLink>
-                        <NavLink className="nav-link" to='/admin/new-customer'>
-                            Add a Customer
-                        </NavLink>
-                    </nav>
-                </div>
+                <SideNavItem id={SideNavItemId.CollapseCustomer} name="Customer" links={CustomerLinks}
+                    isCollapsed={collapsedId == SideNavItemId.CollapseCustomer ? isCollapsed : true}
+                    onItemClick={navItemClickHandler}></SideNavItem>
 
                 {/* Survey */}
-                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSuvey" aria-expanded="false" aria-controls="collapseSuvey">
-                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
-                    Survery
-                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </a>
-                <div className="collapse" id="collapseSuvey" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/admin/surveys'>
-                            All Surveys
-                        </NavLink>
-                        <NavLink className="nav-link" to='/admin/new-survey'>
-                            Add a Survey
-                        </NavLink>
-                    </nav>
-                </div>
+                <SideNavItem id={SideNavItemId.CollapseSurvey} name="Survey" links={SurveyLinks}
+                    isCollapsed={collapsedId == SideNavItemId.CollapseSurvey ? isCollapsed : true}
+                    onItemClick={navItemClickHandler}></SideNavItem>
 
                 {/* Question */}
-                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseQuestion" aria-expanded="false" aria-controls="collapseQuestion">
-                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
-                    Question
-                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </a>
-                <div className="collapse" id="collapseQuestion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/admin/questions'>
-                            All Questions
-                        </NavLink>
-                        <NavLink className="nav-link" to='/admin/new-question'>
-                            Add a Question
-                        </NavLink>
-                    </nav>
-                </div>
+                <SideNavItem id={SideNavItemId.CollapseQuestion} name="Question" links={QuestionLinks}
+                    isCollapsed={collapsedId == SideNavItemId.CollapseQuestion ? isCollapsed : true}
+                    onItemClick={navItemClickHandler}></SideNavItem>
 
                 {/* Multiple Choice */}
-                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMultipleChoice" aria-expanded="false" aria-controls="collapseMultipleChoice">
-                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
-                    Multiple Choice
-                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </a>
-                <div className="collapse" id="collapseMultipleChoice" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/admin/multichoices'>
-                            All Multiple Choices
-                        </NavLink>
-                        <NavLink className="nav-link" to='/admin/new-multichoice'>
-                            Add a Multiple Choice
-                        </NavLink>
-                    </nav>
-                </div>
+                <SideNavItem id={SideNavItemId.CollapseMultipleChoice} name="Multiple Choice" links={MultipleChoiceLinks}
+                    isCollapsed={collapsedId == SideNavItemId.CollapseMultipleChoice ? isCollapsed : true} 
+                    onItemClick={navItemClickHandler}></SideNavItem>
 
                 {/* Business Type */}
-                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBusinessType" aria-expanded="false" aria-controls="collapseBusinessType">
-                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
-                    Business Type
-                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </a>
-                <div className="collapse" id="collapseBusinessType" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/admin/business-types'>
-                            All Business Types
-                        </NavLink>
-                        <NavLink className="nav-link" to='/admin/new-business-type'>
-                            Add a Business Type
-                        </NavLink>
-                    </nav>
-                </div>
+                <SideNavItem id={SideNavItemId.CollapseBusinessType} name="Business Type" links={BusinessTypeLinks}
+                    isCollapsed={collapsedId == SideNavItemId.CollapseBusinessType ? isCollapsed : true}
+                    onItemClick={navItemClickHandler}></SideNavItem>
 
                 {/* Question Type */}
-                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseQuestionType" aria-expanded="false" aria-controls="collapseQuestionType">
-                    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
-                    Question Type
-                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </a>
-                <div className="collapse" id="collapseQuestionType" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav className="sb-sidenav-menu-nested nav">
-                        <NavLink className="nav-link" to='/admin/question-types'>
-                            All Question Types
-                        </NavLink>
-                        <NavLink className="nav-link" to='/admin/new-question-type'>
-                            Add a Question Type
-                        </NavLink>
-                    </nav>
-                </div>
+                <SideNavItem id={SideNavItemId.CollapseQuestionType} name="Question Type" links={QuestionTypeLinks}
+                    isCollapsed={collapsedId == SideNavItemId.CollapseQuestionType ? isCollapsed : true} 
+                    onItemClick={navItemClickHandler}></SideNavItem>
             </div>
         </div>
     );

@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants/common";
+import { ForgotPassword } from "../utils/models/ForgotPassword";
 import { Login } from "../utils/models/Login";
 import { Registration } from "../utils/models/RegisterUser";
 import { TokenInfo } from "../utils/models/TokenInfo";
@@ -46,4 +47,26 @@ export async function loginUser(loginData: Login) {
     };
 
     return loadedTokenInfo;
+}
+
+export async function forgotPassword(userData: ForgotPassword) {
+    const response = await fetch(`${BASE_URL}/password/reset-request`, {
+        method: 'POST',
+        body: JSON.stringify(userData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    const data = await response.json();
+    let message = [];
+
+    for (const key in data) {
+        message.push(data[key])
+    }
+
+    if (!response.ok) {
+        throw new Error(message.join(' ') || 'Request failed.');
+    }
+
+    return data;
 }
