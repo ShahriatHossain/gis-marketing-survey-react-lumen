@@ -5,24 +5,25 @@ import { SideNavItemId } from "../../../../../utils/enums";
 import SideNavItem from "../side-nav-item/SideNavItem";
 
 export const SideNavMenuContainer: React.FC = () => {
-    const [isCollapsed, setIsCollapsed] = useState(true);
+    const [isCollapsed, setIsCollapsed] = useState(false);
     const [collapsedId, setCollapsedId] = useState('');
 
     const navItemClickHandler = (id: string, openFlag: boolean) => {
-        setIsCollapsed(openFlag);
         setCollapsedId(id);
+        setIsCollapsed(openFlag);
     };
     return (
         <div className="sb-sidenav-menu">
             <div className="nav">
-                <NavLink className="nav-link" to="/">
+                <NavLink className="nav-link" to="/admin/dashboard">
                     <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </NavLink>
 
                 {/* User */}
                 <SideNavItem id={SideNavItemId.CollapseUser} name="User" links={UserLinks}
-                    isCollapsed={collapsedId == SideNavItemId.CollapseUser ? isCollapsed : true} onItemClick={navItemClickHandler}></SideNavItem>
+                    isCollapsed={collapsedId == SideNavItemId.CollapseUser ? isCollapsed : true} 
+                    onItemClick={navItemClickHandler}></SideNavItem>
 
                 {/* Customer */}
                 <SideNavItem id={SideNavItemId.CollapseCustomer} name="Customer" links={CustomerLinks}

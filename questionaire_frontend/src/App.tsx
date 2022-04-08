@@ -2,6 +2,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Admin from "./components/admin/Admin";
 import { TopNav } from "./components/admin/navigation/top-nav/TopNav";
 import PrivateRoute from "./components/UI/PrivateRoute";
+import DashboardPage from "./views/admin/dashboard/DashboardPage";
 import ForgotPassword from "./views/landing/forgot-password/ForgotPassword";
 import HomePage from "./views/landing/home/HomePage";
 import Signin from "./views/landing/signin/Signin";

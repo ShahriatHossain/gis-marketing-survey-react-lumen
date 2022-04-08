@@ -5,6 +5,7 @@ import NewBusinessType from '../../../views/admin/business-types/NewBusinessType
 import AllCustomers from '../../../views/admin/customers/AllCustomers';
 import EditCustomer from '../../../views/admin/customers/EditCustomer';
 import NewCustomer from '../../../views/admin/customers/NewCustomer';
+import DashboardPage from '../../../views/admin/dashboard/DashboardPage';
 import AllMultipleChoices from '../../../views/admin/multiple-choices/AllMultipleChoices';
 import EditMultipleChoice from '../../../views/admin/multiple-choices/EditMultipleChoice';
 import NewMultipleChoice from '../../../views/admin/multiple-choices/NewMultipleChoice';
@@ -32,6 +33,10 @@ export const MainContent: React.FC = () => {
                     <div className="card mb-4">
                         <div className="card-body">
                             <Switch>
+
+                                {/* Dashboard */}
+                                <PrivateRoute exact path='/admin/dashboard' component={DashboardPage} />
+
                                 {/* Survey */}
                                 <PrivateRoute exact path='/admin/surveys' component={AllSurveys} />
                                 <PrivateRoute exact path='/admin/new-survey' component={NewSurvey} />

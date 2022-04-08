@@ -19,5 +19,8 @@ export const ROUTES = <RouteModel[]>[
     { path: '/admin/customers', breadcrumb: 'Customers' },
     { path: '/admin/new-customer', root: '/admin/customers', rootBreadcrumb: 'Customers', breadcrumb: 'New Customer' },
     { path: '/admin/edit-customer/', root: '/admin/customers', rootBreadcrumb: 'Customers', breadcrumb: 'Edit Customer' },
+    { path: '/admin/users', breadcrumb: 'Users' },
+    { path: '/admin/new-user', root: '/admin/users', rootBreadcrumb: 'Users', breadcrumb: 'New User' },
+    { path: '/admin/edit-user/', root: '/admin/users', rootBreadcrumb: 'Users', breadcrumb: 'Edit User' },
 
 ];
