@@ -1,10 +1,7 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import AllBusinessTypes from '../../../views/admin/business-types/AllBusinessTypes';
 import EditBusinessType from '../../../views/admin/business-types/EditBusinessType';
 import NewBusinessType from '../../../views/admin/business-types/NewBusinessType';
-import AllCustomers from '../../../views/admin/customers/AllCustomers';
-import EditCustomer from '../../../views/admin/customers/EditCustomer';
-import NewCustomer from '../../../views/admin/customers/NewCustomer';
 import DashboardPage from '../../../views/admin/dashboard/DashboardPage';
 import AllMultipleChoices from '../../../views/admin/multiple-choices/AllMultipleChoices';
 import EditMultipleChoice from '../../../views/admin/multiple-choices/EditMultipleChoice';
@@ -22,7 +19,7 @@ import AllUsers from '../../../views/admin/users/AllUsers';
 import EditUser from '../../../views/admin/users/EditUser';
 import NewUser from '../../../views/admin/users/NewUser';
 import Breadcrumbs from '../../UI/Breadcrumbs';
-import PrivateRoute from '../../UI/PrivateRoute';
+import AdminRoute from '../../UI/AdminRoute';
 
 export const MainContent: React.FC = () => {
     return (
@@ -35,42 +32,37 @@ export const MainContent: React.FC = () => {
                             <Switch>
 
                                 {/* Dashboard */}
-                                <PrivateRoute exact path='/admin/dashboard' component={DashboardPage} />
+                                <AdminRoute exact path='/admin/dashboard' component={DashboardPage} />
 
                                 {/* Survey */}
-                                <PrivateRoute exact path='/admin/surveys' component={AllSurveys} />
-                                <PrivateRoute exact path='/admin/new-survey' component={NewSurvey} />
-                                <PrivateRoute exact path='/admin/edit-survey/:surveyId' component={EditSurvey} />
+                                <AdminRoute exact path='/admin/surveys' component={AllSurveys} />
+                                <AdminRoute exact path='/admin/new-survey' component={NewSurvey} />
+                                <AdminRoute exact path='/admin/edit-survey/:surveyId' component={EditSurvey} />
 
                                 {/* Business Type */}
-                                <PrivateRoute exact path='/admin/business-types' component={AllBusinessTypes} />
-                                <PrivateRoute exact path='/admin/new-business-type' component={NewBusinessType} />
-                                <PrivateRoute exact path='/admin/edit-business-type/:businessTypeId' component={EditBusinessType} />
+                                <AdminRoute exact path='/admin/business-types' component={AllBusinessTypes} />
+                                <AdminRoute exact path='/admin/new-business-type' component={NewBusinessType} />
+                                <AdminRoute exact path='/admin/edit-business-type/:businessTypeId' component={EditBusinessType} />
 
                                 {/* Question Type */}
-                                <PrivateRoute exact path='/admin/question-types' component={AllQuestionTypes} />
-                                <PrivateRoute exact path='/admin/new-question-type' component={NewQuestionType} />
-                                <PrivateRoute exact path='/admin/edit-question-type/:questionTypeId' component={EditQuestionType} />
+                                <AdminRoute exact path='/admin/question-types' component={AllQuestionTypes} />
+                                <AdminRoute exact path='/admin/new-question-type' component={NewQuestionType} />
+                                <AdminRoute exact path='/admin/edit-question-type/:questionTypeId' component={EditQuestionType} />
 
                                 {/* Question */}
-                                <PrivateRoute exact path='/admin/questions' component={AllQuestions} />
-                                <PrivateRoute exact path='/admin/new-question' component={NewQuestion} />
-                                <PrivateRoute exact path='/admin/edit-question/:questionId' component={EditQuestion} />
+                                <AdminRoute exact path='/admin/questions' component={AllQuestions} />
+                                <AdminRoute exact path='/admin/new-question' component={NewQuestion} />
+                                <AdminRoute exact path='/admin/edit-question/:questionId' component={EditQuestion} />
 
                                 {/* Multiple Choice */}
-                                <PrivateRoute exact path='/admin/multichoices' component={AllMultipleChoices} />
-                                <PrivateRoute exact path='/admin/new-multichoice' component={NewMultipleChoice} />
-                                <PrivateRoute exact path='/admin/edit-multichoice/:multiChoiceId' component={EditMultipleChoice} />
+                                <AdminRoute exact path='/admin/multichoices' component={AllMultipleChoices} />
+                                <AdminRoute exact path='/admin/new-multichoice' component={NewMultipleChoice} />
+                                <AdminRoute exact path='/admin/edit-multichoice/:multiChoiceId' component={EditMultipleChoice} />
 
                                 {/* User */}
-                                <PrivateRoute exact path='/admin/users' component={AllUsers} />
-                                <PrivateRoute exact path='/admin/new-user' component={NewUser} />
-                                <PrivateRoute exact path='/admin/edit-user/:userId' component={EditUser} />
-
-                                {/* Customer */}
-                                <PrivateRoute exact path='/admin/customers' component={AllCustomers} />
-                                <PrivateRoute exact path='/admin/new-customer' component={NewCustomer} />
-                                <PrivateRoute exact path='/admin/edit-customer/:customerId' component={EditCustomer} />
+                                <AdminRoute exact path='/admin/users' component={AllUsers} />
+                                <AdminRoute exact path='/admin/new-user' component={NewUser} />
+                                <AdminRoute exact path='/admin/edit-user/:userId' component={EditUser} />
 
                                 {/* <Route path='*'>
                                     <NotFound />

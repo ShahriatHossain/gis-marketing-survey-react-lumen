@@ -1,5 +1,6 @@
 import { Fragment, useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
+import { DefaultSignupRole } from "../../../utils/constants/common";
 import { isEmpty, validateEmail } from "../../../utils/helpers/utility-functions";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import SubmitButton from "../../UI/SubmitButton";
@@ -18,6 +19,7 @@ const SignupForm: React.FC<{ isLoading: boolean, error: string, onAddCustomer: F
         const emailInputRef = useRef<any>();
         const passwordInputRef = useRef<any>();
         const cPasswordInputRef = useRef<any>();
+        const roleInputRef = useRef<any>();
 
         const nameChangeHandler = (event: any) => {
             setFormInputsValidity(prevState => {
@@ -62,6 +64,7 @@ const SignupForm: React.FC<{ isLoading: boolean, error: string, onAddCustomer: F
             const enteredEmail = emailInputRef.current.value;
             const enteredPassword = passwordInputRef.current.value;
             const enteredCPassword = cPasswordInputRef.current.value;
+            const enteredDefaultRole = roleInputRef.current.value;
 
             // optional: Could validate here
             const enteredNameIsValid = !isEmpty(enteredName);
@@ -87,7 +90,8 @@ const SignupForm: React.FC<{ isLoading: boolean, error: string, onAddCustomer: F
                 name: enteredName,
                 email: enteredEmail,
                 password: enteredPassword,
-                password_confirmation: enteredCPassword
+                password_confirmation: enteredCPassword,
+                role_id: enteredDefaultRole
             });
         }
 
@@ -154,6 +158,8 @@ const SignupForm: React.FC<{ isLoading: boolean, error: string, onAddCustomer: F
                                                 </div>}
                                             </div>
                                         </div>
+
+                                        <input type="hidden" name="role_id" value={DefaultSignupRole} ref={roleInputRef} />
                                     </div>
                                     <div className="mt-4 mb-0">
                                         <div className="d-grid">

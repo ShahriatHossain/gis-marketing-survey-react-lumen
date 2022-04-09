@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { loginUser } from "../../../lib/auth-api";
 import AuthContext from "../../../store/auth-context";
+import { BASE_URL } from "../../../utils/constants/common";
+import { getAuthorizedHeader } from "../../../utils/helpers/utility-functions";
 
 const Signin: React.FC = () => {
     const { sendRequest, status, data: loadTokenInfo, error } = useHttpWithParam(loginUser);
@@ -17,6 +19,7 @@ const Signin: React.FC = () => {
         if (status === 'completed' && loadTokenInfo && !error) {
 
             authCtx.login(loadTokenInfo);
+            fetchUserProfile();
 
             history.push('/admin/surveys');
         }
@@ -25,6 +28,28 @@ const Signin: React.FC = () => {
     const loginHandler = (authData: any) => {
         sendRequest(authData);
     };
+
+    const fetchUserProfile = async () => {
+        let loadedUser = null;
+
+        try {
+            const response = await fetch(`${BASE_URL}/profile`, getAuthorizedHeader());
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Could not fetch profile.');
+            }
+
+            loadedUser = {
+                ...data,
+            };
+
+        } catch (err: any) {
+            throw new Error(err.message || 'Could not fetch user.');
+        }
+
+        authCtx.setProfile(loadedUser);
+    }
 
     return (
         <ContentWrapper>
