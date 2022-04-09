@@ -24,9 +24,9 @@ class SurveyResponse extends Model implements AuthenticatableContract, Authoriza
     /**
      * Get the customer that this response belongs to
      */
-    public function customer()
+    public function user()
     {
-        return $this->belongsTo('\App\Models\Customer');
+        return $this->belongsTo('\App\Models\User');
     }
 
      /**
@@ -43,7 +43,7 @@ class SurveyResponse extends Model implements AuthenticatableContract, Authoriza
      * @var array
      */
     protected $fillable = [
-        'comments', 'customer_id', 'survey_id'
+        'comments', 'user_id', 'survey_id'
     ];
 
     /**

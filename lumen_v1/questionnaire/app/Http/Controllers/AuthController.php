@@ -20,7 +20,8 @@ class AuthController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required| min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/|confirmed',
+            'role_id' => 'required',
+            'password' => 'required|min:6|confirmed',
         ]);
 
         try {
@@ -28,6 +29,7 @@ class AuthController extends Controller
             $user = new User;
             $user->name = $request->input('name');
             $user->email = $request->input('email');
+            $user->role_id = $request->input('role_id');
             $plainPassword = $request->input('password');
             $user->password = app('hash')->make($plainPassword);
 
@@ -37,7 +39,7 @@ class AuthController extends Controller
             return response()->json(['user' => $user, 'message' => 'CREATED'], 201);
         } catch (\Exception $e) {
             //return error message
-            return response()->json(['message' => 'User Registration Failed!'], 409);
+            return response()->json(['message' => $e->getMessage()], 409);
         }
     }
 
@@ -72,6 +74,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        //auth()->user()->currentAccessToken()->delete();
         auth()->logout();
         return response()->json(['message' => 'User successfully signed out']);
     }

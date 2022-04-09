@@ -29,7 +29,7 @@ $router->post('/password/reset-request', 'RequestPasswordController@sendResetLin
 $router->post('/password/reset', ['as' => 'password.reset', 'uses' => 'ResetPasswordController@reset']);
 $router->post('/email/verify', ['as' => 'email.verify', 'uses' => 'AuthController@emailVerify']);
 
-$router->group(['middleware' => ['auth']], function () use ($router) {
+$router->group(['middleware' => ['auth', 'verified']], function () use ($router) {
     $router->post('/email/request-verification', ['as' => 'email.request.verification', 'uses' => 'AuthController@emailRequestVerification']);
     $router->post('/logout', 'AuthController@logout');
     $router->post('/refresh', 'AuthController@refresh');
@@ -41,14 +41,6 @@ $router->group(['middleware' => ['auth']], function () use ($router) {
     $router->post('/business-types', ['uses' => 'BusinessTypeController@create']);
     $router->put('/business-types/{id}', ['uses' => 'BusinessTypeController@update']);
     $router->delete('/business-types/{id}', ['uses' => 'BusinessTypeController@delete']);
-
-    // Find Customers
-    $router->get('/customers', ['uses' => 'CustomerController@index']);
-    $router->get('/customers/{id}', ['uses' => 'CustomerController@show']);
-    // Customer CRUD
-    $router->post('/customers', ['uses' => 'CustomerController@create']);
-    $router->put('/customers/{id}', ['uses' => 'CustomerController@update']);
-    $router->delete('/customers/{id}', ['uses' => 'CustomerController@delete']);
 
     // Find Question Types
     $router->get('/question-types', ['uses' => 'QuestionTypeController@index']);
