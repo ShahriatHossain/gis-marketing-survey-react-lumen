@@ -1,7 +1,7 @@
 import { BrowserRouter, Route } from "react-router-dom";
-import Admin from "./components/admin/Admin";
-import { TopNav } from "./components/admin/navigation/top-nav/TopNav";
-import Customer from "./components/customer/Customer";
+import Admin from "./views/admin/Admin";
+import Customer from "./views/customer/Customer";
+import { TopNav } from "./components/shared/navigation/top-nav/TopNav";
 import AdminRoute from "./components/UI/AdminRoute";
 import CustomerRoute from "./components/UI/CustomerRoute";
 import ForgotPassword from "./views/landing/forgot-password/ForgotPassword";

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty, validateEmail } from "../../../utils/helpers/utility-functions";
+import { BusinessType } from "../../../utils/models/BusinessType";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 import SubmitButton from "../../UI/SubmitButton";
 
 const EditUserForm: React.FC<{ existingData: any, isLoading: boolean, onEditUser: Function }> = ({ existingData, isLoading, onEditUser }) => {

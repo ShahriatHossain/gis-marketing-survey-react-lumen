@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Redirect, Route, RouteComponentProps, RouteProps } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
-import { getUserProfile } from "../../utils/helpers/utility-functions";
+import { getStorageUserProfile, getUserProfile } from "../../utils/helpers/utility-functions";
 
 interface Props extends RouteProps {
     component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
@@ -9,12 +9,17 @@ interface Props extends RouteProps {
 
 const AdminRoute = ({ component: Component, ...rest }: Props) => {
     const authCtx = useContext(AuthContext);
-    const currentUser = getUserProfile(authCtx.profile);
+    let currentUser = getUserProfile(authCtx.profile);
+    
+    if (!currentUser) {
+        currentUser = getStorageUserProfile();
+    }
+
     return (
         <Route
             {...rest}
             render={(props) => (authCtx.isLoggedIn
-                && (currentUser && currentUser.role_id == 1)) ? <Component {...props} /> : <Redirect to='/' />}
+                && (currentUser && currentUser.role_id === 1)) ? <Component {...props} /> : <Redirect to='/' />}
         />
     )
 };

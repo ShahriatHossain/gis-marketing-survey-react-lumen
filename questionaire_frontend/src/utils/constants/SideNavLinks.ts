@@ -9,17 +9,6 @@ export const UserLinks = [
     },
 ];
 
-export const CustomerLinks = [
-    {
-        name: 'All Customers',
-        path: '/admin/customers'
-    },
-    {
-        name: 'Add a Customer',
-        path: '/admin/new-customer'
-    },
-];
-
 export const SurveyLinks = [
     {
         name: 'All Surverys',

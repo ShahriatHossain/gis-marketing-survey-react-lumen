@@ -34,3 +34,8 @@ export const getBearerToken = () => {
 export const getUserProfile = (profile: any) => {
     return profile || null;
 }
+
+export const getStorageUserProfile = () => {
+    const profile = localStorage.getItem('profile');
+    return profile && JSON.parse(profile);
+}

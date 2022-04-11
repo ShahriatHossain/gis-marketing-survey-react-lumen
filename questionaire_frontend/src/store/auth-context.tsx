@@ -57,6 +57,7 @@ export const AuthContextProvider = (props: any) => {
     setToken(null);
     localStorage.removeItem('token');
     localStorage.removeItem('expirationTime');
+    localStorage.removeItem('profile');
 
     if (logoutTimer) {
       clearTimeout(logoutTimer);
@@ -80,6 +81,7 @@ export const AuthContextProvider = (props: any) => {
 
   const setProfileHandler = (profile: any) => {
     setProfile(profile);
+    localStorage.setItem('profile', JSON.stringify(profile));
   };
 
   useEffect(() => {

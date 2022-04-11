@@ -10,7 +10,7 @@ const EditUser: React.FC = () => {
     const { sendRequest: sendRequestForEdit, status: statusForEdit } = useHttpWithParam(editUser);
     const authCtx = useContext(AuthContext);
     const currentUser = getStorageUserProfile();
-
+    
     const history = useHistory();
 
     const params = useParams();
@@ -28,7 +28,7 @@ const EditUser: React.FC = () => {
 
     useEffect(() => {
         if (statusForEdit === 'completed') {
-            history.push('/admin/users');
+            history.push('/customer/dashboard');
         }
     }, [statusForEdit, history]);
 

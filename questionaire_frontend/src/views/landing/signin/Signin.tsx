@@ -17,11 +17,8 @@ const Signin: React.FC = () => {
 
     useEffect(() => {
         if (status === 'completed' && loadTokenInfo && !error) {
-
             authCtx.login(loadTokenInfo);
             fetchUserProfile();
-
-            history.push('/admin/surveys');
         }
     }, [status, history]);
 
@@ -30,7 +27,7 @@ const Signin: React.FC = () => {
     };
 
     const fetchUserProfile = async () => {
-        let loadedUser = null;
+        let loadedUser: any = null;
 
         try {
             const response = await fetch(`${BASE_URL}/profile`, getAuthorizedHeader());
@@ -44,12 +41,21 @@ const Signin: React.FC = () => {
                 ...data,
             };
 
+            if (loadedUser) {
+                authCtx.setProfile(loadedUser);
+
+                if (loadedUser.role_id === 1) {
+                    history.push('/admin/dashboard');
+                }
+                else if (loadedUser.role_id === 2) {
+                    history.push('/customer/dashboard');
+                }
+            }
+
         } catch (err: any) {
             throw new Error(err.message || 'Could not fetch user.');
         }
-
-        authCtx.setProfile(loadedUser);
-    }
+    };
 
     return (
         <ContentWrapper>
