@@ -27,6 +27,8 @@ const SurveyList: React.FC<{ surveys: Survey[], onRefreshRecord: Function }> = (
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Description</th>
+                            <th scope="col">Private</th>
+                            <th scope="col">Active</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Updated At</th>
                             <th scope="col">Action</th>

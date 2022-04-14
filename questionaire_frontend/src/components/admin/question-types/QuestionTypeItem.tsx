@@ -38,13 +38,13 @@ const QuestionTypeItem: React.FC<{ questionType: QuestionType, onDeleteQuestionT
                 <td>{questionType.description}</td>
                 <td>{questionType.created_at}</td>
                 <td>{questionType.updated_at}</td>
-                <td>
+                {/* <td>
                     <NavLink className="btn btn-primary btn-sm" to={'/admin/edit-question-type/' + questionType.id}>
                     <i className="fas fa-pen"></i>
                     </NavLink>&nbsp;
                     <ModalButtonLink targetId={modalParam.modalId}><i className="far fa-trash-alt"></i></ModalButtonLink>
                     <ModalUI modalParam={modalParam} onActionItem={deleteItemHandler} />
-                </td>
+                </td> */}
             </tr>
         </React.Fragment>
     );

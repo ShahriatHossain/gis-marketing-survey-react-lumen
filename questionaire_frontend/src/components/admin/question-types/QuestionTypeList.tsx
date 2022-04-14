@@ -16,11 +16,11 @@ const QuestionTypeList: React.FC<{ questionTypes: QuestionType[], onRefreshRecor
 
     return (
         <React.Fragment>
-            <div className="row">
+            {/* <div className="row">
                 <div className="col">
                     <NavLink className="btn btn-primary btn-sm float-end mb-2" role="button" to={"/admin/new-question-type"}><i className="fas fa-plus"></i></NavLink>
                 </div>
-            </div>
+            </div> */}
             <div className="table-responsive">
                 <table className="table table-bordered">
                     <thead>
@@ -29,7 +29,7 @@ const QuestionTypeList: React.FC<{ questionTypes: QuestionType[], onRefreshRecor
                             <th scope="col">Description</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Updated At</th>
-                            <th scope="col">Action</th>
+                            {/* <th scope="col">Action</th> */}
                         </tr>
                     </thead>
                     <tbody>

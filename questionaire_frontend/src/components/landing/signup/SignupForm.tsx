@@ -165,7 +165,7 @@ const SignupForm: React.FC<{ isLoading: boolean, error: string, onAddCustomer: F
                                         <div className="d-grid">
                                             <SubmitButton isLoading={isLoading}
                                                 clickHandler={finishEnteringHandler}
-                                                classes="btn btn-primary btn-block">Create Account</SubmitButton>
+                                                classes="btn btn-primary btn-sm btn-block">Create Account</SubmitButton>
                                         </div>
                                     </div>
                                 </div>

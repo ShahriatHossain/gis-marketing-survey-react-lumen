@@ -17,6 +17,8 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
     }, []);
 
     const nameInputRef = useRef<any>();
+    const privateInputRef = useRef<any>();
+    const activeInputRef = useRef<any>();
     const descriptionInputRef = useRef<any>();
 
     const nameChangeHandler = (event: any) => {
@@ -29,6 +31,8 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
         event.preventDefault();
 
         const enteredName = nameInputRef.current.value;
+        const enteredPrivate = privateInputRef.current.checked;
+        const enteredActive = activeInputRef.current.checked;
         const enteredDescription = descriptionInputRef.current.value;
 
         // optional: Could validate here
@@ -44,7 +48,12 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
             return;
         }
 
-        onAddSurvey({ name: enteredName, description: enteredDescription });
+        onAddSurvey({
+            name: enteredName,
+            private: enteredPrivate,
+            active: enteredActive,
+            description: enteredDescription
+        });
     };
 
     const nameControlClasses = `form-control ${formInputsValidity.name ? '' : 'is-invalid'}`;
@@ -89,14 +98,30 @@ const NewSurveyForm: React.FC<{ isLoading: boolean, onAddSurvey: Function }> = (
                         <textarea className="form-control" id="description" ref={descriptionInputRef}></textarea>
                     </div>
                 </div>
+                <div className="row mb-3">
+                    <label htmlFor="private" className="col-sm-2 col-form-label">Private?</label>
+                    <div className="col-sm-10">
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="private" ref={privateInputRef} />
+                        </div>
+                    </div>
+                </div>
+                <div className="row mb-3">
+                    <label htmlFor="active" className="col-sm-2 col-form-label">Active?</label>
+                    <div className="col-sm-10">
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="active" ref={activeInputRef} />
+                        </div>
+                    </div>
+                </div>
 
                 <div className="row mb-3">
                     <div className="col-sm-2">&nbsp;</div>
                     <div className="col-sm-10">
                         <SubmitButton isLoading={isLoading}
                             clickHandler={finishEnteringHandler}
-                            classes="btn btn-primary">Add Survey</SubmitButton>
-                        <NavLink className="btn btn-secondary ms-2" to={"/admin/surveys"}>Cancel</NavLink>
+                            classes="btn btn-primary btn-sm">Add Survey</SubmitButton>
+                        <NavLink className="btn btn-secondary btn-sm ms-2" to={"/admin/surveys"}>Cancel</NavLink>
                     </div>
                 </div>
 

@@ -161,8 +161,8 @@ const NewUserForm: React.FC<{ isLoading: boolean, onAddUser: Function }> = ({ is
                     <div className="col-sm-10">
                         <SubmitButton isLoading={isLoading}
                             clickHandler={finishEnteringHandler}
-                            classes="btn btn-primary">Add User</SubmitButton>
-                        <NavLink className="btn btn-secondary ms-2" to={"/admin/users"}>Cancel</NavLink>
+                            classes="btn btn-primary btn-sm">Add User</SubmitButton>
+                        <NavLink className="btn btn-secondary btn-sm ms-2" to={"/admin/users"}>Cancel</NavLink>
                     </div>
                 </div>
 

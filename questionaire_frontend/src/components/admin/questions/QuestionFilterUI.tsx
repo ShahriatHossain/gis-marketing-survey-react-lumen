@@ -42,7 +42,7 @@ const QuestionFilterUI: React.FC<Props> = (props: Props) => {
                     </select>
                 </div>
                 <div className="col">
-                    <button type="button" className="btn btn-primary" title="Filter List" onClick={surveyFilterHandler}><i className="fas fa-bars"></i></button>
+                    <button type="button" className="btn btn-primary btn-sm" title="Filter List" onClick={surveyFilterHandler}><i className="fas fa-bars"></i></button>
                 </div>
             </div>
         </React.Fragment>

@@ -152,8 +152,8 @@ const NewMultipleChoiceForm: React.FC<{ isLoading: boolean, questions: Question[
                     <div className="col-sm-10">
                         <SubmitButton isLoading={isLoading}
                             clickHandler={finishEnteringHandler}
-                            classes="btn btn-primary">Add Multiple Choice</SubmitButton>
-                        <NavLink className="btn btn-secondary ms-2" to={"/admin/multichoices"}>Cancel</NavLink>
+                            classes="btn btn-primary btn-sm">Add Multiple Choice</SubmitButton>
+                        <NavLink className="btn btn-secondary btn-sm ms-2" to={"/admin/multichoices"}>Cancel</NavLink>
                     </div>
                 </div>
 

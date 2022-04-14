@@ -36,11 +36,13 @@ const SurveyItem: React.FC<{ survey: Survey, onDeleteSurvey: Function }> = ({ su
             <tr key={survey.id}>
                 <td>{survey.name}</td>
                 <td>{survey.description}</td>
+                <td>{survey.private ? 'Yes' : 'No'}</td>
+                <td>{survey.active ? 'Yes' : 'No'}</td>
                 <td>{survey.created_at}</td>
                 <td>{survey.updated_at}</td>
                 <td>
                     <NavLink className="btn btn-primary btn-sm" to={'/admin/edit-survey/' + survey.id}>
-                    <i className="fas fa-pen"></i>
+                        <i className="fas fa-pen"></i>
                     </NavLink>&nbsp;
                     <ModalButtonLink targetId={modalParam.modalId}><i className="far fa-trash-alt"></i></ModalButtonLink>
                     <ModalUI modalParam={modalParam} onActionItem={deleteItemHandler} />

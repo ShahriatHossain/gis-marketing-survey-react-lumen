@@ -4,7 +4,6 @@ export enum SideNavItemId {
     CollapseSurvey = 'collapseSurvey',
     CollapseQuestion = 'collapseQuestion',
     CollapseMultipleChoice = 'collapseMultipleChoice',
-    CollapseBusinessType = 'collapseBusinessType',
     CollapseQuestionType = 'collapseQuestionType'
 }
 

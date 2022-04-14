@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { NavLink, Prompt } from "react-router-dom";
 import { isEmpty, validateEmail } from "../../../utils/helpers/utility-functions";
-import { BusinessType } from "../../../utils/models/BusinessType";
-import LoadingSpinner from "../../UI/LoadingSpinner";
 import SubmitButton from "../../UI/SubmitButton";
 
 const EditUserForm: React.FC<{ existingData: any, isLoading: boolean, onEditUser: Function }> = ({ existingData, isLoading, onEditUser }) => {
@@ -112,8 +110,8 @@ const EditUserForm: React.FC<{ existingData: any, isLoading: boolean, onEditUser
                     <div className="col-sm-10">
                         <SubmitButton isLoading={isLoading}
                             clickHandler={finishEnteringHandler}
-                            classes="btn btn-primary">Edit User</SubmitButton>
-                        <NavLink className="btn btn-secondary ms-2" to={"/admin/users"}>Cancel</NavLink>
+                            classes="btn btn-primary btn-sm">Edit User</SubmitButton>
+                        <NavLink className="btn btn-secondary btn-sm ms-2" to={"/admin/users"}>Cancel</NavLink>
                     </div>
                 </div>
 

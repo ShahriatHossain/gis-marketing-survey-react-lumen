@@ -74,7 +74,7 @@ const ForgotPasswordForm: React.FC<{ isLoading: boolean, onRequestPasswordReset:
                                 <NavLink className="small" to="/signin">Return to login</NavLink>
                                 <SubmitButton isLoading={isLoading}
                                     clickHandler={finishEnteringHandler}
-                                    classes="btn btn-primary">Reset Password</SubmitButton>
+                                    classes="btn btn-primary btn-sm">Reset Password</SubmitButton>
                             </div>
                         </div>
                         <div className="card-footer text-center py-3">

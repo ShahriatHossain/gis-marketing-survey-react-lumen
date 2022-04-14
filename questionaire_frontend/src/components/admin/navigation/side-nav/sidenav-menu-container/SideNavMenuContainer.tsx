@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../../../../store/auth-context";
-import { BusinessTypeLinks, MultipleChoiceLinks, QuestionLinks, QuestionTypeLinks, SurveyLinks, UserLinks } from "../../../../../utils/constants/SideNavLinks";
+import { MultipleChoiceLinks, QuestionLinks, QuestionTypeLinks, SurveyLinks, UserLinks } from "../../../../../utils/constants/SideNavLinks";
 import { SideNavItemId } from "../../../../../utils/enums";
 import { getStorageUserProfile } from "../../../../../utils/helpers/utility-functions";
 import SideNavItem from "../side-nav-item/SideNavItem";
@@ -41,11 +41,6 @@ export const SideNavMenuContainer: React.FC = () => {
                 {/* Multiple Choice */}
                 <SideNavItem id={SideNavItemId.CollapseMultipleChoice} name="Multiple Choice" links={MultipleChoiceLinks}
                     isCollapsed={collapsedId == SideNavItemId.CollapseMultipleChoice ? isCollapsed : true}
-                    onItemClick={navItemClickHandler}></SideNavItem>
-
-                {/* Business Type */}
-                <SideNavItem id={SideNavItemId.CollapseBusinessType} name="Business Type" links={BusinessTypeLinks}
-                    isCollapsed={collapsedId == SideNavItemId.CollapseBusinessType ? isCollapsed : true}
                     onItemClick={navItemClickHandler}></SideNavItem>
 
                 {/* Question Type */}

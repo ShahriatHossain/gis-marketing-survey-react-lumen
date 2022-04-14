@@ -42,17 +42,6 @@ export const MultipleChoiceLinks = [
     },
 ];
 
-export const BusinessTypeLinks = [
-    {
-        name: 'All Business Types',
-        path: '/admin/business-types'
-    },
-    {
-        name: 'Add a Business Type',
-        path: '/admin/new-business-type'
-    },
-];
-
 export const QuestionTypeLinks = [
     {
         name: 'All Question Types',

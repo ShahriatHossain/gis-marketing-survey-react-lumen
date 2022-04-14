@@ -24,6 +24,28 @@ export async function getAllSurveys() {
     return transformedSurveys;
 }
 
+export async function getSurveysWithRelatedData() {
+    const response = await fetch(`${BASE_URL}/survey-all`);
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || 'Could not fetch surveys.');
+    }
+
+    const transformedSurveys = <Survey[]>[];
+
+    for (const key in data) {
+        const surveyObj = {
+            id: key,
+            ...data[key],
+        };
+
+        transformedSurveys.push(<Survey>surveyObj);
+    }
+
+    return transformedSurveys;
+}
+
 export async function getSingleSurvey(surveyId: string) {
     const response = await fetch(`${BASE_URL}/surveys/${surveyId}`, getAuthorizedHeader());
     const data = await response.json();

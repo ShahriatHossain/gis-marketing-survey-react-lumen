@@ -87,8 +87,8 @@ const NewQuestionTypeForm: React.FC<{ isLoading: boolean, onAddQuestionType: Fun
                     <div className="col-sm-10">
                         <SubmitButton isLoading={isLoading}
                             clickHandler={finishEnteringHandler}
-                            classes="btn btn-primary">Add Question Type</SubmitButton>
-                        <NavLink className="btn btn-secondary ms-2" to={"/admin/question-types"}>Cancel</NavLink>
+                            classes="btn btn-primary btn-sm">Add Question Type</SubmitButton>
+                        <NavLink className="btn btn-secondary btn-sm ms-2" to={"/admin/question-types"}>Cancel</NavLink>
                     </div>
                 </div>
 

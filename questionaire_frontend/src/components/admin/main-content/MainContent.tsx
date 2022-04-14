@@ -1,7 +1,4 @@
 import { Switch } from 'react-router-dom';
-import AllBusinessTypes from '../../../views/admin/business-types/AllBusinessTypes';
-import EditBusinessType from '../../../views/admin/business-types/EditBusinessType';
-import NewBusinessType from '../../../views/admin/business-types/NewBusinessType';
 import DashboardPage from '../../../views/admin/dashboard/DashboardPage';
 import AllMultipleChoices from '../../../views/admin/multiple-choices/AllMultipleChoices';
 import EditMultipleChoice from '../../../views/admin/multiple-choices/EditMultipleChoice';
@@ -39,11 +36,6 @@ export const MainContent: React.FC = () => {
                                 <AdminRoute exact path='/admin/surveys' component={AllSurveys} />
                                 <AdminRoute exact path='/admin/new-survey' component={NewSurvey} />
                                 <AdminRoute exact path='/admin/edit-survey/:surveyId' component={EditSurvey} />
-
-                                {/* Business Type */}
-                                <AdminRoute exact path='/admin/business-types' component={AllBusinessTypes} />
-                                <AdminRoute exact path='/admin/new-business-type' component={NewBusinessType} />
-                                <AdminRoute exact path='/admin/edit-business-type/:businessTypeId' component={EditBusinessType} />
 
                                 {/* Question Type */}
                                 <AdminRoute exact path='/admin/question-types' component={AllQuestionTypes} />

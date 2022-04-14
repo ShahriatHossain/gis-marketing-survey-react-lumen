@@ -11,7 +11,7 @@ const SliderDownButton: React.FC = () => {
     };
 
     return (
-        <button type="button" className="btn btn-primary"
+        <button type="button" className="btn btn-primary btn-sm"
             disabled={quesCtx.currentItemIdx === quesCtx.questions.length - 1}
             onClick={clickHandler}>
             <i className="fas fa-angle-down"></i>

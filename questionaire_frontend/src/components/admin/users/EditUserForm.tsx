@@ -110,8 +110,8 @@ const EditUserForm: React.FC<{ existingData: any, isLoading: boolean, onEditUser
                     <div className="col-sm-10">
                         <SubmitButton isLoading={isLoading}
                             clickHandler={finishEnteringHandler}
-                            classes="btn btn-primary">Edit User</SubmitButton>
-                        <NavLink className="btn btn-secondary ms-2" to={"/admin/users"}>Cancel</NavLink>
+                            classes="btn btn-primary btn-sm">Edit User</SubmitButton>
+                        <NavLink className="btn btn-secondary btn-sm ms-2" to={"/admin/users"}>Cancel</NavLink>
                     </div>
                 </div>
 

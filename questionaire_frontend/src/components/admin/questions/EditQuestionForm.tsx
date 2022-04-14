@@ -170,8 +170,8 @@ const EditQuestionForm: React.FC<{ existingData: any, isLoading: boolean, survey
                     <div className="col-sm-10">
                         <SubmitButton isLoading={isLoading}
                             clickHandler={finishEnteringHandler}
-                            classes="btn btn-primary">Edit Question</SubmitButton>
-                        <NavLink className="btn btn-secondary ms-2" to={"/admin/questions"}>Cancel</NavLink>
+                            classes="btn btn-primary btn-sm">Edit Question</SubmitButton>
+                        <NavLink className="btn btn-secondary btn-sm ms-2" to={"/admin/questions"}>Cancel</NavLink>
                     </div>
                 </div>
             </form>

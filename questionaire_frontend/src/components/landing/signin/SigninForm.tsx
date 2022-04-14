@@ -99,7 +99,7 @@ const SigninForm: React.FC<{ isLoading: boolean, error: string; onLoginUser: Fun
                                     <NavLink className="small" to="/forgot-password">Forgot Password?</NavLink>
                                     <SubmitButton isLoading={isLoading}
                                         clickHandler={finishEnteringHandler}
-                                        classes="btn btn-primary">Login</SubmitButton>
+                                        classes="btn btn-primary btn-sm">Login</SubmitButton>
                                 </div>
                             </div>
                             <div className="card-footer text-center py-3">

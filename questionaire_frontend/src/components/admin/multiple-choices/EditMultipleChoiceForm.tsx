@@ -151,8 +151,8 @@ const EditMultipleChoiceForm: React.FC<{ existingData: MultipleChoice, isLoading
                     <div className="col-sm-10">
                         <SubmitButton isLoading={isLoading}
                             clickHandler={finishEnteringHandler}
-                            classes="btn btn-primary">Edit Multiple Choice</SubmitButton>
-                        <NavLink className="btn btn-secondary ms-2" to={"/admin/multichoices"}>Cancel</NavLink>
+                            classes="btn btn-primary btn-sm">Edit Multiple Choice</SubmitButton>
+                        <NavLink className="btn btn-secondary btn-sm ms-2" to={"/admin/multichoices"}>Cancel</NavLink>
                     </div>
                 </div>
 

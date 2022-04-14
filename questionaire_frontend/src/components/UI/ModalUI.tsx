@@ -19,8 +19,8 @@ const ModalUI: React.FC<{ modalParam: ModalParam, onActionItem: Function }> = ({
                     </div>
                     {modalParam.bodyText && <div className="modal-body">{modalParam.bodyText}</div>}
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={saveChangeHandler}>{modalParam.actionButtonText}</button>
+                        <button type="button" className="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary btn-sm" onClick={saveChangeHandler}>{modalParam.actionButtonText}</button>
                     </div>
                 </div>
             </div>

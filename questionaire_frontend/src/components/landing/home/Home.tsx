@@ -2,13 +2,18 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { QuestionnaireContext } from "../../../store/questionnaire-context";
 import { Direction } from "../../../utils/enums";
+import { Survey } from "../../../utils/models/Survey";
 import ButtonOk from "../../UI/ButtonOk";
 import SliderDownButton from "../../UI/SliderDownButton";
 import SliderUpButton from "../../UI/SliderUpButton";
 
 import './Home.css';
 
-const Home: React.FC = () => {
+interface SurveyParam {
+    surveys: Survey[]
+}
+
+const Home: React.FC<SurveyParam> = (props) => {
     const quesCtx = useContext(QuestionnaireContext);
 
     const getClasses = (idx: number) => {

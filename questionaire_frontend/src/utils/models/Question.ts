@@ -1,3 +1,5 @@
+import { MultipleChoice } from "./MultipleChoice";
+
 export interface Question {
     id: number;
     survey_id: number;
@@ -9,4 +11,5 @@ export interface Question {
     question_type_description: string;
     created_at: string;
     updated_at: string;
+    choices: MultipleChoice[];
 }

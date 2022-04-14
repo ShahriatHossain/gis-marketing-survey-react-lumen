@@ -12,7 +12,7 @@ const SliderUpButton: React.FC = () => {
 
     return (
         <button disabled={quesCtx.currentItemIdx === 0}
-            onClick={clickHandler} type="button" className="btn btn-primary">
+            onClick={clickHandler} type="button" className="btn btn-primary btn-sm">
             <i className="fas fa-angle-up"></i>
         </button>
     )
