@@ -35,7 +35,7 @@ class Survey extends Model implements AuthenticatableContract, AuthorizableContr
      * @var array
      */
     protected $fillable = [
-        'name', 'description'
+        'name', 'description', 'private', 'active'
     ];
 
     /**

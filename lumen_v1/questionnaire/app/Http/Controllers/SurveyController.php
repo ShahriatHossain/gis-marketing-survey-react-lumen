@@ -24,6 +24,13 @@ class SurveyController extends Controller
         return response()->json(Survey::all());
     }
 
+    // FIND
+    public function allRelated()
+    {
+        $surveys = Survey::with('questions.choices')->where('active', 1)->get();
+        return response()->json($surveys[0]);
+    }
+
     public function show($id)
     {
         return response()->json(Survey::find($id));

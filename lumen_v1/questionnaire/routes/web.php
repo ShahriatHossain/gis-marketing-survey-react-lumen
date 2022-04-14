@@ -23,6 +23,7 @@ $router->get('/', function () use ($router) {
 // Register, Login
 $router->post('register', 'AuthController@register');
 $router->post('login', 'AuthController@login');
+$router->get('/survey-all', ['uses' => 'SurveyController@allRelated']);
 
 // Reset password
 $router->post('/password/reset-request', 'RequestPasswordController@sendResetLinkEmail');
@@ -33,14 +34,6 @@ $router->group(['middleware' => ['auth', 'verified']], function () use ($router)
     $router->post('/email/request-verification', ['as' => 'email.request.verification', 'uses' => 'AuthController@emailRequestVerification']);
     $router->post('/logout', 'AuthController@logout');
     $router->post('/refresh', 'AuthController@refresh');
-
-    // Find Business Types
-    $router->get('/business-types', ['uses' => 'BusinessTypeController@index']);
-    $router->get('/business-types/{id}', ['uses' => 'BusinessTypeController@show']);
-    // Business Type CRUD
-    $router->post('/business-types', ['uses' => 'BusinessTypeController@create']);
-    $router->put('/business-types/{id}', ['uses' => 'BusinessTypeController@update']);
-    $router->delete('/business-types/{id}', ['uses' => 'BusinessTypeController@delete']);
 
     // Find Question Types
     $router->get('/question-types', ['uses' => 'QuestionTypeController@index']);
