@@ -3,24 +3,38 @@ import React, { useEffect, useState } from "react";
 import * as jsonResult from "../assets/data/questionnaire.json";
 import { Direction } from "../utils/enums";
 import { Question } from "../utils/models";
+import { Survey } from "../utils/models/Survey";
 
 type QuestionnaireContextObj = {
   questions: Question[];
-  currentItemIdx: number;
+  currentItemIndex: number;
   direction: string;
+  currentSurvey: Survey;
   addCurrentItemIdx: (idx: number) => void;
   addDirection: (direction: Direction) => void;
-  addAnswer: (questionId: string, choiceIndex: number) => void;
+  addAnswer: (questionId: number, choiceIndex: number) => void;
+  addCurrentSurvey: (survey: Survey) => void;
 };
 
 export const QuestionnaireContext =
   React.createContext<QuestionnaireContextObj>({
     questions: [],
-    currentItemIdx: 0,
+    currentSurvey: {
+      id: 0,
+      name: '',
+      description: '',
+      private: false,
+      active: false,
+      created_at: '',
+      updated_at: '',
+      questions: []
+    },
+    currentItemIndex: 0,
     direction: "",
-    addCurrentItemIdx: (idx: number) => {},
-    addDirection: (direction: Direction) => {},
-    addAnswer: (questionId: string, choiceIndex: number) => {},
+    addCurrentItemIdx: (idx: number) => { },
+    addDirection: (direction: Direction) => { },
+    addAnswer: (questionId: number, choiceIndex: number) => { },
+    addCurrentSurvey: (survey: Survey) => { }
   });
 
 let isInitial = true;
@@ -29,21 +43,31 @@ const QuestionnaireContextProvider: React.FC = (props) => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const [direction, setDirection] = useState("");
+  const [currentSurvey, setCurrentSurvey] = useState<Survey>({
+    id: 0,
+    name: '',
+    description: '',
+    private: false,
+    active: false,
+    created_at: '',
+    updated_at: '',
+    questions: []
+  });
 
-  const addAnswerHandler = (questionId: string, choiceIndex: number) => {
-    setQuestions((prevQuestions) => {
-      return prevQuestions.map((q) => ({
-        ...q,
-        choices:
-          q.identifier === questionId
-            ? q.choices?.map((c, idx) => ({
-                ...c,
-                selected:
-                  idx === choiceIndex ? (c.selected ? false : true) : false,
-              }))
-            : q.choices,
-      }));
-    });
+  const addAnswerHandler = (questionId: number, choiceIndex: number) => {
+    // setCurrentSurvey((prevSurvey) => {
+    //   return prevSurvey.questions.map((q) => ({
+    //     ...q,
+    //     choices:
+    //       q.id === questionId
+    //         ? q.choices?.map((c, idx) => ({
+    //           ...c,
+    //           selected:
+    //             idx === choiceIndex ? (c.selected ? false : true) : false,
+    //         }))
+    //         : q.choices,
+    //   }));
+    // });
   };
 
   const addCurrentItemIdxHandler = (index: number) => {
@@ -52,6 +76,10 @@ const QuestionnaireContextProvider: React.FC = (props) => {
 
   const addDirectionHandler = (direction: Direction) => {
     setDirection(direction);
+  };
+
+  const addCurrentSurveyHandler = (survey: Survey) => {
+    setCurrentSurvey(survey);
   };
 
   useEffect(() => {
@@ -64,10 +92,12 @@ const QuestionnaireContextProvider: React.FC = (props) => {
   const contextValue: QuestionnaireContextObj = {
     questions,
     direction,
-    currentItemIdx: currentItemIndex,
+    currentItemIndex,
+    currentSurvey,
     addCurrentItemIdx: addCurrentItemIdxHandler,
     addDirection: addDirectionHandler,
     addAnswer: addAnswerHandler,
+    addCurrentSurvey: addCurrentSurveyHandler
   };
 
   return (

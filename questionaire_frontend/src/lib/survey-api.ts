@@ -32,18 +32,7 @@ export async function getSurveysWithRelatedData() {
         throw new Error(data.message || 'Could not fetch surveys.');
     }
 
-    const transformedSurveys = <Survey[]>[];
-
-    for (const key in data) {
-        const surveyObj = {
-            id: key,
-            ...data[key],
-        };
-
-        transformedSurveys.push(<Survey>surveyObj);
-    }
-
-    return transformedSurveys;
+    return <Survey>data;
 }
 
 export async function getSingleSurvey(surveyId: string) {
