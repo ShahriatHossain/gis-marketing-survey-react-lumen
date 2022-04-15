@@ -19,3 +19,7 @@
 .ml-110px {
     margin-left: 110px !important;
 }
+
+.two-columns-container {
+    columns: 2 auto;
+}

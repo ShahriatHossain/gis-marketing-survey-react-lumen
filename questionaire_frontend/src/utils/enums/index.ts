@@ -13,8 +13,9 @@ export enum Direction {
 }
 
 export enum QuestionType {
-    MultipleChoice = 'multiple-choice',
-    Text = 'text'
+    Radio = 'Radio',
+    Checkbox = 'Checkbox',
+    Text = 'Text'
 }
 
 export enum Multiline {
