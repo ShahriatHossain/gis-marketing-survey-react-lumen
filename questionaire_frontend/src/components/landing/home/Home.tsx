@@ -6,8 +6,11 @@ import { Survey } from "../../../utils/models/Survey";
 import ButtonOk from "../../UI/ButtonOk";
 import SliderDownButton from "../../UI/SliderDownButton";
 import SliderUpButton from "../../UI/SliderUpButton";
+import Checkbox from "./question-types/Checkbox";
 
 import './Home.css';
+import Radio from "./question-types/Radio";
+import TextControler from "./question-types/Text";
 
 interface SurveyParam {
     currentSurvey: Survey
@@ -38,6 +41,10 @@ const Home: React.FC<SurveyParam> = (props) => {
         return classList;
     };
 
+    const addAnswerHandler = (questionId: number, choiceId: number) => {
+        console.log(questionId, choiceId)
+    }
+
     return (
         <>
             <div className="row col-10">
@@ -51,33 +58,15 @@ const Home: React.FC<SurveyParam> = (props) => {
 
                             <div className={qs.question_type != QuestionType.Text ? 'two-columns-container' : ''}>
                                 {(qs.question_type === QuestionType.Radio) && qs.choices && qs.choices.map((ch, chIdx) => (
-                                    <div className="form-check mb-3">
-                                        <input className="form-check-input" type="radio"
-                                            name={`radioEx${ch.id}${chIdx}`}
-                                            id={`radioEx${ch.id}${chIdx}`}
-                                            value={ch.value} />
-                                        <label className="form-check-label" htmlFor={`radioEx${ch.id}${chIdx}`}>
-                                            {ch.label}
-                                        </label>
-                                    </div>
+                                    <Radio onAddAnswer={addAnswerHandler} index={chIdx} choice={ch} />
                                 ))}
 
                                 {(qs.question_type === QuestionType.Checkbox) && qs.choices && qs.choices.map((ch, chIdx) => (
-                                    <div key={chIdx} className="form-check mb-3">
-                                        <input className="form-check-input" type="checkbox"
-                                            name={`checkboxEx${ch.id}${chIdx}`}
-                                            id={`checkboxEx${ch.id}${chIdx}`}
-                                            value={ch.value} />
-                                        <label className="form-check-label" htmlFor={`checkboxEx${ch.id}${chIdx}`}>
-                                            {ch.label}
-                                        </label>
-                                    </div>
+                                    <Checkbox onAddAnswer={addAnswerHandler} index={chIdx} choice={ch} />
                                 ))}
 
                                 {qs.question_type === QuestionType.Text &&
-                                    <div className="mb-3">
-                                        <textarea className="form-control" name={`textEx${qs.id}`} id={`textEx${qs.id}`} rows={3}></textarea>
-                                    </div>
+                                    <TextControler question={qs} onAddAnswer={addAnswerHandler} />
                                 }
 
                             </div>
