@@ -12,10 +12,11 @@ const Checkbox: React.FC<Params> = (props) => {
             <input className="form-check-input" type="checkbox"
                 name={`checkboxEx${props.choice.id}${props.index}`}
                 id={`checkboxEx${props.choice.id}${props.index}`}
-                value={props.choice.value} onChange={() => props.onAddAnswer(
+                value={props.choice.value} onChange={(e) => props.onAddAnswer(
                     props.choice.question_id,
                     props.choice.id,
-                    QuestionType.Checkbox
+                    QuestionType.Checkbox,
+                    e
                 )} />
             <label className="form-check-label" htmlFor={`checkboxEx${props.choice.id}${props.index}`}>
                 {props.choice.label}

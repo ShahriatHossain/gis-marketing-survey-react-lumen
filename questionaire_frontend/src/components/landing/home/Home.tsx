@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import $ from 'jquery';
+
 import { QuestionnaireContext } from "../../../store/questionnaire-context";
 import { Direction, QuestionType } from "../../../utils/enums";
 import { Survey } from "../../../utils/models/Survey";
@@ -41,8 +42,20 @@ const Home: React.FC<SurveyParam> = (props) => {
         return classList;
     };
 
-    const addAnswerHandler = (questionId: number, choiceId: number) => {
-        console.log(questionId, choiceId)
+    const addAnswerHandler = (questionId: number, choiceId: number, questionType: QuestionType, event?: any) => {
+        console.log(event);
+        if (questionType === QuestionType.Text) {
+            setTimeout(() => {
+                const text: any = $(`#textEx${questionId}`) ? $(`#textEx${questionId}`).val() : '';
+                quesCtx.addAnswer(questionId, choiceId, text, questionType);
+            }, 1000);
+        } else {
+            quesCtx.addAnswer(questionId, choiceId, '', questionType, event && event.target.checked);
+        }
+
+        setTimeout(() => {
+            console.log(quesCtx.answers);
+        }, 1000);
     }
 
     return (
@@ -51,18 +64,18 @@ const Home: React.FC<SurveyParam> = (props) => {
                 <h6 className="fw-bold text-center mt-3">{props.currentSurvey.name}</h6>
             </div>
             <div className="p-4 d-flex justify-content-center bg-white w-100">
-                {quesCtx.currentSurvey.questions.map((qs, idx) => (
+                {quesCtx.currentSurvey && quesCtx.currentSurvey.questions.map((qs, idx) => (
                     <div key={idx} className={getClasses(idx).join(" ")}>
                         <form className=" bg-white px-4" action="">
                             <p className="fw-bold">{idx + 1}. {qs.title}</p>
 
                             <div className={qs.question_type != QuestionType.Text ? 'two-columns-container' : ''}>
                                 {(qs.question_type === QuestionType.Radio) && qs.choices && qs.choices.map((ch, chIdx) => (
-                                    <Radio onAddAnswer={addAnswerHandler} index={chIdx} choice={ch} />
+                                    <Radio key={chIdx} onAddAnswer={addAnswerHandler} index={chIdx} choice={ch} />
                                 ))}
 
                                 {(qs.question_type === QuestionType.Checkbox) && qs.choices && qs.choices.map((ch, chIdx) => (
-                                    <Checkbox onAddAnswer={addAnswerHandler} index={chIdx} choice={ch} />
+                                    <Checkbox key={chIdx} onAddAnswer={addAnswerHandler} index={chIdx} choice={ch} />
                                 ))}
 
                                 {qs.question_type === QuestionType.Text &&

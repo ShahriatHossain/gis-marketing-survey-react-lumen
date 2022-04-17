@@ -1,73 +1,69 @@
 import React, { useEffect, useState } from "react";
 
 import * as jsonResult from "../assets/data/questionnaire.json";
-import { Direction } from "../utils/enums";
+import { Direction, QuestionType } from "../utils/enums";
 import { Question } from "../utils/models";
+import { Answer } from "../utils/models/Answer";
 import { Survey } from "../utils/models/Survey";
 
 type QuestionnaireContextObj = {
-  questions: Question[];
   currentItemIndex: number;
   direction: string;
-  currentSurvey: Survey;
+  currentSurvey: Survey | undefined;
+  answers: Answer[];
   addCurrentItemIdx: (idx: number) => void;
   addDirection: (direction: Direction) => void;
-  addAnswer: (questionId: number, choiceIndex: number) => void;
+  addAnswer: (questionId: number, choiceId: number, text: string, questionType: QuestionType, checked?: boolean) => void;
   addCurrentSurvey: (survey: Survey) => void;
 };
 
 export const QuestionnaireContext =
   React.createContext<QuestionnaireContextObj>({
-    questions: [],
-    currentSurvey: {
-      id: 0,
-      name: '',
-      description: '',
-      private: false,
-      active: false,
-      created_at: '',
-      updated_at: '',
-      questions: []
-    },
+    currentSurvey: undefined,
+    answers: [],
     currentItemIndex: 0,
     direction: "",
     addCurrentItemIdx: (idx: number) => { },
     addDirection: (direction: Direction) => { },
-    addAnswer: (questionId: number, choiceIndex: number) => { },
+    addAnswer: (questionId: number, choiceId: number, text: string, questionType: QuestionType, checked?: boolean) => { },
     addCurrentSurvey: (survey: Survey) => { }
   });
 
-let isInitial = true;
-
 const QuestionnaireContextProvider: React.FC = (props) => {
-  const [questions, setQuestions] = useState<Question[]>([]);
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const [direction, setDirection] = useState("");
-  const [currentSurvey, setCurrentSurvey] = useState<Survey>({
-    id: 0,
-    name: '',
-    description: '',
-    private: false,
-    active: false,
-    created_at: '',
-    updated_at: '',
-    questions: []
-  });
+  const [currentSurvey, setCurrentSurvey] = useState<Survey | undefined>();
+  const [answers, setAnswers] = useState<Answer[]>([]);
 
-  const addAnswerHandler = (questionId: number, choiceIndex: number) => {
-    // setCurrentSurvey((prevSurvey) => {
-    //   return prevSurvey.questions.map((q) => ({
-    //     ...q,
-    //     choices:
-    //       q.id === questionId
-    //         ? q.choices?.map((c, idx) => ({
-    //           ...c,
-    //           selected:
-    //             idx === choiceIndex ? (c.selected ? false : true) : false,
-    //         }))
-    //         : q.choices,
-    //   }));
-    // });
+  const addAnswerHandler = (questionId: number, choiceId: number, text: string, questionType: QuestionType, checked?: boolean) => {
+    setAnswers((prevAnswers) => {
+      switch (questionType) {
+        case QuestionType.Radio:
+          prevAnswers = prevAnswers.filter(ans => ans.question_id != questionId);
+          return addNewAnswer(prevAnswers, questionId, choiceId, text);
+
+        case QuestionType.Checkbox:
+          const existingItem = prevAnswers.find(ans => ans.question_id === questionId
+            && ans.multiple_choice_id === choiceId);
+
+          prevAnswers = prevAnswers.filter(ans => ans.question_id != questionId
+            && ans.multiple_choice_id != choiceId);
+
+          if (existingItem && !checked) {
+            return addNewAnswer(prevAnswers, questionId, choiceId, text);
+          }
+
+          if (!existingItem && checked) {
+            return addNewAnswer(prevAnswers, questionId, choiceId, text);
+          }
+
+          return prevAnswers;
+
+        case QuestionType.Text:
+          prevAnswers = prevAnswers.filter(ans => ans.question_id != questionId);
+          return addNewAnswer(prevAnswers, questionId, choiceId, text);
+      }
+    })
   };
 
   const addCurrentItemIdxHandler = (index: number) => {
@@ -82,18 +78,27 @@ const QuestionnaireContextProvider: React.FC = (props) => {
     setCurrentSurvey(survey);
   };
 
+  const addNewAnswer = (prevAnswers: Answer[], questionId: number, choiceId: number, text: string) => {
+    prevAnswers.push({
+      id: 0,
+      question_id: questionId,
+      multiple_choice_id: choiceId,
+      answer_text: text,
+      created_at: '',
+      updated_at: ''
+    });
+
+    return prevAnswers;
+  }
+
   useEffect(() => {
-    if (isInitial) {
-      setQuestions(jsonResult.questionnaire.questions);
-      isInitial = false;
-    }
-  }, [questions, currentItemIndex]);
+  }, [currentItemIndex]);
 
   const contextValue: QuestionnaireContextObj = {
-    questions,
     direction,
     currentItemIndex,
     currentSurvey,
+    answers,
     addCurrentItemIdx: addCurrentItemIdxHandler,
     addDirection: addDirectionHandler,
     addAnswer: addAnswerHandler,
@@ -107,4 +112,4 @@ const QuestionnaireContextProvider: React.FC = (props) => {
   );
 };
 
-export default QuestionnaireContextProvider;
+export default QuestionnaireContextProvider; 

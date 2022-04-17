@@ -9,9 +9,9 @@ const TextControler: React.FC<Params> = (props) => {
     return (
         <div className="mb-3">
             <textarea className="form-control" name={`textEx${props.question.id}`} id={`textEx${props.question.id}`} rows={3}
-                onChange={() => props.onAddAnswer(
+                onKeyUp={() => props.onAddAnswer(
                     props.question.id,
-                    null,
+                    0,
                     QuestionType.Text
                 )}></textarea>
         </div>
