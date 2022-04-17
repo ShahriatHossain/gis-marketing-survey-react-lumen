@@ -10,12 +10,9 @@ import './assets/js/scripts';
 import { AuthContextProvider } from './store/auth-context';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AuthContextProvider>
-      <App />
-    </AuthContextProvider>
-
-  </React.StrictMode>,
+  <AuthContextProvider>
+    <App />
+  </AuthContextProvider>,
   document.getElementById('root')
 );
 

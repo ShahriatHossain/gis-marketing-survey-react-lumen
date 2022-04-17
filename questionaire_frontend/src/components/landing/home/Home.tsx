@@ -12,6 +12,8 @@ import Checkbox from "./question-types/Checkbox";
 import './Home.css';
 import Radio from "./question-types/Radio";
 import TextControler from "./question-types/Text";
+import useHttpWithParam from "../../../hooks/use-httpWithParam";
+import { addMultiAnswer } from "../../../lib/survey-answer-api";
 
 interface SurveyParam {
     currentSurvey: Survey
@@ -19,6 +21,8 @@ interface SurveyParam {
 
 const Home: React.FC<SurveyParam> = (props) => {
     const quesCtx = useContext(QuestionnaireContext);
+
+    const { sendRequest: sendRequestForAnswer, status: statusAnswer } = useHttpWithParam(addMultiAnswer);
 
     useEffect(() => {
         quesCtx.addCurrentSurvey(props.currentSurvey);
@@ -43,7 +47,7 @@ const Home: React.FC<SurveyParam> = (props) => {
     };
 
     const addAnswerHandler = (questionId: number, choiceId: number, questionType: QuestionType, event?: any) => {
-        console.log(event);
+
         if (questionType === QuestionType.Text) {
             setTimeout(() => {
                 const text: any = $(`#textEx${questionId}`) ? $(`#textEx${questionId}`).val() : '';
@@ -52,10 +56,10 @@ const Home: React.FC<SurveyParam> = (props) => {
         } else {
             quesCtx.addAnswer(questionId, choiceId, '', questionType, event && event.target.checked);
         }
+    }
 
-        setTimeout(() => {
-            console.log(quesCtx.answers);
-        }, 1000);
+    const submitHandler = () => {
+        sendRequestForAnswer(quesCtx.answers);
     }
 
     return (
@@ -88,7 +92,7 @@ const Home: React.FC<SurveyParam> = (props) => {
                         </form>
                         <p>&nbsp;</p>
                         <div className="text-start">
-                            <ButtonOk />
+                            <ButtonOk onSubmit={submitHandler} />
                         </div>
                         <p>&nbsp;</p>
                         <div className="text-end">

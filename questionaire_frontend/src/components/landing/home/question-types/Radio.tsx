@@ -14,10 +14,11 @@ const Radio: React.FC<Params> = (props) => {
                 name="radioEx"
                 id="radioEx"
                 value={props.choice.value}
-                onChange={() => props.onAddAnswer(
+                onChange={(e) => props.onAddAnswer(
                     props.choice.question_id,
                     props.choice.id,
-                    QuestionType.Radio
+                    QuestionType.Radio,
+                    e
                 )} />
             <label className="form-check-label" htmlFor="radioEx">
                 {props.choice.label}

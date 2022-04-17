@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { QuestionnaireContext } from "../../store/questionnaire-context";
 
-const ButtonOk: React.FC = () => {
+const ButtonOk: React.FC<{ onSubmit: any }> = ({ onSubmit }) => {
     const quesCtx = useContext(QuestionnaireContext);
 
     const clickHandler = () =>
         quesCtx.addCurrentItemIdx(quesCtx.currentItemIndex + 1);
-    
-    const submitHandler = ()=> {
-        //
+
+    const submitHandler = () => {
+        onSubmit();
     }
 
     return (

@@ -46,8 +46,8 @@ const QuestionnaireContextProvider: React.FC = (props) => {
           const existingItem = prevAnswers.find(ans => ans.question_id === questionId
             && ans.multiple_choice_id === choiceId);
 
-          prevAnswers = prevAnswers.filter(ans => ans.question_id != questionId
-            && ans.multiple_choice_id != choiceId);
+          prevAnswers = prevAnswers.filter(
+            ans => ans.question_id === questionId && ans.multiple_choice_id != choiceId);
 
           if (existingItem && !checked) {
             return addNewAnswer(prevAnswers, questionId, choiceId, text);
