@@ -14,6 +14,7 @@ import Radio from "./question-types/Radio";
 import TextControler from "./question-types/Text";
 import useHttpWithParam from "../../../hooks/use-httpWithParam";
 import { addMultiAnswer } from "../../../lib/survey-answer-api";
+import { useHistory } from "react-router-dom";
 
 interface SurveyParam {
     currentSurvey: Survey
@@ -21,12 +22,19 @@ interface SurveyParam {
 
 const Home: React.FC<SurveyParam> = (props) => {
     const quesCtx = useContext(QuestionnaireContext);
+    const history = useHistory();
 
     const { sendRequest: sendRequestForAnswer, status: statusAnswer } = useHttpWithParam(addMultiAnswer);
 
     useEffect(() => {
         quesCtx.addCurrentSurvey(props.currentSurvey);
     }, []);
+
+    useEffect(() => {
+        if(statusAnswer === 'completed') {
+            history.push('/message-success');
+        }
+    }, [statusAnswer]);
 
     const getClasses = (idx: number) => {
         let classList: string[] = ["row col-5 ml-110px"];

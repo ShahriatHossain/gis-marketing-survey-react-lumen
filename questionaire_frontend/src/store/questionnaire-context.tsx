@@ -43,21 +43,8 @@ const QuestionnaireContextProvider: React.FC = (props) => {
           return addNewAnswer(prevAnswers, questionId, choiceId, text);
 
         case QuestionType.Checkbox:
-          const existingItem = prevAnswers.find(ans => ans.question_id === questionId
-            && ans.multiple_choice_id === choiceId);
-
-          prevAnswers = prevAnswers.filter(
-            ans => ans.question_id === questionId && ans.multiple_choice_id != choiceId);
-
-          if (existingItem && !checked) {
-            return addNewAnswer(prevAnswers, questionId, choiceId, text);
-          }
-
-          if (!existingItem && checked) {
-            return addNewAnswer(prevAnswers, questionId, choiceId, text);
-          }
-
-          return prevAnswers;
+          prevAnswers = prevAnswers.filter(ans => !(ans.question_id === questionId && ans.multiple_choice_id === choiceId));
+          return addNewAnswer(prevAnswers, questionId, choiceId, text);
 
         case QuestionType.Text:
           prevAnswers = prevAnswers.filter(ans => ans.question_id != questionId);
@@ -82,7 +69,7 @@ const QuestionnaireContextProvider: React.FC = (props) => {
     prevAnswers.push({
       id: 0,
       question_id: questionId,
-      multiple_choice_id: choiceId,
+      multiple_choice_id: choiceId === 0 ? null : choiceId,
       answer_text: text,
       created_at: '',
       updated_at: ''
