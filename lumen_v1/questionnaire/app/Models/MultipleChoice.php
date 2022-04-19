@@ -22,6 +22,14 @@ class MultipleChoice extends Model implements AuthenticatableContract, Authoriza
     }
 
     /**
+     * Get the answers that belong to this Question
+     */
+    public function answers()
+    {
+        return $this->hasMany('\App\Models\SurveyAnswer');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

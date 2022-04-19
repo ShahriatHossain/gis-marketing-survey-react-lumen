@@ -30,12 +30,20 @@ class SurveyAnswer extends Model implements AuthenticatableContract, Authorizabl
     }
 
     /**
+     * Get the question that this answer belongs to
+     */
+    public function choice()
+    {
+        return $this->belongsTo('\App\Models\MultipleChoice');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'answer_text', 'question_id', 'response_id'
+        'answer_text', 'question_id', 'multiple_choice_id'
     ];
 
     /**

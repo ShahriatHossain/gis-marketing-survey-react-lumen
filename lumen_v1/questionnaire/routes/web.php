@@ -24,6 +24,7 @@ $router->get('/', function () use ($router) {
 $router->post('register', 'AuthController@register');
 $router->post('login', 'AuthController@login');
 $router->get('/survey-all', ['uses' => 'SurveyController@allRelated']);
+$router->post('/survey-answers/multi', ['uses' => 'SurveyAnswerController@createMulti']);
 
 // Reset password
 $router->post('/password/reset-request', 'RequestPasswordController@sendResetLinkEmail');
@@ -82,9 +83,12 @@ $router->group(['middleware' => ['auth', 'verified']], function () use ($router)
     $router->post('/users', ['uses' => 'UserController@create']);
     $router->put('/users/{id}', ['uses' => 'UserController@update']);
     $router->delete('/users/{id}', ['uses' => 'UserController@delete']);
+
+    // Find Survey Answers
+    $router->get('/survey-answers', ['uses' => 'SurveyAnswerController@index']);
+    $router->get('/survey-answers/{id}', ['uses' => 'SurveyAnswerController@show']);
+    // Survey Answers CRUD
+    $router->post('/survey-answers', ['uses' => 'SurveyAnswerController@create']);
+    $router->put('/survey-answers/{id}', ['uses' => 'SurveyAnswerController@update']);
+    $router->delete('/survey-answers/{id}', ['uses' => 'SurveyAnswerController@delete']);
 });
-
-// $router->group(['prefix' => 'api/v1'], function () use ($router) {
-
-
-// });

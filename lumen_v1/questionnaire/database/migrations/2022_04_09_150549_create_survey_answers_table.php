@@ -24,10 +24,12 @@ class CreateSurveyAnswersTable extends Migration
                 ->on('questions')
                 ->onDelete('cascade');
 
-            $table->bigInteger('response_id')->unsigned();
-            $table->foreign('response_id')
+            $table->bigInteger('multiple_choice_id')->nullable()->unsigned();
+            $table->index('multiple_choice_id')->nullable();
+            $table->foreign('multiple_choice_id')
+                ->nullable()
                 ->references('id')
-                ->on('customer_survey_responses')
+                ->on('multiple_choices')
                 ->onDelete('cascade');
         });
     }
